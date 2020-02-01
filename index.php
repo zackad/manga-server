@@ -15,7 +15,7 @@ $twig = Twig::create('./');
 
 $app->add(TwigMiddleware::create($app, $twig));
 
-$app->get('/[{route:.+}]', function (Request $request, Response $response, $args) {
+$app->get('/[{route:.+}]', function (Request $request, Response $response) {
     $view = Twig::fromRequest($request);
     $targetDir = '/' === $_SERVER['REQUEST_URI'] ? '' : urldecode($_SERVER['REQUEST_URI']);
 
