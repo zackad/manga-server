@@ -21,7 +21,7 @@ $app = AppFactory::create();
 $app->get('/[{route:.+}]', function(Request $request, Response $response, $args) {
     $targetDir = $_SERVER['REQUEST_URI'] === '/' ? '' : urldecode($_SERVER['REQUEST_URI']);
 
-    $entries = array_diff(scandir(__DIR__ . $targetDir), ['.','..']);
+    $entries = preg_grep('/^([^.])/', scandir(__DIR__ . $targetDir));
     natsort($entries);
 
     foreach($entries as $entry) {
