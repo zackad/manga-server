@@ -9,17 +9,19 @@ use Slim\Views\TwigMiddleware;
 
 require __DIR__.'/vendor/autoload.php';
 
+$MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?? __DIR__;
+
 $app = AppFactory::create();
 
 $twig = Twig::create('./');
 
 $app->add(TwigMiddleware::create($app, $twig));
 
-$app->get('/[{route:.+}]', function (Request $request, Response $response) {
+$app->get('/[{route:.+}]', function (Request $request, Response $response) use ($MANGA_ROOT_DIRECTORY) {
     $view = Twig::fromRequest($request);
     $targetDir = '/' === $_SERVER['REQUEST_URI'] ? '' : urldecode($_SERVER['REQUEST_URI']);
 
-    $mangaDir = __DIR__.$targetDir;
+    $mangaDir = $MANGA_ROOT_DIRECTORY.$targetDir;
 
     if (is_file($mangaDir)) {
         $file = fopen($mangaDir, 'r');
