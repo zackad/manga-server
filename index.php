@@ -3,18 +3,9 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use Slim\Psr7\Stream;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
-
-if (PHP_SAPI == 'cli-server') {
-    // To help the built-in PHP dev server, check if the request was actually for
-    // something which should probably be served as a static file
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $file = urldecode(__DIR__.$url['path']);
-    if (is_file($file)) {
-        return false;
-    }
-}
 
 require __DIR__.'/vendor/autoload.php';
 
@@ -28,7 +19,18 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response, $args
     $view = Twig::fromRequest($request);
     $targetDir = '/' === $_SERVER['REQUEST_URI'] ? '' : urldecode($_SERVER['REQUEST_URI']);
 
-    $entries = preg_grep('/^([^.])/', scandir(__DIR__.$targetDir));
+    $mangaDir = __DIR__.$targetDir;
+
+    if (is_file($mangaDir)) {
+        $file = fopen($mangaDir, 'r');
+        $streamFile = new Stream($file);
+
+        return $response
+            ->withHeader('Content-type', mime_content_type($mangaDir))
+            ->withBody($streamFile);
+    }
+
+    $entries = preg_grep('/^([^.])/', scandir($mangaDir));
     natsort($entries);
 
     $data = [];
