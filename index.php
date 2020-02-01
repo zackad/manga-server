@@ -18,6 +18,10 @@ require __DIR__.'/vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$app->get('/favicon.ico', function (Request $request, Response $response, $args) {
+    return $response->withStatus(404);
+});
+
 $app->get('/[{route:.+}]', function (Request $request, Response $response, $args) {
     $targetDir = '/' === $_SERVER['REQUEST_URI'] ? '' : urldecode($_SERVER['REQUEST_URI']);
 
