@@ -49,7 +49,7 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
 
     foreach ($entries as $entry) {
         $uri = $targetDir.'/'.$entry;
-        $data[] = ['uri' => $uri, 'label' => $entry];
+        $data[] = ['uri' => $uri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
     }
 
     return $view->render($response, 'template.html.twig', [
