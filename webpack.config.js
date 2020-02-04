@@ -4,7 +4,8 @@ Encore
   .addEntry('app', './assets/index.js')
   .setOutputPath('static')
   .setPublicPath('/static')
-  .enableSingleRuntimeChunk()
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
   .enablePreactPreset()
 
 module.exports = Encore.getWebpackConfig()
