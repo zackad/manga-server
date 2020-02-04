@@ -1,7 +1,8 @@
 import { h, render } from 'preact'
+import { Listing } from './Components/Listing'
 
 function App(props) {
-  return <div>Manga Server App</div>
+  return <Listing files={props.files} directories={props.directories} />
 }
 
 const directories = ENTRIES_DATA.filter(entry => entry.isDirectory)
