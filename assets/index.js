@@ -1,8 +1,14 @@
 import { h, render } from 'preact'
+import { Breadcrumbs } from './Components/Breadcrumbs'
 import { Listing } from './Components/Listing'
 
 function App(props) {
-  return <Listing files={props.files} directories={props.directories} />
+  return (
+    <div>
+      <Breadcrumbs />
+      <Listing files={props.files} directories={props.directories} />
+    </div>
+  )
 }
 
 const directories = ENTRIES_DATA.filter(entry => entry.isDirectory)
