@@ -12,6 +12,9 @@
 {% for entry in entries %}
     <a href="{{ entry.uri }}">{{ entry.label }}</a></br>
 {% endfor %}
+{% block preact_container %}
+    <div id="preact_container"></div>
+{% endblock %}
 {% block javascripts %}
     <script src="/static/app.js"></script>
 {% endblock %}
