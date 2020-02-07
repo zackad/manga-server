@@ -26,7 +26,7 @@ function Breadcrumbs() {
   })
 
   return (
-    <div className='p-2 border-b bg-secondary flex fixed w-full'>
+    <div className='p-2 border-b bg-gray-800 flex fixed w-full'>
       {breadcrumbs.map(item => item.element)}
       <span className={`flex-grow`} />
     </div>

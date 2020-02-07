@@ -39,7 +39,7 @@ function App(props) {
   const reader = <Reader images={images} />
 
   return (
-    <div>
+    <div className='min-h-screen bg-gray-900 text-white'>
       <Breadcrumbs />
       {mode === 'list' ? list : reader}
     </div>
