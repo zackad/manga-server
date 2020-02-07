@@ -6,7 +6,7 @@ import { Reader } from './Components/Reader'
 import './css/tailwind.src.css'
 
 function App(props) {
-  const [mode, setMode] = useState('list')
+  const [readerMode, setReaderMode] = useState(false)
 
   const regexFilter = new RegExp('.jpe?g$|.png$|.gif$|.webp$', 'i')
   const images = props.files.filter(image => image.uri.match(regexFilter))
@@ -22,7 +22,7 @@ function App(props) {
       // 'Enter/Return' key
       case 13:
         if (images.length > 0) {
-          setMode('reader')
+          setReaderMode(true)
         }
         break
       // ';' (Semicolon)
@@ -30,18 +30,27 @@ function App(props) {
         break
       // '\' key
       case 220:
-        setMode('list')
+        setReaderMode(false)
         break
     }
   }
 
+  const toggleReaderMode = () => {
+    setReaderMode(prevState => !prevState)
+  }
+
   const list = <Listing files={props.files} directories={props.directories} />
   const reader = <Reader images={images} />
+  const toggleReaderButton = (
+    <button className='uppercase' onClick={toggleReaderMode}>
+      read
+    </button>
+  )
 
   return (
     <div className='min-h-screen bg-gray-900 text-white'>
-      <Breadcrumbs />
-      {mode === 'list' ? list : reader}
+      <Breadcrumbs toggleReader={toggleReaderButton} />
+      {readerMode ? reader : list}
     </div>
   )
 }

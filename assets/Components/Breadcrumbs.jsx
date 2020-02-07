@@ -2,7 +2,7 @@ import { h } from 'preact'
 import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
 
-function Breadcrumbs() {
+function Breadcrumbs(props) {
   const location = document.location.pathname
   let items = location.split('/').filter(item => item !== '')
 
@@ -29,6 +29,7 @@ function Breadcrumbs() {
     <div className='p-2 border-b bg-gray-800 flex fixed w-full'>
       {breadcrumbs.map(item => item.element)}
       <span className={`flex-grow`} />
+      {props.toggleReader}
     </div>
   )
 }
