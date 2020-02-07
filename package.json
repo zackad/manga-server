@@ -10,5 +10,9 @@
   },
   "dependencies": {
     "preact": "^10.3.0"
+  },
+  "scripts": {
+    "start": "encore dev --watch",
+    "build": "NODE_ENV=production encore production"
   }
 }
