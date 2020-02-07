@@ -3,7 +3,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { Breadcrumbs } from './Components/Breadcrumbs'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
-import './css/tailwind.css'
+import './css/tailwind.src.css'
 
 function App(props) {
   const [mode, setMode] = useState('list')

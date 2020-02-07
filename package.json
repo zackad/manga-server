@@ -2,6 +2,8 @@
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.8.3",
     "@symfony/webpack-encore": "^0.28.2",
+    "autoprefixer": "^9.7.4",
+    "postcss-loader": "^3.0.0",
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {
