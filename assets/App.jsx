@@ -36,7 +36,9 @@ function App(props) {
   }
 
   const toggleReaderMode = () => {
-    setReaderMode(prevState => !prevState)
+    if (images.length > 0) {
+      setReaderMode(prevState => !prevState)
+    }
   }
 
   const list = <Listing files={props.files} directories={props.directories} />
