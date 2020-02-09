@@ -3,6 +3,16 @@ import { useEffect, useState } from 'preact/hooks'
 import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
 
+function throttle(fn, wait) {
+  let time = Date.now()
+  return () => {
+    if (time + wait - Date.now() < 0) {
+      fn()
+      time = Date.now()
+    }
+  }
+}
+
 function Breadcrumbs(props) {
   const [pinned, setPinned] = useState(true)
   const location = document.location.pathname
@@ -23,7 +33,7 @@ function Breadcrumbs(props) {
       }
     }
 
-    document.addEventListener('scroll', scrollHandler)
+    document.addEventListener('scroll', throttle(scrollHandler, 300))
   }, [])
 
   let breadcrumbs = [{ path: '/', title: 'Root' }]
