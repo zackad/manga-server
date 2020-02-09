@@ -7,12 +7,14 @@ import './css/tailwind.src.css'
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
+  const [maxImageWidth, setMaxImageWidth] = useState(0)
 
   const regexFilter = new RegExp('.jpe?g$|.png$|.gif$|.webp$', 'i')
   const images = props.files.filter(image => image.uri.match(regexFilter))
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeydown)
+    setMaxImageWidth(localStorage.getItem('maxImageWidth') || maxImageWidth)
   }, [])
 
   const handleKeydown = event => {
@@ -42,7 +44,7 @@ function App(props) {
   }
 
   const list = <Listing files={props.files} directories={props.directories} />
-  const reader = <Reader images={images} />
+  const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
   const toggleReaderButton = (
     <button className='ml-2 uppercase' onClick={toggleReaderMode}>
       read
