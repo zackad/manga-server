@@ -44,7 +44,7 @@ function App(props) {
   const list = <Listing files={props.files} directories={props.directories} />
   const reader = <Reader images={images} />
   const toggleReaderButton = (
-    <button className='uppercase' onClick={toggleReaderMode}>
+    <button className='ml-2 uppercase' onClick={toggleReaderMode}>
       read
     </button>
   )

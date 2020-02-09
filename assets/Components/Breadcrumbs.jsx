@@ -27,7 +27,7 @@ function Breadcrumbs(props) {
 
   return (
     <div className='p-2 border-b bg-gray-800 flex fixed w-full'>
-      {breadcrumbs.map(item => item.element)}
+      <div className='flex overflow-x-scroll'>{breadcrumbs.map(item => item.element)}</div>
       <span className={`flex-grow`} />
       {props.toggleReader}
     </div>

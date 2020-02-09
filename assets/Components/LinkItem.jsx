@@ -2,7 +2,7 @@ import { h } from 'preact'
 
 function LinkItem({ path, title }) {
   return (
-    <span>
+    <span className='whitespace-no-wrap'>
       {' '}
       /{' '}
       <a href={path} className='no-underline'>
