@@ -38,7 +38,6 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
         $streamFile = new Stream($file);
 
         return $response
-            ->withHeader('Content-type', mime_content_type($mangaDir))
             ->withBody($streamFile);
     }
 
