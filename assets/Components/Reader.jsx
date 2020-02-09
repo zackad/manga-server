@@ -7,7 +7,7 @@ function Reader({ images, maxImageWidth, borderImage }) {
 
   return (
     <div>
-      <div className={`max-image-width pt-12`}>
+      <div className={`max-image-width`}>
         {images.map((image, index) => {
           return <Image src={image.uri} key={index} alt={image.label} borderImage={borderImage} />
         })}
