@@ -23,7 +23,7 @@ $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
 
 $app = AppFactory::create();
 
-$twig = Twig::create('./');
+$twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
 
