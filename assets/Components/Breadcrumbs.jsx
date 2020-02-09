@@ -1,10 +1,30 @@
 import { h } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
 
 function Breadcrumbs(props) {
+  const [pinned, setPinned] = useState(true)
   const location = document.location.pathname
   let items = location.split('/').filter(item => item !== '')
+
+  useEffect(() => {
+    const breadcrumbsHeight = 40
+    let pxTrigger = 0
+
+    const scrollHandler = () => {
+      const pxFromTop = window.pageYOffset || window.scrollY
+
+      if (pxFromTop > breadcrumbsHeight) {
+        setPinned(pxFromTop < pxTrigger)
+        pxTrigger = pxFromTop
+      } else {
+        setPinned(true)
+      }
+    }
+
+    document.addEventListener('scroll', scrollHandler)
+  }, [])
 
   let breadcrumbs = [{ path: '/', title: 'Root' }]
   let link = ''
@@ -25,8 +45,10 @@ function Breadcrumbs(props) {
     return item
   })
 
+  const pinnedStyle = pinned ? 'mt-o' : '-mt-12'
+
   return (
-    <div className='p-2 border-b bg-gray-800 flex fixed w-full'>
+    <div className={`${pinnedStyle} p-2 border-b bg-gray-800 flex fixed w-full`}>
       <div className='flex overflow-x-scroll'>{breadcrumbs.map(item => item.element)}</div>
       <span className={`flex-grow`} />
       {props.toggleReader}
