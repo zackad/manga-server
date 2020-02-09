@@ -19,7 +19,7 @@ if (PHP_SAPI == 'cli-server') {
 
 require __DIR__.'/vendor/autoload.php';
 
-$MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?? __DIR__;
+$MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
 
 $app = AppFactory::create();
 
