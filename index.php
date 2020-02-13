@@ -42,6 +42,12 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
             ->withBody($streamFile);
     }
 
+    if (!is_dir($mangaDir)) {
+        $response->withStatus(404);
+
+        return $response;
+    }
+
     $entries = preg_grep('/^([^.])/', scandir($mangaDir));
     natsort($entries);
 
