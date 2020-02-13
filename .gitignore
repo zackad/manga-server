@@ -1,5 +1,7 @@
 .idea
+dist
 node_modules
 static
 vendor
 *.cache
+*.zip
