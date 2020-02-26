@@ -1,0 +1,14 @@
+Manga Server
+https://github.com/zackad/manga-server
+
+Changelog:
+([!] Important, [+] Addition, [-] Removal, [*] Fix/Change, [?] Feedback needed)
+
+0.2.0 (next)
+[+] Add caching static file
+[+] Enable static assets versioning on webpack encore
+[*] Fix code style
+
+0.1.0 (2020-02-13)
+Initial Release
+    Most of functionality is adopted from https://github.com/zackad/offmar.
