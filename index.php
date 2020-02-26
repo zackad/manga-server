@@ -29,7 +29,10 @@ $app->get('/static/[{assets:.+}]', function (Request $request, Response $respons
         $extension = pathinfo(__DIR__.$uri,PATHINFO_EXTENSION);
         $resource = fopen(__DIR__.$uri, 'r');
         $stream = new Stream($resource);
-        return $response->withBody($stream)->withAddedHeader('Content-Type', $contentTypeChoice[$extension]);
+        return $response
+            ->withAddedHeader('Content-Type', $contentTypeChoice[$extension])
+            ->withAddedHeader('Cache-Control', 'public, max-age=604800')
+            ->withBody($stream);
     }
 
     return $response->withStatus(404);
