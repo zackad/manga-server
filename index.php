@@ -17,22 +17,25 @@ $twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
 
-$app->get('/static/[{assets:.+}]', function (Request $request, Response $response){
+$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) {
     $uri = $request->getUri()->getPath();
+    $filename = __DIR__.$uri;
     $contentTypeChoice = [
         'css' => 'text/css',
         'js' => 'application/javascript',
         'json' => 'application/json',
     ];
 
-    if (is_file(__DIR__.$uri)) {
-        $extension = pathinfo(__DIR__.$uri,PATHINFO_EXTENSION);
-        $resource = fopen(__DIR__.$uri, 'r');
+    if (is_file($filename)) {
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $resource = fopen($filename, 'r');
         $stream = new Stream($resource);
+
         return $response
             ->withAddedHeader('Content-Type', $contentTypeChoice[$extension])
             ->withAddedHeader('Cache-Control', 'public, max-age=604800')
-            ->withBody($stream);
+            ->withBody($stream)
+        ;
     }
 
     return $response->withStatus(404);
@@ -50,7 +53,8 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
 
         return $response
             ->withAddedHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)))
-            ->withBody($streamFile);
+            ->withBody($streamFile)
+        ;
     }
 
     if (!is_dir($mangaDir)) {
@@ -73,7 +77,7 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
 
     return $view->render($response, 'template.html.twig', [
         'entries' => $data,
-        'manifest' => $manifest
+        'manifest' => $manifest,
     ]);
 });
 
