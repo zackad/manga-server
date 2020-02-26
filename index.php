@@ -7,16 +7,6 @@ use Slim\Psr7\Stream;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 
-if (PHP_SAPI == 'cli-server') {
-    // To help the built-in PHP dev server, check if the request was actually for
-    // something which should probably be served as a static file
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $file = urldecode(__DIR__.$url['path']);
-    if (is_file($file)) {
-        return false;
-    }
-}
-
 require __DIR__.'/vendor/autoload.php';
 
 $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
@@ -26,6 +16,30 @@ $app = AppFactory::create();
 $twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
+
+$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) {
+    $uri = $request->getUri()->getPath();
+    $filename = __DIR__.$uri;
+    $contentTypeChoice = [
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        'json' => 'application/json',
+    ];
+
+    if (is_file($filename)) {
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $resource = fopen($filename, 'r');
+        $stream = new Stream($resource);
+
+        return $response
+            ->withAddedHeader('Content-Type', $contentTypeChoice[$extension])
+            ->withAddedHeader('Cache-Control', 'public, max-age=604800')
+            ->withBody($stream)
+        ;
+    }
+
+    return $response->withStatus(404);
+});
 
 $app->get('/[{route:.+}]', function (Request $request, Response $response) use ($MANGA_ROOT_DIRECTORY) {
     $view = Twig::fromRequest($request);
@@ -38,8 +52,9 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
         $streamFile = new Stream($file);
 
         return $response
-            ->withAddedHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)))
-            ->withBody($streamFile);
+            ->withAddedHeader('Cache-Control', 'public, max-age=86400')
+            ->withBody($streamFile)
+        ;
     }
 
     if (!is_dir($mangaDir)) {
@@ -62,7 +77,7 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
 
     return $view->render($response, 'template.html.twig', [
         'entries' => $data,
-        'manifest' => $manifest
+        'manifest' => $manifest,
     ]);
 });
 
