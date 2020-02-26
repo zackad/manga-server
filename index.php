@@ -52,7 +52,7 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
         $streamFile = new Stream($file);
 
         return $response
-            ->withAddedHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)))
+            ->withAddedHeader('Cache-Control', 'public, max-age=86400')
             ->withBody($streamFile)
         ;
     }
