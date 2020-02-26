@@ -58,8 +58,11 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
         $data[] = ['uri' => $uri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
     }
 
+    $manifest = json_decode(file_get_contents('static/manifest.json'), true);
+
     return $view->render($response, 'template.html.twig', [
         'entries' => $data,
+        'manifest' => $manifest
     ]);
 });
 

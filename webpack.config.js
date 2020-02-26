@@ -7,5 +7,6 @@ Encore.addEntry('app', './assets/index.js')
   .cleanupOutputBeforeBuild()
   .enablePreactPreset()
   .enablePostCssLoader()
+  .enableVersioning(Encore.isProduction())
 
 module.exports = Encore.getWebpackConfig()

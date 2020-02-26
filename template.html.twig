@@ -8,7 +8,7 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <title>Manga Server</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="/static/app.css">
+        <link rel="stylesheet" href={{ manifest['static/app.css'] }}>
     {% endblock %}
 </head>
 <body>
@@ -21,7 +21,7 @@
     </script>
 {% endblock %}
 {% block javascripts %}
-    <script src="/static/app.js"></script>
+    <script src={{ manifest['static/app.js'] }}></script>
 {% endblock %}
 </body>
 </html>
