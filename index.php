@@ -7,16 +7,6 @@ use Slim\Psr7\Stream;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 
-if (PHP_SAPI == 'cli-server') {
-    // To help the built-in PHP dev server, check if the request was actually for
-    // something which should probably be served as a static file
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $file = urldecode(__DIR__.$url['path']);
-    if (is_file($file)) {
-        return false;
-    }
-}
-
 require __DIR__.'/vendor/autoload.php';
 
 $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
@@ -26,6 +16,24 @@ $app = AppFactory::create();
 $twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
+
+$app->get('/static/[{assets:.+}]', function (Request $request, Response $response){
+    $uri = $request->getUri()->getPath();
+    $contentTypeChoice = [
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        'json' => 'application/json',
+    ];
+
+    if (is_file(__DIR__.$uri)) {
+        $extension = pathinfo(__DIR__.$uri,PATHINFO_EXTENSION);
+        $resource = fopen(__DIR__.$uri, 'r');
+        $stream = new Stream($resource);
+        return $response->withBody($stream)->withAddedHeader('Content-Type', $contentTypeChoice[$extension]);
+    }
+
+    return $response->withStatus(404);
+});
 
 $app->get('/[{route:.+}]', function (Request $request, Response $response) use ($MANGA_ROOT_DIRECTORY) {
     $view = Twig::fromRequest($request);
