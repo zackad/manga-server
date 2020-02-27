@@ -10,6 +10,11 @@ use Slim\Views\TwigMiddleware;
 require __DIR__.'/vendor/autoload.php';
 
 $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
+$supportedMime = [
+    'css' => 'text/css',
+    'js' => 'application/javascript',
+    'json' => 'application/json',
+];
 
 $app = AppFactory::create();
 
@@ -17,14 +22,9 @@ $twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
 
-$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) {
+$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) use ($supportedMime) {
     $uri = $request->getUri()->getPath();
     $filename = __DIR__.$uri;
-    $contentTypeChoice = [
-        'css' => 'text/css',
-        'js' => 'application/javascript',
-        'json' => 'application/json',
-    ];
 
     if (is_file($filename)) {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -32,7 +32,7 @@ $app->get('/static/[{assets:.+}]', function (Request $request, Response $respons
         $stream = new Stream($resource);
 
         return $response
-            ->withAddedHeader('Content-Type', $contentTypeChoice[$extension])
+            ->withAddedHeader('Content-Type', $supportedMime[$extension])
             ->withAddedHeader('Cache-Control', 'public, max-age=604800')
             ->withBody($stream)
         ;
