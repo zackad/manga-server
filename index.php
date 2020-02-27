@@ -58,9 +58,7 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
     }
 
     if (!is_dir($mangaDir)) {
-        $response->withStatus(404);
-
-        return $response;
+        return $response->withStatus(404);
     }
 
     $entries = preg_grep('/^([^.])/', scandir($mangaDir));
