@@ -10,11 +10,24 @@ use Slim\Views\TwigMiddleware;
 require __DIR__.'/vendor/autoload.php';
 
 $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
-$supportedMime = [
-    'css' => 'text/css',
-    'js' => 'application/javascript',
-    'json' => 'application/json',
-];
+
+function guessMimeType(string $extension)
+{
+    $supportedMime = [
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        'json' => 'application/json',
+        'jpeg' => 'image/jpg',
+        'jpg' => 'image/jpg',
+        'png' => 'image/png',
+    ];
+
+    if (!array_key_exists(strtolower($extension), $supportedMime)) {
+        return 'application/octet-stream';
+    }
+
+    return $supportedMime[$extension];
+}
 
 $app = AppFactory::create();
 
@@ -22,7 +35,7 @@ $twig = Twig::create(__DIR__);
 
 $app->add(TwigMiddleware::create($app, $twig));
 
-$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) use ($supportedMime) {
+$app->get('/static/[{assets:.+}]', function (Request $request, Response $response) {
     $uri = $request->getUri()->getPath();
     $filename = __DIR__.$uri;
 
@@ -32,7 +45,7 @@ $app->get('/static/[{assets:.+}]', function (Request $request, Response $respons
         $stream = new Stream($resource);
 
         return $response
-            ->withAddedHeader('Content-Type', $supportedMime[$extension])
+            ->withAddedHeader('Content-Type', guessMimeType($extension))
             ->withAddedHeader('Cache-Control', 'public, max-age=604800')
             ->withBody($stream)
         ;
@@ -48,11 +61,13 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
     $mangaDir = $MANGA_ROOT_DIRECTORY.$targetDir;
 
     if (is_file($mangaDir)) {
+        $extension = pathinfo($mangaDir, PATHINFO_EXTENSION);
         $file = fopen($mangaDir, 'r');
         $streamFile = new Stream($file);
 
         return $response
             ->withAddedHeader('Cache-Control', 'public, max-age=86400')
+            ->withAddedHeader('Content-Type', guessMimeType($extension))
             ->withBody($streamFile)
         ;
     }
