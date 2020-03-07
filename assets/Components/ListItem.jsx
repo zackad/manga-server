@@ -3,7 +3,7 @@ import { h } from 'preact'
 function ListItem({ className, item }) {
   return (
     <p className='p-2'>
-      <a className={`${className} flex items-center`} href={item.uri}>
+      <a className={`${className} inline-flex items-center`} href={item.uri}>
         {item.isDirectory && (
           <svg
             aria-hidden='true'
