@@ -2,8 +2,8 @@ import { h } from 'preact'
 
 function ListItem({ className, item }) {
   return (
-    <p className='p-2'>
-      <a className={`${className} inline-flex items-center`} href={item.uri}>
+    <p className='px-2 pt-2'>
+      <a className={`${className} inline-flex items-center max-w-full`} href={item.uri}>
         {item.isDirectory && (
           <svg
             aria-hidden='true'
@@ -21,7 +21,7 @@ function ListItem({ className, item }) {
             ></path>
           </svg>
         )}
-        <span className={!item.isDirectory && 'font-thin'}>{item.label}</span>
+        <span className={`truncate ${!item.isDirectory && 'font-thin'}`}>{item.label}</span>
       </a>
     </p>
   )
