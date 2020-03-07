@@ -1,6 +1,9 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      minHeight: theme => theme('spacing'),
+      minWidth: theme => theme('spacing'),
+    },
   },
   variants: {},
   plugins: [],

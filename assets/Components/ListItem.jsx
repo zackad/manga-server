@@ -10,7 +10,7 @@ function ListItem({ className, item }) {
             focusable='false'
             data-prefix='fas'
             data-icon='folder-open'
-            className='fill-current text-gray-300 h-5 w-5 mr-2'
+            className='fill-current text-gray-300 h-5 w-5 min-h-5 min-w-5 mr-2'
             role='img'
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 576 512'
