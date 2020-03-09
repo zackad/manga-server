@@ -1,6 +1,7 @@
 import { h } from 'preact'
 import { Image } from './Image.jsx'
 import { useEffect } from 'preact/hooks'
+import { EndOfPage } from './EndOfPage'
 
 function Reader({ images, maxImageWidth, borderImage }) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function Reader({ images, maxImageWidth, borderImage }) {
           return <Image src={image.uri} key={index} alt={image.label} borderImage={borderImage} />
         })}
       </div>
+      <EndOfPage />
     </div>
   )
 }

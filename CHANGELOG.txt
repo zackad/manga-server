@@ -4,6 +4,9 @@ https://github.com/zackad/manga-server
 Changelog:
 ([!] Important, [+] Addition, [-] Removal, [*] Fix/Change, [?] Feedback needed)
 
+0.3.0 (next)
+[+] Add notification End Of Page on Reader footer
+
 0.2.0 (2020-03-07)
 [+] Add caching static file
 [+] Enable static assets versioning on webpack encore
