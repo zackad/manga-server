@@ -11,7 +11,7 @@ require __DIR__.'/vendor/autoload.php';
 
 $MANGA_ROOT_DIRECTORY = getenv('MANGA_ROOT_DIRECTORY') ?: __DIR__;
 
-function guessMimeType(string $extension)
+function guessMimeType(string $filename)
 {
     $supportedMime = [
         'css' => 'text/css',
@@ -22,7 +22,9 @@ function guessMimeType(string $extension)
         'png' => 'image/png',
     ];
 
-    if (!array_key_exists(strtolower($extension), $supportedMime)) {
+    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+    if (!array_key_exists($extension, $supportedMime)) {
         return 'application/octet-stream';
     }
 
@@ -40,12 +42,11 @@ $app->get('/static/[{assets:.+}]', function (Request $request, Response $respons
     $filename = __DIR__.$uri;
 
     if (is_file($filename)) {
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
         $resource = fopen($filename, 'r');
         $stream = new Stream($resource);
 
         return $response
-            ->withAddedHeader('Content-Type', guessMimeType($extension))
+            ->withAddedHeader('Content-Type', guessMimeType($filename))
             ->withAddedHeader('Cache-Control', 'public, max-age=604800')
             ->withBody($stream)
         ;
@@ -61,13 +62,12 @@ $app->get('/[{route:.+}]', function (Request $request, Response $response) use (
     $mangaDir = $MANGA_ROOT_DIRECTORY.$targetDir;
 
     if (is_file($mangaDir)) {
-        $extension = pathinfo($mangaDir, PATHINFO_EXTENSION);
         $file = fopen($mangaDir, 'r');
         $streamFile = new Stream($file);
 
         return $response
             ->withAddedHeader('Cache-Control', 'public, max-age=86400')
-            ->withAddedHeader('Content-Type', guessMimeType($extension))
+            ->withAddedHeader('Content-Type', guessMimeType($mangaDir))
             ->withBody($streamFile)
         ;
     }

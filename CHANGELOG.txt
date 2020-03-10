@@ -6,7 +6,8 @@ Changelog:
 
 0.3.0 (next)
 [+] Add notification End Of Page on Reader footer
-[*] rename shell script to build release artifact
+[*] Rename shell script to build release artifact
+[*] Refactor mime-type guessing to use filename as parameter instead of extension
 
 0.2.0 (2020-03-07)
 [+] Add caching static file
