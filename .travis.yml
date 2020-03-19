@@ -8,6 +8,7 @@ php:
 
 before_script:
     - nvm install 12
+    - rm composer.lock
 
 script:
     - composer install
