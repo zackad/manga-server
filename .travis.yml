@@ -9,8 +9,9 @@ php:
 before_script:
     - nvm install 12
     - rm composer.lock
-
-script:
     - composer install
     - yarn install
+
+script:
+    - bin/phpunit
     - yarn build
