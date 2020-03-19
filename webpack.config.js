@@ -1,8 +1,8 @@
 const Encore = require('@symfony/webpack-encore')
 
 Encore.addEntry('app', './assets/index.js')
-  .setOutputPath('static')
-  .setPublicPath('/static')
+  .setOutputPath('public/build/')
+  .setPublicPath('/build')
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enablePreactPreset()
