@@ -4,6 +4,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "sensio/framework-extra-bundle": "^5.5",
         "slim/psr7": "^1.0",
         "slim/slim": "^4.4",
         "slim/twig-view": "^3.0",
