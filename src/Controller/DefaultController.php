@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
         }
 
         if (!is_dir($mangaDir)) {
-            return $this->json(['status' => 'ERROR', 'message' => 'Not Found!'], 404);
+            throw $this->createNotFoundException('Directory not found.');
         }
 
         $entries = preg_grep('/^([^.])/', scandir($mangaDir));
