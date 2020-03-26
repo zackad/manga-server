@@ -18,8 +18,8 @@ class AssetsControllerTest extends WebTestCase
     {
         $this->client->request('GET', '/build/app.js');
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHasHeader('Content-Type');
-        $this->assertSame('application/javascript', $this->client->getResponse()->headers->get('Content-Type'));
+        $this->assertResponseHeaderSame('Content-Type', 'application/javascript');
+        $this->assertResponseHeaderSame('Expires', (new \DateTime('+1 week'))->format(DATE_RFC7231));
     }
 
     public function testGetNonExistingFile()

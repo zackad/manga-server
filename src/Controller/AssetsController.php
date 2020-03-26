@@ -24,6 +24,7 @@ class AssetsController extends AbstractController
         $stream = new Stream($file);
         $response = new BinaryFileResponse($stream);
         $response->headers->add(['Content-Type' => $this->guessMimeType($file)]);
+        $response->setExpires(new \DateTime('+1 week'));
 
         return $response;
     }
