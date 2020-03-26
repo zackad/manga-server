@@ -13,5 +13,5 @@ before_script:
     - yarn install
 
 script:
-    - bin/phpunit
     - yarn build
+    - bin/phpunit
