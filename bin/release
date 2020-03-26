@@ -1,12 +1,5 @@
 #!/usr/bin/env sh
 
-#git describe --exact-match > /dev/null 2>&1
-#if [ $? != 0 ]; then
-#  echo "[ERROR] Building a release artifact is for tagged commit only."
-#  echo "exit: 1"
-#  exit 1
-#fi
-
 # Prepare build target directory
 rm -fr dist/manga-server
 mkdir -p dist/manga-server
