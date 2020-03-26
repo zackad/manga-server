@@ -25,7 +25,7 @@ echo "APP_ENV=prod" > dist/manga-server/.env
 echo "APP_SECRET=$(openssl rand -hex 20)" >> dist/manga-server/.env
 echo "MANGA_ROOT_DIRECTORY=/" >> dist/manga-server/.env
 
-#zip -r dist/manga-server.$(git describe --abbrev=0).zip static vendor index.php template.html.twig
+cd dist; zip -r manga-server.$(git describe).zip manga-server; cd ..
 
 # Re-install dependencies
 composer install
