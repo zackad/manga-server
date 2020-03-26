@@ -41,7 +41,7 @@ class DefaultController extends AbstractController
             $data[] = ['uri' => $uri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
         }
 
-        return $this->render('template.html.twig', [
+        return $this->render('index.html.twig', [
             'entries' => $data,
         ]);
     }
