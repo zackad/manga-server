@@ -17,6 +17,10 @@ class AssetsController extends AbstractController
     {
         $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
 
+        if (!is_file($file)) {
+            return $this->json([], 404);
+        }
+
         $stream = new Stream($file);
         $response = new BinaryFileResponse($stream);
         $response->headers->add(['Content-Type' => $this->guessMimeType($file)]);
