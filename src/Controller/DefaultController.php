@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\DirectoryListing;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
@@ -14,7 +15,7 @@ class DefaultController extends AbstractController
      * @Route("/", name="home", methods={"GET"})
      * @Route("/{default}", name="default", methods={"GET"}, requirements={"default"="^(?!build).+"})
      */
-    public function index(Request $request)
+    public function index(Request $request, DirectoryListing $listing)
     {
         $requestUri = $request->getRequestUri();
         $targetDir = '/' === $requestUri ? '' : urldecode($requestUri);
@@ -33,15 +34,7 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Directory not found.');
         }
 
-        $entries = preg_grep('/^([^.])/', scandir($mangaDir));
-        natsort($entries);
-
-        $data = [];
-
-        foreach ($entries as $entry) {
-            $requestUri = $targetDir.'/'.$entry;
-            $data[] = ['uri' => $requestUri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
-        }
+        $data = $listing->scan($mangaDir, $targetDir);
 
         return $this->render('index.html.twig', [
             'entries' => $data,
