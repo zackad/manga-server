@@ -18,23 +18,23 @@ class DefaultController extends AbstractController
     public function index(Request $request, DirectoryListing $listing)
     {
         $requestUri = $request->getRequestUri();
-        $targetDir = '/' === $requestUri ? '' : urldecode($requestUri);
+        $uriPrefix = '/' === $requestUri ? '' : urldecode($requestUri);
 
-        $mangaDir = $_ENV['MANGA_ROOT_DIRECTORY'].$targetDir;
+        $target = $_ENV['MANGA_ROOT_DIRECTORY'].$uriPrefix;
 
-        if (is_file($mangaDir)) {
-            $stream = new Stream($mangaDir);
+        if (is_file($target)) {
+            $stream = new Stream($target);
             $response = new BinaryFileResponse($stream);
             $response->setExpires(new \DateTime('+1 week'));
 
             return $response;
         }
 
-        if (!is_dir($mangaDir)) {
+        if (!is_dir($target)) {
             throw $this->createNotFoundException('Directory not found.');
         }
 
-        $data = $listing->scan($mangaDir, $targetDir);
+        $data = $listing->scan($target, $uriPrefix);
 
         return $this->render('index.html.twig', [
             'entries' => $data,
