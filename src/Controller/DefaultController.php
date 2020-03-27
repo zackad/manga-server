@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -13,9 +14,10 @@ class DefaultController extends AbstractController
      * @Route("/", name="home", methods={"GET"})
      * @Route("/{default}", name="default", methods={"GET"}, requirements={"default"="^(?!build).+"})
      */
-    public function index()
+    public function index(Request $request)
     {
-        $targetDir = '/' === $_SERVER['REQUEST_URI'] ? '' : urldecode($_SERVER['REQUEST_URI']);
+        $requestUri = $request->getRequestUri();
+        $targetDir = '/' === $requestUri ? '' : urldecode($requestUri);
 
         $mangaDir = $_ENV['MANGA_ROOT_DIRECTORY'].$targetDir;
 
@@ -37,8 +39,8 @@ class DefaultController extends AbstractController
         $data = [];
 
         foreach ($entries as $entry) {
-            $uri = $targetDir.'/'.$entry;
-            $data[] = ['uri' => $uri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
+            $requestUri = $targetDir.'/'.$entry;
+            $data[] = ['uri' => $requestUri, 'label' => $entry, 'isDirectory' => is_dir($mangaDir.'/'.$entry)];
         }
 
         return $this->render('index.html.twig', [
