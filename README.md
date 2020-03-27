@@ -8,10 +8,12 @@ Web application to serve manga collection from your computer over the network.
 
 ## Requirements
 
-- PHP version 7.1.5 or newer (version 7.4 recommended)
-- composer
-- NodeJS
-- yarn (replacement for npm)
+- PHP >= 7.1.5 (7.4 recommended)
+- composer*
+- NodeJS*
+- yarn* (replacement for npm)
+
+*: for development
 
 ## How to run
 
