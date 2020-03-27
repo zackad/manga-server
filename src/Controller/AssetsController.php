@@ -17,8 +17,8 @@ class AssetsController extends AbstractController
     {
         $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
 
-        if (!is_file($file)) {
-            return $this->json([], 404);
+        if (!file_exists($file)) {
+            throw  $this->createNotFoundException(sprintf('File "%s" not found.', $file));
         }
 
         $stream = new Stream($file);
