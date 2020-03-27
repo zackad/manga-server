@@ -13,6 +13,24 @@ Web application to serve manga collection from your computer over the network.
 - NodeJS
 - yarn (replacement for npm)
 
+## How to run
+
+- Download zip file from [latest release](https://github.com/zackad/manga-server/releases)
+- Extract
+- Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder
+```shell
+# Please change to something like MANGA_ROOT_DIRECTORY=/data/manga
+MANGA_ROOT_DIRECTORY=/
+```
+- Open terminal
+- Navigate to extracted directory
+- Run following command
+```shell
+php -S 0.0.0.0:8000 public/index.php
+```
+- Open web browser and access to `http://localhost:8000`
+- If your computer is connected to local network, you can access it from other device (smartphone, tablet, or other computer) that connected to the same network by accessing to it's ip address e.g `http://192.168.100.12:8000`
+
 ## Development
 
 - Clone this repository
