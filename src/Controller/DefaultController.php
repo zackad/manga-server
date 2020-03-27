@@ -24,7 +24,7 @@ class DefaultController extends AbstractController
         if (is_file($mangaDir)) {
             $stream = new Stream($mangaDir);
             $response = new BinaryFileResponse($stream);
-            $response->setExpires(new \DateTime('+1 day'));
+            $response->setExpires(new \DateTime('+1 week'));
 
             return $response;
         }
