@@ -24,6 +24,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "7.1.15"
+        },
         "preferred-install": {
             "*": "dist"
         },
