@@ -13,8 +13,12 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', $image);
+
+        $expiresHeader = $client->getResponse()->headers->get('expires');
+        $expires = (new \DateTime($expiresHeader))->getTimestamp();
+
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('Expires', (new \DateTime('+1 week'))->format(DATE_RFC7231));
+        $this->assertLessThanOrEqual((new \DateTime('+1 week'))->getTimestamp(), $expires);
     }
 
     public function imageProvider()
