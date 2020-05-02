@@ -3,7 +3,7 @@ import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
 
 function Breadcrumbs(props) {
-  const location = document.location.pathname
+  const location = decodeURIComponent(document.location.pathname)
   let items = location.split('/').filter(item => item !== '')
 
   let breadcrumbs = [{ path: '/', title: 'Root' }]
