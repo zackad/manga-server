@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\MimeGuesser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -23,22 +24,10 @@ class AssetsController extends AbstractController
 
         $stream = new Stream($file);
         $response = new BinaryFileResponse($stream);
-        $response->headers->add(['Content-Type' => $this->guessMimeType($file)]);
+        $response->headers->add(['Content-Type' => MimeGuesser::guessMimeType($file)]);
         $response->setExpires(new \DateTime('+1 week'));
 
         return $response;
     }
 
-    private function guessMimeType(string $filename)
-    {
-        $supportedMime = [
-            'css' => 'text/css',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-        ];
-
-        $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        return $supportedMime[$fileExtension];
-    }
 }
