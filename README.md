@@ -1,6 +1,6 @@
 # Manga Server
 
-[![Build Status](https://img.shields.io/travis/zackad/manga-server?style=for-the-badge)](https://travis-ci.org/zackad/manga-server)
+[![Build Status](https://img.shields.io/travis/zackad/manga-server?style=for-the-badge)](https://travis-ci.com/zackad/manga-server)
 ![MIT License](https://img.shields.io/github/license/zackad/manga-server?style=for-the-badge)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/zackad/manga-server?style=for-the-badge)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/zackad/manga-server?style=for-the-badge)
