@@ -60,6 +60,7 @@ class ArchiveController extends AbstractController
             'Content-Type' => MimeGuesser::guessMimeType($entryName),
         ];
         $response->headers->add($headers);
+        $response->setExpires(new \DateTime('+1 week'));
 
         return $response;
     }
