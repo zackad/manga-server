@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ArchiveReader;
+use App\Service\DirectoryListing;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,16 +18,17 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_list"=".+(\.zip)$"}
      * )
      */
-    public function archiveListing(Request $request)
+    public function archiveListing(Request $request, DirectoryListing $listing)
     {
         $requestUri = $request->getRequestUri();
         $uriPrefix = '/' === $requestUri ? '' : urldecode($requestUri);
 
         $target = $_ENV['MANGA_ROOT_DIRECTORY'].$uriPrefix;
         $entries = new ArchiveReader($target);
+        $entryList = $listing->buildList($entries->getList(), $uriPrefix, $target);
 
-        return $this->json([
-            'entries' => $entries->getList(),
+        return $this->render('index.html.twig', [
+            'entries' => $entryList,
         ]);
     }
 

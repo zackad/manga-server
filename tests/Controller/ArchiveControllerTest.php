@@ -17,18 +17,8 @@ class ArchiveControllerTest extends WebTestCase
     {
         $this->client->request('GET', '/archive.zip');
 
-        $expected = json_encode([
-            'entries' => [
-                'image.jpeg',
-                'image.jpg',
-                'image.png',
-                'image.webp',
-            ],
-        ]);
-        $actual = $this->client->getResponse()->getContent();
-
         $this->assertResponseIsSuccessful();
-        $this->assertEquals($expected, $actual);
+        $this->assertResponseHeaderSame('Content-Type', 'text/html; charset=UTF-8');
     }
 
     public function testLoadImageFromArchive()
