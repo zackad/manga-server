@@ -15,7 +15,7 @@ class PathTool
 
     public function getUri(): string
     {
-        return $this->request->getRequestUri();
+        return trim(urldecode($this->request->getRequestUri()), '/');
     }
 
     public function getPrefix(): string
