@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
+use App\Service\MimeGuesser;
 use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArchiveController extends AbstractController
@@ -39,10 +41,26 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_item"=".+(\.zip\/).+$"}
      * )
      */
-    public function archiveItem()
+    public function archiveItem(PathTool $pathTool)
     {
-        return $this->json([
-            'controller_name' => 'ArchiveController',
-        ]);
+        $archivePath = dirname($pathTool->getTarget());
+        $entryName = pathinfo($pathTool->getTarget(), PATHINFO_BASENAME);
+
+        $za = new \ZipArchive();
+        $za->open($archivePath);
+
+        $response = new StreamedResponse(function () use ($za, $entryName) {
+            $outputStream = fopen('php://output', 'wb');
+            $inputStream = $za->getStream($entryName);
+
+            stream_copy_to_stream($inputStream, $outputStream);
+        });
+
+        $headers = [
+            'Content-Type' => MimeGuesser::guessMimeType($entryName),
+        ];
+        $response->headers->add($headers);
+
+        return $response;
     }
 }
