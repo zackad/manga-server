@@ -17,7 +17,7 @@ class ArchiveController extends AbstractController
      *     "/{archive_list}",
      *     name="archive_list",
      *     methods={"GET"},
-     *     requirements={"archive_list"=".+(\.zip)$"}
+     *     requirements={"archive_list"=".+(\.zip|cbz)$"}
      * )
      */
     public function archiveListing(DirectoryListing $listing, PathTool $pathTool)
@@ -38,7 +38,7 @@ class ArchiveController extends AbstractController
      *     "/{archive_item}",
      *     name="archive_item",
      *     methods={"GET"},
-     *     requirements={"archive_item"=".+(\.zip\/).+$"}
+     *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
      * )
      */
     public function archiveItem(PathTool $pathTool)
