@@ -12,6 +12,8 @@ class MimeGuesser
             'jpg' => 'image/jpeg',
             'js' => 'application/javascript',
             'json' => 'application/json',
+            'png' => 'image/png',
+            'webp' => 'image/webp',
         ];
 
         $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
