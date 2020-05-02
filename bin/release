@@ -13,6 +13,9 @@ yarn build
 # Copy artifact into dist directory
 cp -r config public src templates vendor dist/manga-server
 
+# Remove php_cs cache
+find dist -type f -name "*.cache" -exec rm {} \;
+
 # Define environment variable
 echo "APP_ENV=prod" > dist/manga-server/.env
 echo "APP_SECRET=$(openssl rand -hex 20)" >> dist/manga-server/.env
