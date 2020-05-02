@@ -30,7 +30,10 @@ class AssetsControllerTest extends WebTestCase
             default:
                 break;
         }
-        $this->assertResponseHeaderSame('Expires', (new \DateTime('+1 week'))->format(DATE_RFC7231));
+
+        $expiresHeader = $this->client->getResponse()->headers->get('expires');
+        $expires = (new \DateTime($expiresHeader))->getTimestamp();
+        $this->assertLessThanOrEqual((new \DateTime('+1 week'))->getTimestamp(), $expires);
     }
 
     public function testGetNonExistingFile()
