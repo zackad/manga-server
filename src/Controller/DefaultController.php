@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Service\DirectoryListing;
+use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -15,12 +15,10 @@ class DefaultController extends AbstractController
      * @Route("/", name="home", methods={"GET"})
      * @Route("/{default}", name="default", methods={"GET"}, requirements={"default"="^(?!build).+"})
      */
-    public function index(Request $request, DirectoryListing $listing)
+    public function index(DirectoryListing $listing, PathTool $pathTool)
     {
-        $requestUri = $request->getRequestUri();
-        $uriPrefix = '/' === $requestUri ? '' : urldecode($requestUri);
-
-        $target = $_ENV['MANGA_ROOT_DIRECTORY'].$uriPrefix;
+        $uriPrefix = $pathTool->getPrefix();
+        $target = $pathTool->getTarget();
 
         if (is_file($target)) {
             $stream = new Stream($target);
