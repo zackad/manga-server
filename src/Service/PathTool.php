@@ -25,6 +25,6 @@ class PathTool
 
     public function getTarget(): string
     {
-        return $_ENV['MANGA_ROOT_DIRECTORY'].$this->getPrefix();
+        return $_ENV['MANGA_ROOT_DIRECTORY'].'/'.$this->getPrefix();
     }
 }
