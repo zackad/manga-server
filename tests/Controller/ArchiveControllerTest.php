@@ -25,6 +25,11 @@ class ArchiveControllerTest extends WebTestCase
     {
         $this->client->request('GET', '/archive.zip/image.jpeg');
 
+        $expiresExpected = (new \DateTime('+1 week'))->getTimestamp();
+        $actualExpires = (new \DateTime($this->client->getResponse()->headers->get('Expires')))->getTimestamp();
+
         $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('Content-Type', 'image/jpeg');
+        $this->assertLessThanOrEqual($expiresExpected, $actualExpires);
     }
 }
