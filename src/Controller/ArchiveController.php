@@ -23,7 +23,7 @@ class ArchiveController extends AbstractController
     public function archiveListing(DirectoryListing $listing, PathTool $pathTool)
     {
         $uriPrefix = $pathTool->getPrefix();
-        $target = urldecode($pathTool->getTarget());
+        $target = rawurldecode($pathTool->getTarget());
 
         $entries = new ArchiveReader($target);
         $entryList = $listing->buildList($entries->getList(), $uriPrefix, $target);
