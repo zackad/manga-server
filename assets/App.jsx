@@ -1,13 +1,16 @@
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
+
 import { Breadcrumbs } from './Components/Breadcrumbs'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
+import { SettingsDialog } from './Components/SettingsDialog'
 import './css/tailwind.src.css'
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
-  const [maxImageWidth, setMaxImageWidth] = useState(0)
+  const [maxImageWidth, setMaxImageWidth] = useState(null)
+  const [openSettingDialog, setOpenSettingDialog] = useState(false)
 
   const regexFilter = new RegExp('.jpe?g$|.png$|.gif$|.webp$', 'i')
   const images = props.files.filter(image => image.uri.match(regexFilter))
@@ -37,10 +40,20 @@ function App(props) {
     }
   }
 
+  const handleMaxImageWidthChange = event => {
+    const value = parseInt(event.target.value)
+    setMaxImageWidth(value)
+    localStorage.setItem('maxImageWidth', value)
+  }
+
   const toggleReaderMode = () => {
     if (images.length > 0) {
       setReaderMode(prevState => !prevState)
     }
+  }
+
+  const toggleSettingDialog = () => {
+    setOpenSettingDialog(prevState => !prevState)
   }
 
   const list = <Listing files={props.files} directories={props.directories} />
@@ -51,9 +64,22 @@ function App(props) {
     </button>
   )
 
+  const toggleSettingButton = (
+    <button className='uppercase' onClick={toggleSettingDialog}>
+      settings
+    </button>
+  )
+
   return (
     <div className='min-h-screen bg-gray-900 text-white'>
-      <Breadcrumbs toggleReader={toggleReaderButton} />
+      <Breadcrumbs toggleReader={toggleReaderButton} toggleSetting={toggleSettingButton} />
+      {openSettingDialog && (
+        <SettingsDialog
+          value={maxImageWidth}
+          onChange={handleMaxImageWidthChange}
+          onClick={() => setOpenSettingDialog(false)}
+        />
+      )}
       {readerMode ? reader : list}
     </div>
   )

@@ -7,7 +7,7 @@ function Reader({ images, maxImageWidth, borderImage }) {
   useEffect(() => {
     let width = !maxImageWidth ? `100%` : `${maxImageWidth}px`
     document.documentElement.style.setProperty('--max-image-width', width)
-  }, [])
+  }, [maxImageWidth])
 
   return (
     <div>
