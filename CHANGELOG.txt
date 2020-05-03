@@ -6,6 +6,7 @@ Changelog:
 
 (next)
 [+] Add support for handling zip and cbz (comic book) file format
+[*] Fix path resolution and url encoding
 
 0.5.0 (2020-05-02)
 [+] Add lazy load to prevent downloading unnecessary image.

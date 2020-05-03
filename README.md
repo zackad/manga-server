@@ -25,6 +25,10 @@ Web application to serve manga collection from your computer over the network.
 - Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder
 ```shell
 # Please change to something like MANGA_ROOT_DIRECTORY=/data/manga
+#
+# Warning: If you pointing to sub directory, do NOT add trailing slash e.g
+# valid: MANGAN_ROOT_DIRECTORY=/data/manga
+# invalid: MANGAN_ROOT_DIRECTORY=/data/manga/
 MANGA_ROOT_DIRECTORY=/
 ```
 - Open terminal

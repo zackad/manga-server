@@ -15,7 +15,7 @@ class PathTool
 
     public function getUri(): string
     {
-        return $this->request->getRequestUri();
+        return trim(urldecode($this->request->getRequestUri()), '/');
     }
 
     public function getPrefix(): string
@@ -25,6 +25,6 @@ class PathTool
 
     public function getTarget(): string
     {
-        return $_ENV['MANGA_ROOT_DIRECTORY'].$this->getPrefix();
+        return $_ENV['MANGA_ROOT_DIRECTORY'].'/'.$this->getPrefix();
     }
 }
