@@ -17,7 +17,7 @@ class DirectoryListing
         $data = [];
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
-            $data[] = ['uri' => urlencode($requestUri), 'label' => $entry, 'isDirectory' => is_dir($target.'/'.$entry)];
+            $data[] = ['uri' => rawurlencode($requestUri), 'label' => $entry, 'isDirectory' => is_dir($target.'/'.$entry)];
         }
 
         return $data;

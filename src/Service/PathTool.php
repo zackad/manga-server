@@ -15,12 +15,12 @@ class PathTool
 
     public function getUri(): string
     {
-        return trim(urldecode($this->request->getRequestUri()), '/');
+        return trim(rawurldecode($this->request->getRequestUri()), '/');
     }
 
     public function getPrefix(): string
     {
-        return '/' === $this->getUri() ? '' : urldecode($this->getUri());
+        return '/' === $this->getUri() ? '' : rawurldecode($this->getUri());
     }
 
     public function getTarget(): string
