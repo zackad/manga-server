@@ -9,6 +9,7 @@ Changelog:
 [+] Add option to set maximum image width
 [*] Fix path resolution and url encoding
 [*] Fix breadcrumbs url encoding
+[*] Make multi column layout for larger screen
 
 0.5.0 (2020-05-02)
 [+] Add lazy load to prevent downloading unnecessary image.
