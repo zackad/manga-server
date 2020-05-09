@@ -2,7 +2,7 @@ import { h } from 'preact'
 
 function ListItem({ className, item }) {
   return (
-    <p className='px-2 pt-2'>
+    <p className='w-full md:w-1/2 lg:w-1/3 px-2 pt-2'>
       <a className={`${className} inline-flex items-center max-w-full`} href={item.uri}>
         {item.isDirectory && (
           <svg
