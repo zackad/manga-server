@@ -11,7 +11,7 @@ function Breadcrumbs(props) {
   for (let item of items) {
     link += '/' + item
     breadcrumbs.push({
-      path: decodeURIComponent(link),
+      path: encodeURIComponent(link.replace(/^\/+|\/+$/g, '')),
       title: decodeURIComponent(item),
     })
   }
