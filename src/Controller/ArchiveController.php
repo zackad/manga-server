@@ -43,8 +43,9 @@ class ArchiveController extends AbstractController
      */
     public function archiveItem(PathTool $pathTool)
     {
-        $archivePath = dirname($pathTool->getTarget());
-        $entryName = pathinfo($pathTool->getTarget(), PATHINFO_BASENAME);
+        $target = $pathTool->getTarget();
+        $archivePath = preg_replace('/(?<=cbz|zip).*$/i', '', $target);
+        $entryName = preg_replace('/.*(cbz|zip)\//i', '', $target);
 
         $za = new \ZipArchive();
         $za->open($archivePath);
