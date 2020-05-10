@@ -9,6 +9,7 @@ Changelog:
 [+] Add option to set maximum image width
 [*] Fix path resolution and url encoding
 [*] Fix breadcrumbs url encoding
+[*] Fix retrieving item inside nested archive file
 [*] Make multi column layout for larger screen
 
 0.5.0 (2020-05-02)

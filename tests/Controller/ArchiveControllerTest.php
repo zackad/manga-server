@@ -32,4 +32,11 @@ class ArchiveControllerTest extends WebTestCase
         $this->assertResponseHeaderSame('Content-Type', 'image/jpeg');
         $this->assertLessThanOrEqual($expiresExpected, $actualExpires);
     }
+
+    public function testLoadFromNestedArchive()
+    {
+        $this->client->request('GET', '/nested-archive.zip%2Ftests%2Fstub%2Fimage.jpeg');
+
+        $this->assertResponseIsSuccessful();
+    }
 }
