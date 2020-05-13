@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# Prepare build target directory
+rm -fr build/manga-server
+mkdir -p build/manga-server
+
+composer install --no-dev
+composer dump-autoload --optimize
+
+# Build frontend artifact
+yarn build
+
+# Copy artifact into dist directory
+cp -r config public src templates vendor build/manga-server
+
+# Remove php_cs cache
+find build -type f -name "*.cache" -exec rm {} \;
+
+# Define environment variable
+echo "APP_ENV=prod" > build/manga-server/.env
+echo "APP_SECRET=$(openssl rand -hex 20)" >> build/manga-server/.env
+echo "MANGA_ROOT_DIRECTORY=/" >> build/manga-server/.env
+
+# Re-install dependencies
+composer install
