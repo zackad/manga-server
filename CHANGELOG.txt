@@ -7,6 +7,7 @@ Changelog:
 (next)
 [+] Add support for handling zip and cbz (comic book) file format
 [+] Add option to set maximum image width
+[+] Show cover image for supported archive file (zip, cbz)
 [*] Fix path resolution and url encoding
 [*] Fix breadcrumbs url encoding
 [*] Fix retrieving item inside nested archive file

@@ -14,10 +14,19 @@ class DirectoryListing
 
     public function buildList(array $entries, string $uriPrefix, string $target = ''): iterable
     {
+        $comicBook = new ComicBook();
         $data = [];
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
-            $data[] = ['uri' => rawurlencode($requestUri), 'label' => $entry, 'isDirectory' => is_dir($target.'/'.$entry)];
+            $hasCover = $comicBook->getCover($target.'/'.$entry);
+
+            $cover = $hasCover ? rawurlencode($requestUri.'/'.$hasCover) : false;
+            $data[] = [
+                'uri' => rawurlencode($requestUri),
+                'label' => $entry,
+                'isDirectory' => is_dir($target.'/'.$entry),
+                'cover' => $cover,
+            ];
         }
 
         return $data;
