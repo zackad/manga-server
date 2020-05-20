@@ -56,7 +56,7 @@ function App(props) {
     setOpenSettingDialog(prevState => !prevState)
   }
 
-  const list = <Listing files={props.files} directories={props.directories} />
+  const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
   const toggleReaderButton = (
     <button className='ml-2 uppercase' onClick={toggleReaderMode}>
