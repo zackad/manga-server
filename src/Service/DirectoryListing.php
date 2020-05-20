@@ -31,7 +31,6 @@ class DirectoryListing
             $data[] = [
                 'uri' => rawurlencode($requestUri),
                 'label' => $entry,
-                'isDirectory' => is_dir($target.'/'.$entry),
                 'type' => $this->getType($target.'/'.$entry),
                 'cover' => $cover,
             ];
