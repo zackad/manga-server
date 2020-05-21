@@ -4,6 +4,13 @@ namespace App\Service;
 
 class DirectoryListing
 {
+    private $za;
+
+    public function __construct()
+    {
+        $this->za = new \ZipArchive();
+    }
+
     public function scan(string $target, string $uriPrefix): iterable
     {
         $entries = preg_grep('/^([^.])/', scandir($target));
@@ -24,11 +31,24 @@ class DirectoryListing
             $data[] = [
                 'uri' => rawurlencode($requestUri),
                 'label' => $entry,
-                'isDirectory' => is_dir($target.'/'.$entry),
+                'type' => $this->getType($target.'/'.$entry),
                 'cover' => $cover,
             ];
         }
 
         return $data;
+    }
+
+    private function getType(string $pathname): string
+    {
+        if (is_dir($pathname)) {
+            return 'directory';
+        }
+
+        if (true === $this->za->open($pathname)) {
+            return 'archive';
+        }
+
+        return 'file';
     }
 }

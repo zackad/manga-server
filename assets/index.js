@@ -1,7 +1,8 @@
 import { h, render } from 'preact'
 import { App } from './App'
 
-const directories = ENTRIES_DATA.filter(entry => entry.isDirectory)
-const files = ENTRIES_DATA.filter(entry => !entry.isDirectory)
+const directories = ENTRIES_DATA.filter(entry => entry.type === 'directory')
+const archive = ENTRIES_DATA.filter(entry => entry.type === 'archive')
+const files = ENTRIES_DATA.filter(entry => entry.type === 'file')
 
-render(<App directories={directories} files={files} />, document.getElementById('preact_container'))
+render(<App directories={directories} files={files} archive={archive} />, document.getElementById('preact_container'))
