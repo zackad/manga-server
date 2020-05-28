@@ -6,7 +6,7 @@ import { Thumbnail } from '../Thumbnail'
 export function ArchiveItem({ cover, label, uri }) {
   return (
     <Wrapper>
-      <div className='w-1/4 max-h-32 overflow-hidden'>{cover && <Thumbnail image={cover} />}</div>
+      <div className='w-1/4 max-h-32 lg:max-h-48 overflow-hidden'>{cover && <Thumbnail image={cover} />}</div>
       <div className='w-3/4 max-h-32 overflow-hidden'>
         <h1>
           <a className='inline-flex items-start max-w-full' href={uri}>
