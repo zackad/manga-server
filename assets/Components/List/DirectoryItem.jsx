@@ -9,9 +9,9 @@ export function DirectoryItem({ label, uri }) {
       <div className='w-1/4 h-16 overflow-hidden'>
         <IconDirectory />
       </div>
-      <div className={`w-3/4 h-16 overflow-hidden`}>
+      <div className='w-3/4 h-16 overflow-hidden'>
         <h1>
-          <a className={`inline-flex items-start max-w-full`} href={uri}>
+          <a className='inline-flex items-start w-full' href={uri}>
             <span>{label}</span>
           </a>
         </h1>
