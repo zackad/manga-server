@@ -13,6 +13,7 @@ Changelog:
 [+] Add border bottom on Wrapper component
 [*] Change list entry size to maximize space usage
 [*] Increase thumbnail size on lg screen
+[*] Reduce directory icon size
 [*] Use 2 column layout for md and lg screen size
 
 0.6.0 (2020-05-18)
