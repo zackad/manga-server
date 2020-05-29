@@ -2,6 +2,7 @@ import { h } from 'preact'
 
 import { Wrapper } from './Wrapper'
 import { IconDirectory } from '../IconDirectory'
+import { ListLabel } from './ListLabel'
 
 export function DirectoryItem({ label, uri }) {
   return (
@@ -10,11 +11,7 @@ export function DirectoryItem({ label, uri }) {
         <IconDirectory />
       </div>
       <div className='w-full h-6 overflow-hidden'>
-        <h1>
-          <a className='inline-flex items-start w-full' href={uri}>
-            <span>{label}</span>
-          </a>
-        </h1>
+        <ListLabel uri={uri} label={label} />
       </div>
     </Wrapper>
   )
