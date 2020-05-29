@@ -2,17 +2,14 @@ import { h } from 'preact'
 
 import { Wrapper } from './Wrapper'
 import { Thumbnail } from '../Thumbnail'
+import { ListLabel } from './ListLabel'
 
 export function ArchiveItem({ cover, label, uri }) {
   return (
     <Wrapper>
       <div className='w-1/4 max-h-32 lg:max-h-48 overflow-hidden'>{cover && <Thumbnail image={cover} />}</div>
       <div className='w-3/4 max-h-32 overflow-hidden'>
-        <h1>
-          <a className='inline-flex items-start max-w-full' href={uri}>
-            <span>{label}</span>
-          </a>
-        </h1>
+        <ListLabel uri={uri} label={label} />
       </div>
     </Wrapper>
   )
