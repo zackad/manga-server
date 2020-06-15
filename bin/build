@@ -11,7 +11,7 @@ composer dump-autoload --optimize
 yarn build
 
 # Copy artifact into dist directory
-cp -r config public src templates vendor build/manga-server
+cp -r config public src templates vendor composer.json build/manga-server
 
 # Remove php_cs cache
 find build -type f -name "*.cache" -exec rm {} \;
