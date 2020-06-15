@@ -2,6 +2,7 @@
 
 namespace App\Tests\Service;
 
+use App\Service\Search;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 
@@ -17,13 +18,11 @@ class SearchTest extends TestCase
     public function testGenericSearch()
     {
         $finder = new Finder();
-        $root = $_ENV['MANGA_ROOT_DIRECTORY'];
-        $search = '';
-        $patterns = sprintf('/.*%s.*\.(zip|cbz)$/i', $search);
-        $finder->files()->depth('< 3')->in($root)->name($patterns);
-        $results = iterator_to_array($finder);
+        $search = new Search($finder);
+        $string = '';
+        $results = $search->find($string);
 
-        $this->assertTrue($finder->hasResults());
+        $this->assertIsIterable($results);
         $this->assertGreaterThanOrEqual(3, count($results));
     }
 }
