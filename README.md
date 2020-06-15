@@ -11,12 +11,13 @@ Web application to serve manga collection from your computer over the network.
 
 ## Requirements
 
-- PHP >= 7.1.5 (7.4 recommended)
-- composer*
-- NodeJS*
-- yarn* (replacement for npm)
+**Runtime**
+- PHP >= 7.2.5 (7.4 recommended)
 
-*: for development
+**Development**
+- composer
+- NodeJS
+- yarn (replacement for npm)
 
 ## How to run
 
@@ -27,8 +28,8 @@ Web application to serve manga collection from your computer over the network.
 # Please change to something like MANGA_ROOT_DIRECTORY=/data/manga
 #
 # Warning: If you pointing to sub directory, do NOT add trailing slash e.g
-# valid: MANGAN_ROOT_DIRECTORY=/data/manga
-# invalid: MANGAN_ROOT_DIRECTORY=/data/manga/
+# valid: MANGA_ROOT_DIRECTORY=/data/manga
+# invalid: MANGA_ROOT_DIRECTORY=/data/manga/
 MANGA_ROOT_DIRECTORY=/
 ```
 - Open terminal
@@ -44,7 +45,7 @@ php -S 0.0.0.0:8000 public/index.php
 
 - Clone this repository
 ```shell
-git clone https://github.com/zaackad/manga-server
+git clone https://github.com/zackad/manga-server
 ```
 - Install dependencies
 ```shell
