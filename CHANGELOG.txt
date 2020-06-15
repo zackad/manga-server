@@ -13,6 +13,7 @@ Changelog:
 [!] Upgrade to symfony 5.1
 [+] Add entry type to differentiate styling
 [+] Add border bottom on Wrapper component
+[+] Add search feature
 [*] Change list entry size to maximize space usage
 [*] Fix deprecation message regarding `Dotenv` constructor
 [*] Increase thumbnail size on lg screen
