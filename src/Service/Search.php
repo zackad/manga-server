@@ -24,6 +24,7 @@ class Search
             ->ignoreUnreadableDirs()
             ->in($this->mangaRootDirectory)
             ->name($patterns)
+            ->sortByName(true)
         ;
 
         return iterator_to_array($this->finder);
