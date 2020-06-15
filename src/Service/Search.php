@@ -18,7 +18,13 @@ class Search
     public function find(string $search = ''): iterable
     {
         $patterns = sprintf('/.*%s.*\.(zip|cbz)$/i', $search);
-        $this->finder->files()->in($this->mangaRootDirectory)->name($patterns);
+        $this->finder
+            ->files()
+            ->depth('< 3')
+            ->ignoreUnreadableDirs()
+            ->in($this->mangaRootDirectory)
+            ->name($patterns)
+        ;
 
         return iterator_to_array($this->finder);
     }
