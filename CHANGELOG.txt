@@ -9,16 +9,19 @@ Changelog:
 [?] Feedback needed
 
 (next)
-[!] Bump system requirement to php version 7.2.5
-[!] Upgrade to symfony 5.1
-[+] Add entry type to differentiate styling
-[+] Add border bottom on Wrapper component
-[+] Add search feature
-[*] Change list entry size to maximize space usage
-[*] Fix deprecation message regarding `Dotenv` constructor
-[*] Increase thumbnail size on lg screen
-[*] Reduce directory icon size
-[*] Use 2 column layout for md and lg screen size
+New Features:
+    [+] Add border bottom on Wrapper component
+    [+] Add entry type to differentiate styling
+    [+] Add search feature
+Bugfixes:
+    [*] Fix deprecation message regarding `Dotenv` constructor
+Changes:
+    [!] Bump system requirement to php version 7.2.5
+    [!] Upgrade to symfony 5.1
+    [*] Change list entry size to maximize space usage
+    [*] Increase thumbnail size on lg screen
+    [*] Reduce directory icon size
+    [*] Use 2 column layout for md and lg screen size
 
 0.6.0 (2020-05-18)
 [+] Add support for handling zip and cbz (comic book) file format
