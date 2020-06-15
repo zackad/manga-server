@@ -4,7 +4,6 @@ namespace App\Tests\Service;
 
 use App\Service\Search;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
@@ -17,8 +16,7 @@ class SearchTest extends TestCase
      */
     public function testGenericSearch()
     {
-        $finder = new Finder();
-        $search = new Search($finder);
+        $search = new Search();
         $string = '';
         $results = $search->find($string);
 

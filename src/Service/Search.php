@@ -9,9 +9,9 @@ class Search
     private $finder;
     private $mangaRootDirectory;
 
-    public function __construct(Finder $finder)
+    public function __construct()
     {
-        $this->finder = $finder;
+        $this->finder = new Finder();
         $this->mangaRootDirectory = $_ENV['MANGA_ROOT_DIRECTORY'];
     }
 
