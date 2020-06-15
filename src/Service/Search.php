@@ -22,7 +22,7 @@ class Search
         $patterns = sprintf('/.*%s.*\.(zip|cbz)$/i', $search);
         $this->finder
             ->files()
-            ->depth('< 3')
+            ->depth(sprintf('< %s', $_ENV['MAXIMUM_SEARCH_DEPTH']))
             ->ignoreUnreadableDirs()
             ->followLinks()
             ->in($this->mangaRootDirectory)

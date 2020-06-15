@@ -20,6 +20,7 @@ find build -type f -name "*.cache" -exec rm {} \;
 echo "APP_ENV=prod" > build/manga-server/.env
 echo "APP_SECRET=$(openssl rand -hex 20)" >> build/manga-server/.env
 echo "MANGA_ROOT_DIRECTORY=/" >> build/manga-server/.env
+echo "MAXIMUM_SEARCH_DEPTH=3" >> build/manga-server/.env
 
 # Re-install dependencies
 composer install
