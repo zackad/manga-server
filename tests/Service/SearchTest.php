@@ -25,7 +25,7 @@ class SearchTest extends TestCase
 
     public function testResultDataStructure()
     {
-        $generator = (new Search())->find('');
+        $generator = (new Search())->find('archive');
         $result = iterator_to_array($generator)[0];
 
         $this->assertArrayHasKey('uri', $result);
