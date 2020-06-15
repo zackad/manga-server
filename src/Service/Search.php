@@ -19,6 +19,14 @@ class Search
 
     public function find(string $search = ''): \Generator
     {
+        /*
+         * Prevent traversing all valid archive file and force user to include
+         * search pattern.
+         */
+        if ('' === $search) {
+            return;
+        }
+
         $patterns = sprintf('/.*%s.*\.(zip|cbz)$/i', $search);
         $this->finder
             ->files()
