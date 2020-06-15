@@ -21,6 +21,16 @@ class SearchTest extends TestCase
         $results = $search->find($string);
 
         $this->assertIsIterable($results);
-        $this->assertGreaterThanOrEqual(3, count($results));
+    }
+
+    public function testResultDataStructure()
+    {
+        $generator = (new Search())->find('');
+        $result = iterator_to_array($generator)[0];
+
+        $this->assertArrayHasKey('uri', $result);
+        $this->assertArrayHasKey('label', $result);
+        $this->assertArrayHasKey('type', $result);
+        $this->assertArrayHasKey('cover', $result);
     }
 }
