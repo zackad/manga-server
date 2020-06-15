@@ -1,18 +1,18 @@
 {
     "require": {
-        "php": "^7.1.5",
+        "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-zip": "*",
         "sensio/framework-extra-bundle": "^5.5",
-        "symfony/console": "4.4.*",
-        "symfony/dotenv": "4.4.*",
+        "symfony/console": "5.1.*",
+        "symfony/dotenv": "5.1.*",
         "symfony/flex": "^1.6",
-        "symfony/framework-bundle": "4.4.*",
+        "symfony/framework-bundle": "5.1.*",
         "symfony/twig-pack": "^1.0",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "5.1.*"
     },
     "autoload": {
         "psr-4": {
@@ -26,7 +26,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.1.15"
+            "php": "7.2.5"
         },
         "preferred-install": {
             "*": "dist"
@@ -47,7 +47,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.4.*"
+            "require": "5.1.*"
         }
     },
     "scripts": {
