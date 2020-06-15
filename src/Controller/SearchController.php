@@ -14,7 +14,7 @@ class SearchController extends AbstractController
      */
     public function index(Request $request, Search $search)
     {
-        $q = $request->query->get('q');
+        $q = $request->query->get('q') ?? '';
 
         $results = $search->find($q);
 
