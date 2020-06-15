@@ -1,6 +1,7 @@
 import { h } from 'preact'
 import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
+import { SeacrhField } from './Search/SearchField'
 
 function Breadcrumbs(props) {
   const location = decodeURIComponent(document.location.pathname)
@@ -29,6 +30,7 @@ function Breadcrumbs(props) {
     <div className={`p-2 border-b bg-gray-800 flex w-full`}>
       <div className='flex overflow-x-scroll'>{breadcrumbs.map(item => item.element)}</div>
       <span className={`flex-grow`} />
+      <SeacrhField />
       {props.toggleSetting}
       {props.toggleReader}
     </div>
