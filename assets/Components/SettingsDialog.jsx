@@ -1,4 +1,5 @@
 import { h } from 'preact'
+import { SeacrhField } from './Search/SearchField'
 
 export function SettingsDialog(props) {
   return (
@@ -17,6 +18,7 @@ export function SettingsDialog(props) {
           onChange={props.onChange}
         />
       </div>
+      <SeacrhField />
       <button className='mt-3 px-3 py-1 border rounded' onClick={props.onClick}>
         Close
       </button>
