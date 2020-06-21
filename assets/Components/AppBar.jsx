@@ -5,6 +5,7 @@ import { ButtonIcon } from './Button/ButtonIcon'
 import { IconBookOpen } from './Icon/IconBookOpen'
 import { IconCog } from './Icon/IconCog'
 import { IconHome } from './Icon/IconHome'
+import { SeacrhField } from './Search/SearchField'
 import { AppContext } from '../App'
 
 export function AppBar() {
@@ -17,6 +18,7 @@ export function AppBar() {
           <IconHome />
         </ButtonIcon>
       </a>
+      <SeacrhField />
       <div className='flex-grow'></div>
       <ButtonIcon onClick={toggleSettingDialog}>
         <IconCog />
