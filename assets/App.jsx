@@ -8,6 +8,7 @@ import { SettingsDialog } from './Components/SettingsDialog'
 import { IconBookOpen } from './Components/Icon/IconBookOpen'
 import { IconCog } from './Components/Icon/IconCog'
 import './css/tailwind.src.css'
+import { ButtonIcon } from './Components/Button/ButtonIcon'
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
@@ -61,15 +62,15 @@ function App(props) {
   const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
   const toggleReaderButton = (
-    <button className='inline-block mx-1 p-1 w-8 h-8' onClick={toggleReaderMode}>
+    <ButtonIcon onClick={toggleReaderMode}>
       <IconBookOpen />
-    </button>
+    </ButtonIcon>
   )
 
   const toggleSettingButton = (
-    <button className='inline-block mx-1 p-1 w-8 h-8' onClick={toggleSettingDialog}>
+    <ButtonIcon onClick={toggleSettingDialog}>
       <IconCog />
-    </button>
+    </ButtonIcon>
   )
 
   return (
