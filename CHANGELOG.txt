@@ -10,6 +10,7 @@ Changelog:
 
 (next)
 Changes:
+    [+] Introducing context API to simplify passing object into child component
     [*] Change menu with icon from fontawesome
     [*] Remove Breadcrumbs component, and replace it with AppBar component as
         container

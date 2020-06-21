@@ -1,14 +1,13 @@
-import { h } from 'preact'
+import { createContext, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
 import { AppBar } from './Components/AppBar'
-import { ButtonIcon } from './Components/Button/ButtonIcon'
-import { IconBookOpen } from './Components/Icon/IconBookOpen'
-import { IconCog } from './Components/Icon/IconCog'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
 import { SettingsDialog } from './Components/SettingsDialog'
 import './css/tailwind.src.css'
+
+export const AppContext = createContext(null)
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
@@ -63,25 +62,19 @@ function App(props) {
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
-      <AppBar>
-        <div className='flex-grow'></div>
-        <ButtonIcon onClick={toggleSettingDialog}>
-          <IconCog />
-        </ButtonIcon>
-        <ButtonIcon onClick={toggleReaderMode}>
-          <IconBookOpen />
-        </ButtonIcon>
-      </AppBar>
-      {openSettingDialog && (
-        <SettingsDialog
-          value={maxImageWidth}
-          onChange={handleMaxImageWidthChange}
-          onClick={() => setOpenSettingDialog(false)}
-        />
-      )}
-      {readerMode ? reader : list}
-    </div>
+    <AppContext.Provider value={{ toggleSettingDialog, toggleReaderMode }}>
+      <div className='min-h-screen bg-gray-900 text-white'>
+        <AppBar />
+        {openSettingDialog && (
+          <SettingsDialog
+            value={maxImageWidth}
+            onChange={handleMaxImageWidthChange}
+            onClick={() => setOpenSettingDialog(false)}
+          />
+        )}
+        {readerMode ? reader : list}
+      </div>
+    </AppContext.Provider>
   )
 }
 
