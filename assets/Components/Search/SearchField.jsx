@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-export function SeacrhField() {
+export function SearchField() {
   return (
     <form action='/search' className='flex-grow max-w-md'>
       <input
