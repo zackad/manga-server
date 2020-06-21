@@ -1,14 +1,14 @@
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { Breadcrumbs } from './Components/Breadcrumbs'
+import { AppBar } from './Components/AppBar'
+import { ButtonIcon } from './Components/Button/ButtonIcon'
+import { IconBookOpen } from './Components/Icon/IconBookOpen'
+import { IconCog } from './Components/Icon/IconCog'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
 import { SettingsDialog } from './Components/SettingsDialog'
-import { IconBookOpen } from './Components/Icon/IconBookOpen'
-import { IconCog } from './Components/Icon/IconCog'
 import './css/tailwind.src.css'
-import { ButtonIcon } from './Components/Button/ButtonIcon'
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
@@ -61,21 +61,18 @@ function App(props) {
 
   const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
-  const toggleReaderButton = (
-    <ButtonIcon onClick={toggleReaderMode}>
-      <IconBookOpen />
-    </ButtonIcon>
-  )
-
-  const toggleSettingButton = (
-    <ButtonIcon onClick={toggleSettingDialog}>
-      <IconCog />
-    </ButtonIcon>
-  )
 
   return (
     <div className='min-h-screen bg-gray-900 text-white'>
-      <Breadcrumbs toggleReader={toggleReaderButton} toggleSetting={toggleSettingButton} />
+      <AppBar>
+        <div className='flex-grow'></div>
+        <ButtonIcon onClick={toggleSettingDialog}>
+          <IconCog />
+        </ButtonIcon>
+        <ButtonIcon onClick={toggleReaderMode}>
+          <IconBookOpen />
+        </ButtonIcon>
+      </AppBar>
       {openSettingDialog && (
         <SettingsDialog
           value={maxImageWidth}
