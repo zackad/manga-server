@@ -5,6 +5,8 @@ import { Breadcrumbs } from './Components/Breadcrumbs'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
 import { SettingsDialog } from './Components/SettingsDialog'
+import { IconBookOpen } from './Components/Icon/IconBookOpen'
+import { IconCog } from './Components/Icon/IconCog'
 import './css/tailwind.src.css'
 
 function App(props) {
@@ -59,14 +61,14 @@ function App(props) {
   const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
   const toggleReaderButton = (
-    <button className='ml-2 uppercase' onClick={toggleReaderMode}>
-      read
+    <button className='inline-block mx-1 p-1 w-8 h-8' onClick={toggleReaderMode}>
+      <IconBookOpen />
     </button>
   )
 
   const toggleSettingButton = (
-    <button className='uppercase' onClick={toggleSettingDialog}>
-      settings
+    <button className='inline-block mx-1 p-1 w-8 h-8' onClick={toggleSettingDialog}>
+      <IconCog />
     </button>
   )
 
