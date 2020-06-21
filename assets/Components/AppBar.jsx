@@ -12,20 +12,22 @@ export function AppBar() {
   const { toggleSettingDialog, toggleReaderMode } = useContext(AppContext)
 
   return (
-    <div className='flex py-1 bg-gray-800 border-b'>
-      <a href='/'>
-        <ButtonIcon>
-          <IconHome />
+    <div className='bg-gray-800 border-b'>
+      <div className='container mx-auto flex py-1'>
+        <a href='/'>
+          <ButtonIcon>
+            <IconHome />
+          </ButtonIcon>
+        </a>
+        <SeacrhField />
+        <div className='flex-grow'></div>
+        <ButtonIcon onClick={toggleSettingDialog}>
+          <IconCog />
         </ButtonIcon>
-      </a>
-      <SeacrhField />
-      <div className='flex-grow'></div>
-      <ButtonIcon onClick={toggleSettingDialog}>
-        <IconCog />
-      </ButtonIcon>
-      <ButtonIcon onClick={toggleReaderMode}>
-        <IconBookOpen />
-      </ButtonIcon>
+        <ButtonIcon onClick={toggleReaderMode}>
+          <IconBookOpen />
+        </ButtonIcon>
+      </div>
     </div>
   )
 }
