@@ -9,8 +9,12 @@ Changelog:
 [?] Feedback needed
 
 (next)
+New Features:
+    [+] Add home button
 Changes:
+    [+] Introducing context API to simplify passing object into child component
     [*] Change menu with icon from fontawesome
+    [*] Change placement of Breadcrumbs component
 
 0.7.0 (2020-07-17)
 New Features:

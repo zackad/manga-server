@@ -1,14 +1,13 @@
-import { h } from 'preact'
+import { createContext, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { Breadcrumbs } from './Components/Breadcrumbs'
+import { AppBar } from './Components/AppBar'
 import { Listing } from './Components/Listing'
 import { Reader } from './Components/Reader'
 import { SettingsDialog } from './Components/SettingsDialog'
-import { IconBookOpen } from './Components/Icon/IconBookOpen'
-import { IconCog } from './Components/Icon/IconCog'
 import './css/tailwind.src.css'
-import { ButtonIcon } from './Components/Button/ButtonIcon'
+
+export const AppContext = createContext(null)
 
 function App(props) {
   const [readerMode, setReaderMode] = useState(false)
@@ -61,30 +60,21 @@ function App(props) {
 
   const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />
   const reader = <Reader images={images} maxImageWidth={maxImageWidth} />
-  const toggleReaderButton = (
-    <ButtonIcon onClick={toggleReaderMode}>
-      <IconBookOpen />
-    </ButtonIcon>
-  )
-
-  const toggleSettingButton = (
-    <ButtonIcon onClick={toggleSettingDialog}>
-      <IconCog />
-    </ButtonIcon>
-  )
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
-      <Breadcrumbs toggleReader={toggleReaderButton} toggleSetting={toggleSettingButton} />
-      {openSettingDialog && (
-        <SettingsDialog
-          value={maxImageWidth}
-          onChange={handleMaxImageWidthChange}
-          onClick={() => setOpenSettingDialog(false)}
-        />
-      )}
-      {readerMode ? reader : list}
-    </div>
+    <AppContext.Provider value={{ toggleSettingDialog, toggleReaderMode }}>
+      <div className='min-h-screen bg-gray-900 text-white'>
+        <AppBar />
+        {openSettingDialog && (
+          <SettingsDialog
+            value={maxImageWidth}
+            onChange={handleMaxImageWidthChange}
+            onClick={() => setOpenSettingDialog(false)}
+          />
+        )}
+        {readerMode ? reader : list}
+      </div>
+    </AppContext.Provider>
   )
 }
 
