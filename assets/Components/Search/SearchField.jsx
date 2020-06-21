@@ -1,10 +1,14 @@
 import { h } from 'preact'
 
-export function SeacrhField() {
+export function SearchField() {
   return (
-    <form action='/search' className='w-full py-1 mt-2 border-t'>
-      <label htmlFor=''>Search</label>
-      <input type='text' name='q' className=' w-full px-1 h-8 text-sm text-gray-900' placeholder='Search' />
+    <form action='/search' className='flex-grow max-w-md'>
+      <input
+        type='text'
+        name='q'
+        className='w-full px-1 h-8 bg-gray-900 focus:bg-white text-sm text-gray-900 border border-gray-700 rounded'
+        placeholder='Search'
+      />
     </form>
   )
 }
