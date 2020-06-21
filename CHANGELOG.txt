@@ -9,6 +9,8 @@ Changelog:
 [?] Feedback needed
 
 (next)
+New Features:
+    [+] Add home button
 Changes:
     [+] Introducing context API to simplify passing object into child component
     [*] Change menu with icon from fontawesome
