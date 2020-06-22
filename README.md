@@ -1,10 +1,9 @@
 # Manga Server
 
-[![Build Status](https://img.shields.io/travis/zackad/manga-server?style=for-the-badge)](https://travis-ci.com/zackad/manga-server)
-[![Codecov](https://img.shields.io/codecov/c/github/zackad/manga-server?style=for-the-badge)](https://codecov.io/gh/zackad/manga-server)
-![MIT License](https://img.shields.io/github/license/zackad/manga-server?style=for-the-badge)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/zackad/manga-server?style=for-the-badge)](https://github.com/zackad/manga-server/releases/latest)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/zackad/manga-server?style=for-the-badge)
+[![Build Status](https://img.shields.io/travis/zackad/manga-server?style=for-the-badge&logo=travis)](https://travis-ci.com/zackad/manga-server)
+[![Codecov](https://img.shields.io/codecov/c/github/zackad/manga-server?style=for-the-badge&logo=codecov)](https://codecov.io/gh/zackad/manga-server)
+[![MIT License](https://img.shields.io/github/license/zackad/manga-server?style=for-the-badge)](https://github.com/zackad/manga-server/blob/master/LICENSE)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/zackad/manga-server?style=for-the-badge&logo=github)](https://github.com/zackad/manga-server/releases/latest)
 
 Web application to serve manga collection from your computer over the network.
 
