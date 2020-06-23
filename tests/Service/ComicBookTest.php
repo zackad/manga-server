@@ -15,7 +15,7 @@ class ComicBookTest extends TestCase
         $this->assertEquals('image.jpeg', $comicBook->getCover($testFile));
     }
 
-    public function getCoverWithFailure()
+    public function testGetCoverWithFailure()
     {
         $comicBook = new ComicBook();
         $this->assertFalse($comicBook->getCover('not-existing.zip'));
