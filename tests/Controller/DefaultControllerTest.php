@@ -6,15 +6,21 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    private $client;
+
+    protected function setUp()
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * @dataProvider imageProvider
      */
     public function testLoadImage($image)
     {
-        $client = static::createClient();
-        $client->request('GET', $image);
+        $this->client->request('GET', $image);
 
-        $expiresHeader = $client->getResponse()->headers->get('expires');
+        $expiresHeader = $this->client->getResponse()->headers->get('expires');
         $expires = (new \DateTime($expiresHeader))->getTimestamp();
 
         $this->assertResponseIsSuccessful();
@@ -23,16 +29,14 @@ class DefaultControllerTest extends WebTestCase
 
     public function testAccessNonExistingDirectory()
     {
-        $client = static::createClient();
-        $client->request('GET', '/non-existing-directory');
+        $this->client->request('GET', '/non-existing-directory');
 
         $this->assertResponseStatusCodeSame(404);
     }
 
     public function testAccessHomepage()
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
+        $this->client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
     }
