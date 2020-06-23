@@ -10,13 +10,14 @@ class SearchTest extends TestCase
     /**
      * Test search using with simple string.
      */
-    public function testGenericSearch()
+    public function testSearchWithEmptySringReturnZeroResult()
     {
         $search = new Search();
         $string = '';
         $results = $search->find($string);
 
         $this->assertIsIterable($results);
+        $this->assertCount(0, $results);
     }
 
     public function testResultDataStructure()
