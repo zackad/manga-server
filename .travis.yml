@@ -14,6 +14,7 @@ before_script:
 script:
     - bin/build
     - bin/phpunit --coverage-clover var/coverage.xml
+    - vendor/bin/psalm
 
 after_success:
     - bash <(curl -s https://codecov.io/bash) -f var/coverage.xml
