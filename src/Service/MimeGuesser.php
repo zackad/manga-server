@@ -2,22 +2,15 @@
 
 namespace App\Service;
 
+use Symfony\Component\Mime\MimeTypes;
+
 class MimeGuesser
 {
-    public static function guessMimeType(string $filename)
+    public function guessMimeType(string $filename)
     {
-        $supportedMime = [
-            'css' => 'text/css',
-            'jpeg' => 'image/jpeg',
-            'jpg' => 'image/jpeg',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-            'png' => 'image/png',
-            'webp' => 'image/webp',
-        ];
-
+        $mimeTypes = new MimeTypes();
         $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
 
-        return $supportedMime[$fileExtension];
+        return $mimeTypes->getMimeTypes($fileExtension)[0] ?? 'application/octet-stream';
     }
 }
