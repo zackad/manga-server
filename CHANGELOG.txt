@@ -11,6 +11,9 @@ Changelog:
 (next)
 New Features:
     [+] Add home button
+Bugfixes:
+    [*] Fix MimeGuesser by leveraging symfony mime component, returning generic
+        'application/octet-stream' for unknown file type
 Changes:
     [+] Introducing context API to simplify passing object into child component
     [*] Change menu with icon from fontawesome

@@ -41,7 +41,7 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
      * )
      */
-    public function archiveItem(PathTool $pathTool)
+    public function archiveItem(PathTool $pathTool, MimeGuesser $guesser)
     {
         $target = $pathTool->getTarget();
         $archivePath = preg_replace('/(?<=cbz|zip).*$/i', '', $target);
@@ -58,7 +58,7 @@ class ArchiveController extends AbstractController
         });
 
         $headers = [
-            'Content-Type' => MimeGuesser::guessMimeType($entryName),
+            'Content-Type' => $guesser->guessMimeType($entryName),
         ];
         $response->headers->add($headers);
         $response->setExpires(new \DateTime('+1 week'));
