@@ -11,7 +11,7 @@ class ArchiveReader
         $this->filename = $filename;
     }
 
-    public function getList(): iterable
+    public function getList(): array
     {
         $za = new \ZipArchive();
         $za->open($this->filename);
