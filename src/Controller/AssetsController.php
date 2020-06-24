@@ -14,7 +14,7 @@ class AssetsController extends AbstractController
     /**
      * @Route("/build/{assets}", name="assets", methods={"GET"}, requirements={"assets"=".+"})
      */
-    public function index(ParameterBagInterface $parameterBag, string $assets)
+    public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets)
     {
         $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
 
@@ -24,10 +24,9 @@ class AssetsController extends AbstractController
 
         $stream = new Stream($file);
         $response = new BinaryFileResponse($stream);
-        $response->headers->add(['Content-Type' => MimeGuesser::guessMimeType($file)]);
+        $response->headers->add(['Content-Type' => $guesser->guessMimeType($file)]);
         $response->setExpires(new \DateTime('+1 week'));
 
         return $response;
     }
-
 }
