@@ -49,10 +49,13 @@ class ArchiveController extends AbstractController
 
         $za = new \ZipArchive();
         $za->open($archivePath);
+        $inputStream = $za->getStream($entryName);
+        if (false === $inputStream) {
+            throw $this->createNotFoundException();
+        }
 
-        $response = new StreamedResponse(function () use ($za, $entryName) {
+        $response = new StreamedResponse(function () use ($inputStream) {
             $outputStream = fopen('php://output', 'wb');
-            $inputStream = $za->getStream($entryName);
 
             stream_copy_to_stream($inputStream, $outputStream);
         });

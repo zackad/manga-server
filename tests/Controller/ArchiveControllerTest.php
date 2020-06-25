@@ -39,4 +39,11 @@ class ArchiveControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+
+    public function testLoadInvalidImageFromArchiveGiveErrorResponse()
+    {
+        $this->client->request('GET', '/archive.zip%2Fimage.JPEG');
+
+        $this->assertResponseStatusCodeSame(404);
+    }
 }
