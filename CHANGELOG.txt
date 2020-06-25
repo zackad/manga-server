@@ -14,6 +14,8 @@ New Features:
 Bugfixes:
     [*] Fix MimeGuesser by leveraging symfony mime component, returning generic
         'application/octet-stream' for unknown file type
+    [*] Fix when accessing non existing image inside archive file, give 404 http
+        error response
 Changes:
     [+] Introducing context API to simplify passing object into child component
     [*] Change menu with icon from fontawesome
