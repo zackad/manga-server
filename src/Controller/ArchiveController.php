@@ -26,7 +26,7 @@ class ArchiveController extends AbstractController
         $target = rawurldecode($pathTool->getTarget());
 
         $entries = new ArchiveReader($target);
-        $entryList = $listing->buildList($entries->getList(), $uriPrefix, $target);
+        $entryList = iterator_to_array($listing->buildList($entries->getList(), $uriPrefix, $target));
 
         return $this->render('index.html.twig', [
             'entries' => $entryList,
