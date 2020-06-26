@@ -21,6 +21,7 @@ Changes:
     [*] Change menu with icon from fontawesome
     [*] Change placement of Breadcrumbs component
     [*] Change placement of SearchField component
+    [*] Refactor some code that generate list by using generator
 
 0.7.0 (2020-06-17)
 New Features:
