@@ -11,32 +11,29 @@ class DirectoryListing
         $this->za = new \ZipArchive();
     }
 
-    public function scan(string $target, string $uriPrefix): iterable
+    public function scan(string $target, string $uriPrefix): array
     {
         $entries = preg_grep('/^([^.])/', scandir($target));
         natsort($entries);
 
-        return $this->buildList($entries, $uriPrefix, $target);
+        return iterator_to_array($this->buildList($entries, $uriPrefix, $target));
     }
 
-    public function buildList(array $entries, string $uriPrefix, string $target = ''): iterable
+    public function buildList(array $entries, string $uriPrefix, string $target = ''): \Traversable
     {
         $comicBook = new ComicBook();
-        $data = [];
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
             $hasCover = $comicBook->getCover($target.'/'.$entry);
 
             $cover = $hasCover ? rawurlencode($requestUri.'/'.$hasCover) : false;
-            $data[] = [
+            yield [
                 'uri' => rawurlencode($requestUri),
                 'label' => $entry,
                 'type' => $this->getType($target.'/'.$entry),
                 'cover' => $cover,
             ];
         }
-
-        return $data;
     }
 
     private function getType(string $pathname): string

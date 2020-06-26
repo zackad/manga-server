@@ -13,18 +13,20 @@ class ArchiveReader
 
     public function getList(): array
     {
+        return iterator_to_array($this->generateList());
+    }
+
+    private function generateList(): \Traversable
+    {
         $za = new \ZipArchive();
         $za->open($this->filename);
-        $list = [];
         $indexNumber = 0;
 
         while ($indexNumber < $za->numFiles) {
-            $list[] = $za->statIndex($indexNumber)['name'];
+            yield $za->statIndex($indexNumber)['name'];
             ++$indexNumber;
         }
 
         $za->close();
-
-        return $list;
     }
 }
