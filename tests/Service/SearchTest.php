@@ -7,14 +7,20 @@ use PHPUnit\Framework\TestCase;
 
 class SearchTest extends TestCase
 {
+    private $search;
+
+    protected function setUp(): void
+    {
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $_ENV['MAXIMUM_SEARCH_DEPTH']);
+    }
+
     /**
      * Test search using with simple string.
      */
     public function testSearchWithEmptySringReturnZeroResult()
     {
-        $search = new Search();
         $string = '';
-        $results = $search->find($string);
+        $results = $this->search->find($string);
 
         $this->assertIsIterable($results);
         $this->assertCount(0, $results);
@@ -22,7 +28,7 @@ class SearchTest extends TestCase
 
     public function testResultDataStructure()
     {
-        $generator = (new Search())->find('archive');
+        $generator = $this->search->find('archive');
         $result = iterator_to_array($generator)[0];
 
         $this->assertArrayHasKey('uri', $result);
