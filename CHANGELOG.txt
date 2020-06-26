@@ -18,6 +18,7 @@ Bugfixes:
         error response
 Changes:
     [+] Introducing context API to simplify passing object into child component
+    [*] Bind environment variable into service argument binding
     [*] Change menu with icon from fontawesome
     [*] Change placement of Breadcrumbs component
     [*] Change placement of SearchField component

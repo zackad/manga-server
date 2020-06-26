@@ -11,7 +11,7 @@ class SearchTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY']);
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $_ENV['MAXIMUM_SEARCH_DEPTH']);
     }
 
     /**
