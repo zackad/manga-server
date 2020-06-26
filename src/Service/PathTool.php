@@ -7,10 +7,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PathTool
 {
     private $request;
+    private $mangaRoot;
 
-    public function __construct(RequestStack $request)
+    public function __construct(RequestStack $request, string $mangaRoot)
     {
         $this->request = $request->getCurrentRequest();
+        $this->mangaRoot = $mangaRoot;
     }
 
     public function getUri(): string
@@ -25,6 +27,6 @@ class PathTool
 
     public function getTarget(): string
     {
-        return $_ENV['MANGA_ROOT_DIRECTORY'].'/'.$this->getPrefix();
+        return $this->mangaRoot.'/'.$this->getPrefix();
     }
 }

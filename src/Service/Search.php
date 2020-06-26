@@ -8,13 +8,13 @@ class Search
 {
     private $finder;
     private $comicBook;
-    private $mangaRootDirectory;
+    private $mangaRoot;
 
-    public function __construct()
+    public function __construct(string $mangaRoot)
     {
         $this->finder = new Finder();
         $this->comicBook = new ComicBook();
-        $this->mangaRootDirectory = $_ENV['MANGA_ROOT_DIRECTORY'];
+        $this->mangaRoot = $mangaRoot;
     }
 
     public function find(string $search = ''): \Generator
@@ -33,7 +33,7 @@ class Search
             ->depth(sprintf('< %s', $_ENV['MAXIMUM_SEARCH_DEPTH']))
             ->ignoreUnreadableDirs()
             ->followLinks()
-            ->in($this->mangaRootDirectory)
+            ->in($this->mangaRoot)
             ->name($patterns)
             ->sortByName(true)
         ;
