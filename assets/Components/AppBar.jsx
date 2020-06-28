@@ -15,16 +15,16 @@ export function AppBar() {
     <div className='bg-gray-800 border-b'>
       <div className='container mx-auto flex py-1'>
         <a href='/'>
-          <ButtonIcon>
+          <ButtonIcon margin='mx-2'>
             <IconHome />
           </ButtonIcon>
         </a>
         <SearchField />
         <div className='flex-grow'></div>
-        <ButtonIcon onClick={toggleSettingDialog}>
+        <ButtonIcon onClick={toggleSettingDialog} margin='mx-2'>
           <IconCog />
         </ButtonIcon>
-        <ButtonIcon onClick={toggleReaderMode}>
+        <ButtonIcon onClick={toggleReaderMode} margin='mr-2'>
           <IconBookOpen />
         </ButtonIcon>
       </div>

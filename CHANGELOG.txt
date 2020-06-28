@@ -16,6 +16,7 @@ Bugfixes:
         'application/octet-stream' for unknown file type
     [*] Fix when accessing non existing image inside archive file, give 404 http
         error response
+    [*] Fix icon spacing on AppBar
 Changes:
     [+] Introducing context API to simplify passing object into child component
     [*] Bind environment variable into service argument binding
