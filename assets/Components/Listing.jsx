@@ -8,13 +8,13 @@ function Listing({ directories, files, archive }) {
       <div className='container mx-auto'>
         <Breadcrumbs />
         <div className='flex flex-wrap'>
-          {directories.map(item => (
+          {directories.map((item) => (
             <ListItem className='dir' item={item} key={item.uri} />
           ))}
-          {archive.map(item => (
+          {archive.map((item) => (
             <ListItem item={item} key={item.uri} />
           ))}
-          {files.map(item => (
+          {files.map((item) => (
             <ListItem item={item} key={item.uri} />
           ))}
         </div>
