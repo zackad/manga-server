@@ -15,14 +15,14 @@ function App(props) {
   const [openSettingDialog, setOpenSettingDialog] = useState(false)
 
   const regexFilter = new RegExp('.jpe?g$|.png$|.gif$|.webp$', 'i')
-  const images = props.files.filter(image => image.uri.match(regexFilter))
+  const images = props.files.filter((image) => image.uri.match(regexFilter))
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeydown)
     setMaxImageWidth(localStorage.getItem('maxImageWidth') || maxImageWidth)
   }, [])
 
-  const handleKeydown = event => {
+  const handleKeydown = (event) => {
     const { keyCode } = event
 
     switch (keyCode) {
@@ -42,7 +42,7 @@ function App(props) {
     }
   }
 
-  const handleMaxImageWidthChange = event => {
+  const handleMaxImageWidthChange = (event) => {
     const value = parseInt(event.target.value)
     setMaxImageWidth(value)
     localStorage.setItem('maxImageWidth', value)
@@ -50,12 +50,12 @@ function App(props) {
 
   const toggleReaderMode = () => {
     if (images.length > 0) {
-      setReaderMode(prevState => !prevState)
+      setReaderMode((prevState) => !prevState)
     }
   }
 
   const toggleSettingDialog = () => {
-    setOpenSettingDialog(prevState => !prevState)
+    setOpenSettingDialog((prevState) => !prevState)
   }
 
   const list = <Listing files={props.files} directories={props.directories} archive={props.archive} />

@@ -4,7 +4,7 @@ import { useEffect } from 'preact/hooks'
 
 function Image({ src, alt, borderImage }) {
   const observer = lozad('.lozad', {
-    loaded: el => {
+    loaded: (el) => {
       setTimeout(() => {
         el.classList.remove('min-h-screen')
       }, 100)

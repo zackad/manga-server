@@ -10,7 +10,7 @@ function Breadcrumbs() {
     return null
   }
 
-  let items = location.split('/').filter(item => item !== '')
+  let items = location.split('/').filter((item) => item !== '')
   let breadcrumbs = []
   let link = ''
   for (let item of items) {
@@ -32,7 +32,7 @@ function Breadcrumbs() {
 
   return (
     <div className='p-2 border-b border-gray-500 w-full'>
-      <div className='flex overflow-x-scroll text-sm'>{breadcrumbs.map(item => item.element)}</div>
+      <div className='flex overflow-x-scroll text-sm'>{breadcrumbs.map((item) => item.element)}</div>
     </div>
   )
 }
