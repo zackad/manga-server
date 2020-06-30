@@ -1,12 +1,15 @@
 import { h } from 'preact'
+
 import { ListItem } from './ListItem.jsx'
 import { Breadcrumbs } from './Breadcrumbs'
+import { ErrorMessage } from './Message/ErrorMessage'
 
 function Listing({ directories, files, archive }) {
   return (
     <div>
       <div className='container mx-auto'>
         <Breadcrumbs />
+        <ErrorMessage />
         <div className='flex flex-wrap'>
           {directories.map((item) => (
             <ListItem className='dir' item={item} key={item.uri} />

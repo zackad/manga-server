@@ -16,6 +16,7 @@ class SearchController extends AbstractController
     public function index(Request $request, Search $search)
     {
         $response = new Response();
+        $errorMessage = null;
 
         $q = $request->query->get('q') ?? '';
         $results = $search->find($q);
@@ -23,10 +24,12 @@ class SearchController extends AbstractController
 
         if (0 === count($entries)) {
             $response->setStatusCode(404);
+            $errorMessage = 'Empty search result, please use other "search term"';
         }
 
         return $this->render('index.html.twig', [
             'entries' => $entries,
+            'error_message' => $errorMessage,
         ], $response);
     }
 }

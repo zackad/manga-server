@@ -18,6 +18,9 @@
 {% block entries_data %}
     <script>
         const ENTRIES_DATA = {{ entries|json_encode()|raw() }}
+        {% if error_message is defined %}
+            const ERROR_MESSAGE = '{{error_message|raw}}'
+        {% endif %}
     </script>
 {% endblock %}
 {% block javascripts %}
