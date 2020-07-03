@@ -7,6 +7,7 @@ use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -15,7 +16,7 @@ class DefaultController extends AbstractController
      * @Route("/", name="home", methods={"GET"})
      * @Route("/{default}", name="default", methods={"GET"}, requirements={"default"="^(?!build).+"})
      */
-    public function index(DirectoryListing $listing, PathTool $pathTool)
+    public function index(DirectoryListing $listing, PathTool $pathTool): Response
     {
         $uriPrefix = $pathTool->getPrefix();
         $target = $pathTool->getTarget();
