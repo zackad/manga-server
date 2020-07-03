@@ -2,11 +2,18 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class PathTool
 {
+    /**
+     * @var Request|null
+     */
     private $request;
+    /**
+     * @var string
+     */
     private $mangaRoot;
 
     public function __construct(RequestStack $request, string $mangaRoot)
@@ -17,6 +24,10 @@ class PathTool
 
     public function getUri(): string
     {
+        if (null === $this->request) {
+            return '/';
+        }
+
         return trim(rawurldecode($this->request->getRequestUri()), '/');
     }
 
