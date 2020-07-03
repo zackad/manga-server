@@ -11,6 +11,8 @@ Changelog:
 (next)
 New Features:
     [+] Show error message when searching doesn't has results (issue #33)
+Change:
+    [*] Increase psalm static analysis to error level 2
 
 0.8.0 (2020-06-28)
 New Features:
