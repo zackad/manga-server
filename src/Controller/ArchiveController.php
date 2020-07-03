@@ -7,6 +7,7 @@ use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
 use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,7 +21,7 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_list"=".+(\.zip|cbz)$"}
      * )
      */
-    public function archiveListing(DirectoryListing $listing, PathTool $pathTool)
+    public function archiveListing(DirectoryListing $listing, PathTool $pathTool): Response
     {
         $uriPrefix = $pathTool->getPrefix();
         $target = rawurldecode($pathTool->getTarget());
@@ -41,7 +42,7 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
      * )
      */
-    public function archiveItem(PathTool $pathTool, MimeGuesser $guesser)
+    public function archiveItem(PathTool $pathTool, MimeGuesser $guesser): Response
     {
         $target = $pathTool->getTarget();
         $archivePath = preg_replace('/(?<=cbz|zip).*$/i', '', $target);
