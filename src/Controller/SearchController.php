@@ -13,7 +13,7 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search", priority=10)
      */
-    public function index(Request $request, Search $search)
+    public function index(Request $request, Search $search): Response
     {
         $response = new Response();
         $errorMessage = null;

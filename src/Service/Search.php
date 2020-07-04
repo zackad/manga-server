@@ -6,12 +6,24 @@ use Symfony\Component\Finder\Finder;
 
 class Search
 {
+    /**
+     * @var Finder
+     */
     private $finder;
+    /**
+     * @var ComicBook
+     */
     private $comicBook;
+    /**
+     * @var string
+     */
     private $mangaRoot;
+    /**
+     * @var int
+     */
     private $maximumSearchDepth;
 
-    public function __construct(string $mangaRoot, string $maximumSearchDepth)
+    public function __construct(string $mangaRoot, int $maximumSearchDepth)
     {
         $this->finder = new Finder();
         $this->comicBook = new ComicBook();

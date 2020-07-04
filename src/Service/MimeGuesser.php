@@ -6,7 +6,7 @@ use Symfony\Component\Mime\MimeTypes;
 
 class MimeGuesser
 {
-    public function guessMimeType(string $filename)
+    public function guessMimeType(string $filename): string
     {
         $mimeTypes = new MimeTypes();
         $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);

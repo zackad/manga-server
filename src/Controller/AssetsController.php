@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AssetsController extends AbstractController
@@ -14,7 +15,7 @@ class AssetsController extends AbstractController
     /**
      * @Route("/build/{assets}", name="assets", methods={"GET"}, requirements={"assets"=".+"})
      */
-    public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets)
+    public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets): Response
     {
         $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
 

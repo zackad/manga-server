@@ -4,6 +4,9 @@ namespace App\Service;
 
 class DirectoryListing
 {
+    /**
+     * @var \ZipArchive
+     */
     private $za;
 
     public function __construct()
