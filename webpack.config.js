@@ -6,6 +6,7 @@ Encore.addEntry('app', './assets/index.js')
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enablePreactPreset()
+  .enableTypeScriptLoader()
   .enablePostCssLoader()
   .enableVersioning(Encore.isProduction())
 
