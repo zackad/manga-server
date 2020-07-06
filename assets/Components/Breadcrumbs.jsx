@@ -23,9 +23,9 @@ function Breadcrumbs() {
 
   breadcrumbs.map((item, i, arr) => {
     if (arr.length - 1 === i) {
-      item.element = <LabelItem title={item?.title} />
+      item.element = <LabelItem title={item?.title} key={i} />
     } else {
-      item.element = <LinkItem path={item.path} title={item?.title} />
+      item.element = <LinkItem path={item.path} title={item?.title} key={i} />
     }
     return item
   })
