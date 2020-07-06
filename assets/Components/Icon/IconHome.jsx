@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import React from 'react'
 
 export function IconHome() {
   return (
@@ -7,7 +7,7 @@ export function IconHome() {
       focusable='false'
       data-prefix='fas'
       data-icon='home'
-      class='fill-current'
+      className='fill-current'
       role='img'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 576 512'

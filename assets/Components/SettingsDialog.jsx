@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 export function SettingsDialog(props) {
   return (
     <div className='fixed inset-x-0 max-w-md top-12 mx-auto p-2 bg-gray-900 border rounded'>

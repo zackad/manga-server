@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import React from 'react'
 
 import { ArchiveItem } from './List/ArchiveItem'
 import { DirectoryItem } from './List/DirectoryItem'

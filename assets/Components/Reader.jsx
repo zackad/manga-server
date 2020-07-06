@@ -1,6 +1,6 @@
-import { h } from 'preact'
-import { Image } from './Image.jsx'
-import { useEffect } from 'preact/hooks'
+import { useEffect } from 'react'
+
+import { Image } from './Image'
 import { EndOfPage } from './EndOfPage'
 
 function Reader({ images, maxImageWidth, borderImage }) {

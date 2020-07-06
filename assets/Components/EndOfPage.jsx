@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 function EndOfPage() {
   const segmentName = decodeURIComponent(location.pathname).split('/').pop()
   return (

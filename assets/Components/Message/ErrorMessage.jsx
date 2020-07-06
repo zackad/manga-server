@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 export function ErrorMessage() {
   if (typeof ERROR_MESSAGE === 'undefined' || ERROR_MESSAGE === '') {
     return null

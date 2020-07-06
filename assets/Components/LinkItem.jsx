@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 function LinkItem({ path, title }) {
   return (
     <span className='whitespace-no-wrap'>

@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import React from 'react'
 
 import { Wrapper } from './Wrapper'
 import { IconDirectory } from '../Icon/IconDirectory'

@@ -1,6 +1,5 @@
-import { h } from 'preact'
+import React, { useEffect } from 'react'
 import lozad from 'lozad'
-import { useEffect } from 'preact/hooks'
 
 export function Thumbnail({ image }) {
   const observer = lozad()

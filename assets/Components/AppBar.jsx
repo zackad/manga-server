@@ -1,5 +1,4 @@
-import { h } from 'preact'
-import { useContext } from 'preact/hooks'
+import React, { useContext } from 'react'
 
 import { ButtonIcon } from './Button/ButtonIcon'
 import { IconBookOpen } from './Icon/IconBookOpen'
