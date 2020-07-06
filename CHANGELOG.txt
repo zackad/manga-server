@@ -12,6 +12,7 @@ Changelog:
 New Features:
     [+] Show error message when searching doesn't has results (issue #33)
 Change:
+    [!] Add support for typescript
     [*] Increase psalm static analysis to error level 2
 
 0.8.0 (2020-06-28)
