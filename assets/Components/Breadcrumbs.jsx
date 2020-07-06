@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { LabelItem } from './LabelItem.jsx'
 import { LinkItem } from './LinkItem.jsx'
 
