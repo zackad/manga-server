@@ -10,7 +10,9 @@
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {
-    "lozad": "^1.14.0"
+    "lozad": "^1.14.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "scripts": {
     "start": "encore dev --watch",
