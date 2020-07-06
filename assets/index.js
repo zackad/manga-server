@@ -1,4 +1,4 @@
-import { h, render } from 'preact'
+import { render } from 'react-dom'
 import { App } from './App'
 
 const directories = ENTRIES_DATA.filter(entry => entry.type === 'directory')
