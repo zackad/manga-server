@@ -1,5 +1,5 @@
+import React, { useEffect } from 'react'
 import lozad from 'lozad'
-import { useEffect } from 'react'
 
 function Image({ src, alt, borderImage }) {
   const observer = lozad('.lozad', {

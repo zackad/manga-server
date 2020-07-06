@@ -1,3 +1,5 @@
+import React from 'react'
+
 function EndOfPage() {
   const segmentName = decodeURIComponent(location.pathname).split('/').pop()
   return (
