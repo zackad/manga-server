@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/preset-react": "^7.0.0",
     "@fullhuman/postcss-purgecss": "^2.0.6",
     "@symfony/webpack-encore": "^0.28.2",
     "autoprefixer": "^9.7.4",
