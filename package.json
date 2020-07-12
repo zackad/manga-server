@@ -3,10 +3,13 @@
     "@babel/plugin-transform-react-jsx": "^7.8.3",
     "@fullhuman/postcss-purgecss": "^2.0.6",
     "@symfony/webpack-encore": "^0.28.2",
+    "@types/jest": "^26.0.4",
     "autoprefixer": "^9.7.4",
     "cssnano": "^4.1.10",
+    "jest": "^26.1.0",
     "postcss-loader": "^3.0.0",
     "tailwindcss": "^1.2.0",
+    "ts-jest": "^26.1.1",
     "ts-loader": "5.3.0",
     "typescript": "^3.9.6"
   },
@@ -16,6 +19,12 @@
   },
   "scripts": {
     "start": "encore dev --watch",
+    "test": "jest",
     "build": "NODE_ENV=production encore production"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   }
 }
