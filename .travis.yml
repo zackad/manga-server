@@ -5,16 +5,19 @@ php:
     - '7.3'
     - '7.4'
 
-before_script:
+before_install:
+    - composer self-update --2
     - nvm install 12
     - rm composer.lock
+
+install:
     - composer install
     - yarn install
 
 script:
-    - bin/build
-    - bin/phpunit --coverage-clover var/coverage.xml
     - vendor/bin/psalm
+    - yarn build
+    - bin/phpunit --coverage-clover var/coverage.xml
 
 after_success:
     - bash <(curl -s https://codecov.io/bash) -f var/coverage.xml
