@@ -16,8 +16,8 @@ install:
 
 script:
     - vendor/bin/psalm
+    - yarn build
     - bin/phpunit --coverage-clover var/coverage.xml
-    - bin/build
 
 after_success:
     - bash <(curl -s https://codecov.io/bash) -f var/coverage.xml
