@@ -5,6 +5,9 @@ php:
     - '7.3'
     - '7.4'
 
+before_install:
+    - composer self-update --2
+
 before_script:
     - nvm install 12
     - rm composer.lock
