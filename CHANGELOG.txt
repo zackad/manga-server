@@ -9,6 +9,8 @@ Changelog:
 [?] Feedback needed
 
 (next)
+
+0.8.1 (2020-07-12)
 New Features:
     [+] Show error message when searching doesn't has results (issue #33)
 Change:
