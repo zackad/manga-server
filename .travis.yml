@@ -16,6 +16,7 @@ install:
 
 script:
     - vendor/bin/psalm
+    - yarn test
     - yarn build
     - bin/phpunit --coverage-clover var/coverage.xml
 

@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "encore dev --watch",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "NODE_ENV=production encore production"
   },
   "jest": {
