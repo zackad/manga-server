@@ -23,8 +23,7 @@
     "build": "NODE_ENV=production encore production"
   },
   "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    }
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
   }
 }
