@@ -8,7 +8,7 @@ export function ArchiveItem({ cover, label, uri }) {
   return (
     <ArchiveWrapper>
       <div className='w-1/2 md:w-full overflow-hidden'>{cover && <Thumbnail image={cover} />}</div>
-      <div className='w-1/2 md:w-full overflow-hidden'>
+      <div className='w-1/2 md:w-full md:h-12 overflow-hidden'>
         <ListLabel uri={uri} label={label} />
       </div>
     </ArchiveWrapper>
