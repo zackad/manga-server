@@ -1,6 +1,6 @@
 import { h, render } from 'preact'
 
-import { App } from './App'
+import { App } from 'App/App'
 import { EntryData } from 'App/types/EntryData.ts'
 
 declare const ENTRIES_DATA: EntryData[]
