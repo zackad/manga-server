@@ -45,7 +45,7 @@ function App(props) {
   const handleMaxImageWidthChange = (event) => {
     const value = parseInt(event.target.value)
     setMaxImageWidth(value)
-    localStorage.setItem('maxImageWidth', value)
+    localStorage.setItem('maxImageWidth', value.toString())
   }
 
   const toggleReaderMode = () => {
