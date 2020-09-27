@@ -1,15 +1,9 @@
 import { h, render } from 'preact'
 
 import { App } from './App'
+import { EntryData } from 'App/types/EntryData.ts'
 
-type ENTRY = {
-  uri: string
-  label: string
-  type: 'directory' | 'archive' | 'file'
-  cover?: string
-}
-
-declare const ENTRIES_DATA: ENTRY[]
+declare const ENTRIES_DATA: EntryData[]
 
 const directories = ENTRIES_DATA.filter((entry) => entry.type === 'directory')
 const archive = ENTRIES_DATA.filter((entry) => entry.type === 'archive')
