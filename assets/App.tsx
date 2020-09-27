@@ -8,7 +8,7 @@ import { SettingsDialog } from 'App/Components/SettingsDialog'
 import { AppContext } from 'App/AppContext'
 import 'App/css/tailwind.src.css'
 
-function App(props) {
+export function App(props) {
   const [readerMode, setReaderMode] = useState(false)
   const [maxImageWidth, setMaxImageWidth] = useState(null)
   const [openSettingDialog, setOpenSettingDialog] = useState(false)
@@ -76,5 +76,3 @@ function App(props) {
     </AppContext.Provider>
   )
 }
-
-export { App }
