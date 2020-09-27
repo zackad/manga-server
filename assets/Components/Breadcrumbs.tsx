@@ -1,7 +1,7 @@
 import { h } from 'preact'
 
-import { LabelItem } from './LabelItem.jsx'
-import { LinkItem } from './LinkItem.jsx'
+import { LabelItem } from './LabelItem'
+import { LinkItem } from './LinkItem'
 
 function Breadcrumbs() {
   const location = decodeURIComponent(document.location.pathname)

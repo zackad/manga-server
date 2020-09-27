@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { ListItem } from './ListItem.jsx'
+import { ListItem } from './ListItem'
 import { Breadcrumbs } from './Breadcrumbs'
 import { ErrorMessage } from './Message/ErrorMessage'
 

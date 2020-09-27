@@ -1,5 +1,5 @@
 import { h } from 'preact'
-import { Image } from './Image.jsx'
+import { Image } from './Image'
 import { useEffect } from 'preact/hooks'
 import { EndOfPage } from './EndOfPage'
 
