@@ -11,13 +11,15 @@ function Listing({ directories, files, archive }) {
         <Breadcrumbs />
         <ErrorMessage />
         <div className='flex flex-wrap'>
-          {directories.map((item) => (
-            <ListItem className='dir' item={item} key={item.uri} />
-          ))}
+          <div className='flex flex-wrap w-full'>
+            {directories.map((item) => (
+              <ListItem className='dir' item={item} key={item.uri} />
+            ))}
+            {files.map((item) => (
+              <ListItem item={item} key={item.uri} />
+            ))}
+          </div>
           {archive.map((item) => (
-            <ListItem item={item} key={item.uri} />
-          ))}
-          {files.map((item) => (
             <ListItem item={item} key={item.uri} />
           ))}
         </div>

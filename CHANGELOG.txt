@@ -9,6 +9,10 @@ Changelog:
 [?] Feedback needed
 
 (next)
+New Feature:
+    [+] Make thumbnail clickable
+Change:
+    [*] Re-design thumbnail size and layout
 
 0.8.1 (2020-07-12)
 New Features:
