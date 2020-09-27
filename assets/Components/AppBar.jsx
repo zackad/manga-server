@@ -6,7 +6,7 @@ import { IconBookOpen } from './Icon/IconBookOpen'
 import { IconCog } from './Icon/IconCog'
 import { IconHome } from './Icon/IconHome'
 import { SearchField } from './Search/SearchField'
-import { AppContext } from '../App'
+import { AppContext } from '../AppContext'
 
 export function AppBar() {
   const { toggleSettingDialog, toggleReaderMode } = useContext(AppContext)
