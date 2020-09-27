@@ -1,9 +1,17 @@
 import { h } from 'preact'
-import { Image } from './Image'
 import { useEffect } from 'preact/hooks'
-import { EndOfPage } from './EndOfPage'
 
-function Reader({ images, maxImageWidth, borderImage }) {
+import { Image } from 'App/Components/Image'
+import { EndOfPage } from 'App/Components/EndOfPage'
+import { EntryData } from 'App/types/EntryData'
+
+type ReaderProps = {
+  images: EntryData[]
+  maxImageWidth?: number
+  borderImage?: boolean
+}
+
+export function Reader({ images, maxImageWidth, borderImage }: ReaderProps) {
   useEffect(() => {
     let width = !maxImageWidth ? `100%` : `${maxImageWidth}px`
     document.documentElement.style.setProperty('--max-image-width', width)
@@ -20,5 +28,3 @@ function Reader({ images, maxImageWidth, borderImage }) {
     </div>
   )
 }
-
-export { Reader }
