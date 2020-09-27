@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { ListItem } from './ListItem.jsx'
-import { Breadcrumbs } from './Breadcrumbs'
-import { ErrorMessage } from './Message/ErrorMessage'
+import { Breadcrumbs } from 'App/Components/Breadcrumbs'
+import { ErrorMessage } from 'App/Components/Message/ErrorMessage'
+import { ListItem } from 'App/Components/ListItem'
 
 function Listing({ directories, files, archive }) {
   return (
@@ -13,7 +13,7 @@ function Listing({ directories, files, archive }) {
         <div className='flex flex-wrap'>
           <div className='flex flex-wrap w-full'>
             {directories.map((item) => (
-              <ListItem className='dir' item={item} key={item.uri} />
+              <ListItem item={item} key={item.uri} />
             ))}
             {files.map((item) => (
               <ListItem item={item} key={item.uri} />

@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { Wrapper } from './Wrapper'
-import { IconDirectory } from '../Icon/IconDirectory'
-import { ListLabel } from './ListLabel'
+import { IconDirectory } from 'App/Components/Icon/IconDirectory'
+import { ListLabel } from 'App/Components/List/ListLabel'
+import { Wrapper } from 'App/Components/List/Wrapper'
 
 export function DirectoryItem({ label, uri }) {
   return (

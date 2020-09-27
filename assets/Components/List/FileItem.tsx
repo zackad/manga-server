@@ -1,7 +1,7 @@
 import { h } from 'preact'
 
-import { Wrapper } from './Wrapper'
-import { ListLabel } from './ListLabel'
+import { ListLabel } from 'App/Components/List/ListLabel'
+import { Wrapper } from 'App/Components/List/Wrapper'
 
 export function FileItem({ label, uri }) {
   return (

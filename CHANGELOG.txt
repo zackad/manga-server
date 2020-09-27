@@ -9,15 +9,16 @@ Changelog:
 [?] Feedback needed
 
 (next)
-New Feature:
+New Features:
     [+] Make thumbnail clickable
-Change:
+Changes:
     [*] Re-design thumbnail size and layout
+    [*] Convert jsx into tsx (typescript)
 
 0.8.1 (2020-07-12)
 New Features:
     [+] Show error message when searching doesn't has results (issue #33)
-Change:
+Changes:
     [!] Add support for typescript
     [*] Increase psalm static analysis to error level 2
 

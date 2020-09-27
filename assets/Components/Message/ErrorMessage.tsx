@@ -1,5 +1,7 @@
 import { h } from 'preact'
 
+declare const ERROR_MESSAGE: string
+
 export function ErrorMessage() {
   if (typeof ERROR_MESSAGE === 'undefined' || ERROR_MESSAGE === '') {
     return null

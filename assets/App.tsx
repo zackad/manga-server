@@ -1,15 +1,14 @@
-import { createContext, h } from 'preact'
+import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-import { AppBar } from './Components/AppBar'
-import { Listing } from './Components/Listing'
-import { Reader } from './Components/Reader'
-import { SettingsDialog } from './Components/SettingsDialog'
-import './css/tailwind.src.css'
+import { AppBar } from 'App/Components/AppBar'
+import { Listing } from 'App/Components/Listing'
+import { Reader } from 'App/Components/Reader'
+import { SettingsDialog } from 'App/Components/SettingsDialog'
+import { AppContext } from 'App/AppContext'
+import 'App/css/tailwind.src.css'
 
-export const AppContext = createContext(null)
-
-function App(props) {
+export function App(props) {
   const [readerMode, setReaderMode] = useState(false)
   const [maxImageWidth, setMaxImageWidth] = useState(null)
   const [openSettingDialog, setOpenSettingDialog] = useState(false)
@@ -45,7 +44,7 @@ function App(props) {
   const handleMaxImageWidthChange = (event) => {
     const value = parseInt(event.target.value)
     setMaxImageWidth(value)
-    localStorage.setItem('maxImageWidth', value)
+    localStorage.setItem('maxImageWidth', value.toString())
   }
 
   const toggleReaderMode = () => {
@@ -77,5 +76,3 @@ function App(props) {
     </AppContext.Provider>
   )
 }
-
-export { App }

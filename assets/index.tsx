@@ -1,9 +1,9 @@
-import React from 'preact/compat'
-import { render } from 'preact'
+import { h, render } from 'preact'
 
-import { App } from './App'
+import { App } from 'App/App'
+import { EntryData } from 'App/types/EntryData.ts'
 
-declare const ENTRIES_DATA: any
+declare const ENTRIES_DATA: EntryData[]
 
 const directories = ENTRIES_DATA.filter((entry) => entry.type === 'directory')
 const archive = ENTRIES_DATA.filter((entry) => entry.type === 'archive')
