@@ -3,7 +3,14 @@ import { h, render } from 'preact'
 
 import { App } from './App'
 
-declare const ENTRIES_DATA: any
+type ENTRY = {
+  uri: string
+  label: string
+  type: 'directory' | 'archive' | 'file'
+  cover?: string
+}
+
+declare const ENTRIES_DATA: ENTRY[]
 
 const directories = ENTRIES_DATA.filter((entry) => entry.type === 'directory')
 const archive = ENTRIES_DATA.filter((entry) => entry.type === 'archive')
