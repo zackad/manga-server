@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { ListItem } from './ListItem'
-import { Breadcrumbs } from './Breadcrumbs'
-import { ErrorMessage } from './Message/ErrorMessage'
+import { Breadcrumbs } from 'App/Components/Breadcrumbs'
+import { ErrorMessage } from 'App/Components/Message/ErrorMessage'
+import { ListItem } from 'App/Components/ListItem'
 
 function Listing({ directories, files, archive }) {
   return (

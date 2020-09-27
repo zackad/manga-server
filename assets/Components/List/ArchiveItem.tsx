@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { ArchiveWrapper } from './ArchiveWrapper'
-import { Thumbnail } from '../Thumbnail'
-import { ListLabel } from './ListLabel'
+import { ArchiveWrapper } from 'App/Components/List/ArchiveWrapper'
+import { ListLabel } from 'App/Components/List/ListLabel'
+import { Thumbnail } from 'App/Components/Thumbnail'
 
 type ArchiveItemProps = {
   uri: string

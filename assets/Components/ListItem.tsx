@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { ArchiveItem } from './List/ArchiveItem'
-import { DirectoryItem } from './List/DirectoryItem'
-import { FileItem } from './List/FileItem'
+import { ArchiveItem } from 'App/Components/List/ArchiveItem'
+import { DirectoryItem } from 'App/Components/List/DirectoryItem'
+import { FileItem } from 'App/Components/List/FileItem'
 import { EntryData } from 'App/types/EntryData'
 
 type ListItemProps = {

@@ -1,12 +1,12 @@
 import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 
-import { ButtonIcon } from './Button/ButtonIcon'
-import { IconBookOpen } from './Icon/IconBookOpen'
-import { IconCog } from './Icon/IconCog'
-import { IconHome } from './Icon/IconHome'
-import { SearchField } from './Search/SearchField'
-import { AppContext } from '../AppContext'
+import { ButtonIcon } from 'App/Components/Button/ButtonIcon'
+import { IconBookOpen } from 'App/Components/Icon/IconBookOpen'
+import { IconCog } from 'App/Components/Icon/IconCog'
+import { IconHome } from 'App/Components/Icon/IconHome'
+import { SearchField } from 'App/Components/Search/SearchField'
+import { AppContext } from 'App/AppContext'
 
 export function AppBar() {
   const { toggleSettingDialog, toggleReaderMode } = useContext(AppContext)
