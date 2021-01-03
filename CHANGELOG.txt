@@ -14,6 +14,7 @@ New Features:
 Changes:
     [*] Re-design thumbnail size and layout
     [*] Convert jsx into tsx (typescript)
+    [!] Remove support for php older than 7.4
 
 0.8.1 (2020-07-12)
 New Features:
