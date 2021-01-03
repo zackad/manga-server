@@ -47,7 +47,9 @@ class NextChapterResolver
         $finder->in($directory)->directories()->depth('== 0')->sortByName(true);
 
         foreach ($finder as $entry) {
-            yield str_replace($this->mangaRoot, '', $entry->getPathname());
+            // Fix windows path separator
+            $fixedPath = str_replace('\\', '/', $entry->getPathname());
+            yield str_replace($this->mangaRoot, '', $fixedPath);
         }
     }
 
