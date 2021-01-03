@@ -44,7 +44,7 @@ class NextChapterResolver
     private function getEntry(string $directory): \Generator
     {
         $finder = new Finder();
-        $finder->in($directory)->directories()->depth('== 0');
+        $finder->in($directory)->directories()->depth('== 0')->sortByName(true);
 
         foreach ($finder as $entry) {
             yield str_replace($this->mangaRoot, '', $entry->getPathname());
