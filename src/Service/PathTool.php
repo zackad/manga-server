@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PathTool
 {
     /**
-     * @var Request|null
+     * @var null|Request
      */
     private $request;
     /**
@@ -28,7 +28,7 @@ class PathTool
             return '/';
         }
 
-        return trim(rawurldecode($this->request->getRequestUri()), '/');
+        return trim(rawurldecode($this->request->getPathInfo()), '/');
     }
 
     public function getPrefix(): string
