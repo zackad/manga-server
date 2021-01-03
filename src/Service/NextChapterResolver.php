@@ -22,6 +22,10 @@ class NextChapterResolver
         $entries = iterator_to_array($this->getEntry($parent));
 
         $uri = '/'.$this->pathTool->getUri();
+        if ('/' === $uri) {
+            return $uri;
+        }
+
         $nexpage = $this->getNext($entries, $uri);
 
         if (!$nexpage) {
