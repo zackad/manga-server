@@ -29,7 +29,13 @@ class NextChapterResolver
         $nexpage = $this->getNext($entries, $uri);
 
         if (!$nexpage) {
-            return rawurlencode(str_replace($this->mangaRoot, '', $parent));
+            $parentUrl = rawurlencode(str_replace($this->mangaRoot, '', $parent));
+
+            if (!$parentUrl) {
+                return '/';
+            }
+
+            return $parentUrl;
         }
 
         return rawurlencode($nexpage);

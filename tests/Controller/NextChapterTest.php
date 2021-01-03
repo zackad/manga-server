@@ -29,6 +29,6 @@ class NextChapterTest extends WebTestCase
     public function testHomeDoesNotRedirect()
     {
         $this->client->request('GET', '?next');
-        $this->assertResponseRedirects('%2F');
+        $this->assertResponseRedirects('/');
     }
 }
