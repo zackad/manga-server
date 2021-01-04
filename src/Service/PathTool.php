@@ -7,14 +7,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class PathTool
 {
-    /**
-     * @var Request|null
-     */
-    private $request;
-    /**
-     * @var string
-     */
-    private $mangaRoot;
+    private ?Request $request;
+    private string $mangaRoot;
 
     public function __construct(RequestStack $request, string $mangaRoot)
     {
@@ -28,7 +22,7 @@ class PathTool
             return '/';
         }
 
-        return trim(rawurldecode($this->request->getRequestUri()), '/');
+        return trim(rawurldecode($this->request->getPathInfo()), '/');
     }
 
     public function getPrefix(): string
@@ -39,5 +33,10 @@ class PathTool
     public function getTarget(): string
     {
         return $this->mangaRoot.'/'.$this->getPrefix();
+    }
+
+    public function getTargetParent(): string
+    {
+        return dirname($this->getTarget());
     }
 }

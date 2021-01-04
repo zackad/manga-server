@@ -11,6 +11,7 @@ Changelog:
 (next)
 New Features:
     [+] Make thumbnail clickable
+    [+] Add button to open next chapter if available
 Changes:
     [*] Re-design thumbnail size and layout
     [*] Convert jsx into tsx (typescript)
