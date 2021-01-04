@@ -9,6 +9,8 @@ Changelog:
 [?] Feedback needed
 
 (next)
+
+0.9.0 (2021-01-04)
 New Features:
     [+] Make thumbnail clickable
     [+] Add button to open next chapter if available
