@@ -1,0 +1,55 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+            -   name: Setup NodeJS
+                uses: actions/setup-node@v2
+                with:
+                    node-version: 12
+            -   name: Get yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+            -   name: Get composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            -   name: Cache yarn dependencies
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-yarn-
+            -   name: Cache composer dependencies
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    # Use composer.json for key, if composer.lock is not committed.
+                    # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer-
+            -   name: Install Composer dependencies
+                run: |
+                    composer install --no-progress --prefer-dist --optimize-autoloader
+            -   name: Intall yarn dependencies
+                run: yarn install
+            -   name: Build frontend artifact
+                run: |
+                    NODE_ENV=production yarn encore production
+            -   name: Run Tests
+                run: php bin/phpunit --coverage-text
