@@ -52,4 +52,8 @@ jobs:
                 run: |
                     NODE_ENV=production yarn encore production
             -   name: Run Tests
-                run: php bin/phpunit --coverage-text
+                run: php bin/phpunit --coverage-clover var/coverage.xml
+            -   name: Upload coverage to Codecov
+                uses: codecov/codecov-action@v1
+                with:
+                    files: ./var/coverage.xml
