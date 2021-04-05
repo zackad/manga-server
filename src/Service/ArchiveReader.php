@@ -13,7 +13,10 @@ class ArchiveReader
 
     public function getList(): array
     {
-        return iterator_to_array($this->generateList());
+        $list = iterator_to_array($this->generateList());
+        natsort($list);
+
+        return $list;
     }
 
     private function generateList(): \Traversable
