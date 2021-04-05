@@ -5,10 +5,6 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @internal
- * @coversNothing
- */
 class NextChapterTest extends WebTestCase
 {
     private KernelBrowser $client;
@@ -24,6 +20,8 @@ class NextChapterTest extends WebTestCase
         $this->assertResponseRedirects('%2FSeries%201%2FChapter%20002');
         $this->client->request('GET', 'Series%201%2FChapter%20005?next');
         $this->assertResponseRedirects('%2FSeries%201');
+        $this->client->request('GET', 'empty-directory?next');
+        $this->assertResponseRedirects('/');
     }
 
     public function testHomeDoesNotRedirect()
