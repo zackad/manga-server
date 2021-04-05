@@ -7,7 +7,7 @@ class ComicBook
     /**
      * @param string $pathname Pathname of zip file/comicbook
      *
-     * @return string|false Resolveable image url, or false on failure
+     * @return false|string Resolveable image url, or false on failure
      */
     public function getCover(string $pathname)
     {
@@ -18,14 +18,24 @@ class ComicBook
             return false;
         }
 
-        for ($index = 0; $index < $za->numFiles; ++$index) {
-            $cover = $za->statIndex($index)['name'];
-            $coverPatternExtension = '/.+(jpe?g|png|webp)$/i';
-            if (preg_match($coverPatternExtension, $cover)) {
-                return $cover;
-            }
+        $images = iterator_to_array($this->getImages($za));
+        natsort($images);
+
+        if (count($images) > 0) {
+            return $images[array_key_first($images)];
         }
 
         return false;
+    }
+
+    private function getImages(\ZipArchive $archive): \Generator
+    {
+        for ($index = 0; $index < $archive->numFiles; ++$index) {
+            $cover = $archive->statIndex($index)['name'];
+            $coverPatternExtension = '/.+(jpe?g|png|webp)$/i';
+            if (preg_match($coverPatternExtension, $cover)) {
+                yield $cover;
+            }
+        }
     }
 }
