@@ -1,0 +1,91 @@
+{# tailwindcss Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+  <div class="py-2 border-t border-gray-600 border-dashed">
+    <div class="flex items-baseline flex-row rounded-sm w-auto">
+      <div class="flex-grow"></div>
+      {% if first is defined and current != first %}
+        <span class="text-gray-100 px-3 py-2 font-bold">
+          <a href="{{
+            path(
+              route,
+              query|merge({
+                (pageParameterName): first
+              })
+            )
+            }}">
+            &lt;&lt;
+          </a>
+        </span>
+      {% endif %}
+
+      {% if previous is defined %}
+        <span class="text-gray-100 px-3 py-2">
+          <a rel="prev"
+            href="{{
+            path(
+              route,
+              query|merge({
+                (pageParameterName): previous
+              })
+            )
+            }}">
+            &lt;
+          </a>
+        </span>
+      {% endif %}
+
+      {% for page in pagesInRange %}
+        {% if page != current %}
+          <span class="text-gray-100 px-3 py-2">
+            <a href="{{
+              path(
+                route,
+                query|merge({
+                  (pageParameterName): page
+                })
+              )
+              }}">
+              {{ page }}
+            </a>
+          </span>
+        {% else %}
+          <span class="bg-gray-800 text-white px-3 py-2 font-bold rounded">
+            {{ page }}
+          </span>
+        {% endif %}
+      {% endfor %}
+
+      {% if next is defined %}
+        <span class="text-gray-100 px-3 py-2">
+          <a rel="next"
+            href="{{
+            path(
+              route,
+              query|merge({
+                (pageParameterName): next
+              })
+            )
+            }}">
+            &gt;
+          </a>
+        </span>
+      {% endif %}
+
+      {% if last is defined and current != last %}
+        <span class="text-gray-100 px-3 py-2 border-gray-400 font-bold">
+          <a href="{{
+            path(
+              route,
+              query|merge({
+                (pageParameterName): last
+              })
+            )
+            }}">
+            &gt;&gt;
+          </a>
+        </span>
+      {% endif %}
+      <div class="flex-grow"></div>
+    </div>
+  </div>
+{% endif %}

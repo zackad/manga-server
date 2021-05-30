@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
 use App\Service\PathTool;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,16 +25,19 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_list"=".+(\.zip|cbz)$"}
      * )
      */
-    public function archiveListing(DirectoryListing $listing, PathTool $pathTool): Response
+    public function archiveListing(DirectoryListing $listing, PathTool $pathTool, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page', 1);
         $uriPrefix = $pathTool->getPrefix();
         $target = rawurldecode($pathTool->getTarget());
 
         $entries = new ArchiveReader($target);
         $entryList = iterator_to_array($listing->buildList($entries->getList(), $uriPrefix, $target));
+        $pagination = $paginator->paginate($entryList, $page);
 
         return $this->render('index.html.twig', [
-            'entries' => $entryList,
+            'entries' => $pagination->getItems(),
+            'pagination' => $pagination,
         ]);
     }
 
