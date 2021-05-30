@@ -1,102 +1,128 @@
 Manga Server
 https://github.com/zackad/manga-server
 
-Changelog:
-[!] Important
-[+] Addition
-[-] Removal
-[*] Fix/Change
-[?] Feedback needed
+(unreleased)
 
-(next)
-
-(0.10.0) (2021-04-05)
+v0.10.0 (2021-04-05)
 Bugfixes:
-    [*] Fix get cover image by assuming that the first image is the cover (after sorted using natural order)
-    [*] Fix inconsistent archive entry index using natural order
+- Fix get cover image by assuming that the first image is the cover (after
+  sorted using natural order)
+- Fix inconsistent archive entry index using natural order
+
 Internal:
-    [*] Migrate CI/CD from travis to github action
-    [*] Fix uploading coverage report to codecov
-    [*] Fix coverage report
+- Migrate CI/CD from travis to github action
+- Fix uploading coverage report to codecov
+- Fix coverage report
 
-0.9.0 (2021-01-04)
+---
+v0.9.0 (2021-01-04)
 New Features:
-    [+] Make thumbnail clickable
-    [+] Add button to open next chapter if available
-Changes:
-    [*] Re-design thumbnail size and layout
-    [*] Convert jsx into tsx (typescript)
-    [!] Remove support for php older than 7.4
+- Make thumbnail clickable
+- Add button to open next chapter if available
+- Re-design thumbnail size and layout
 
-0.8.1 (2020-07-12)
-New Features:
-    [+] Show error message when searching doesn't has results (issue #33)
-Changes:
-    [!] Add support for typescript
-    [*] Increase psalm static analysis to error level 2
+Internals:
+- Convert jsx into tsx (typescript)
+- Remove support for php older than 7.4
 
-0.8.0 (2020-06-28)
+---
+v0.8.1 (2020-07-12)
 New Features:
-    [+] Add home button
+- Show error message when searching doesn't has results (issue #33)
+
+Internals:
+- Add support for typescript
+- Increase psalm static analysis to error level 2
+
+---
+v0.8.0 (2020-06-28)
+New Features:
+- Add home button
+
 Bugfixes:
-    [*] Fix MimeGuesser by leveraging symfony mime component, returning generic
-        'application/octet-stream' for unknown file type
-    [*] Fix when accessing non existing image inside archive file, give 404 http
-        error response
-    [*] Fix icon spacing on AppBar
-Changes:
-    [+] Introducing context API to simplify passing object into child component
-    [*] Bind environment variable into service argument binding
-    [*] Change menu with icon from fontawesome
-    [*] Change placement of Breadcrumbs component
-    [*] Change placement of SearchField component
-    [*] Refactor some code that generate list by using generator
+- Fix MimeGuesser by leveraging symfony mime component, returning generic
+  'application/octet-stream' for unknown file type
+- Fix when accessing non existing image inside archive file, give 404 http error
+  response
+- Fix icon spacing on AppBar
 
-0.7.0 (2020-06-17)
+Internals:
+- Introducing context API to simplify passing object into child component
+- Bind environment variable into service argument binding
+- Change menu with icon from fontawesome
+- Change placement of Breadcrumbs component
+- Change placement of SearchField component
+- Refactor some code that generate list by using generator
+
+---
+v0.7.0 (2020-06-17)
 New Features:
-    [+] Add border bottom on Wrapper component
-    [+] Add entry type to differentiate styling
-    [+] Add search feature
+- Add border bottom on Wrapper component
+- Add entry type to differentiate styling
+- Add search feature
+
 Bugfixes:
-    [*] Fix deprecation message regarding `Dotenv` constructor
-Changes:
-    [!] Bump system requirement to php version 7.2.5
-    [!] Upgrade to symfony 5.1
-    [*] Change list entry size to maximize space usage
-    [*] Increase thumbnail size on lg screen
-    [*] Reduce directory icon size
-    [*] Use 2 column layout for md and lg screen size
+- Fix deprecation message regarding `Dotenv` constructor
 
-0.6.0 (2020-05-18)
-[+] Add support for handling zip and cbz (comic book) file format
-[+] Add option to set maximum image width
-[+] Show cover image for supported archive file (zip, cbz)
-[*] Fix path resolution and url encoding
-[*] Fix breadcrumbs url encoding
-[*] Fix retrieving item inside nested archive file
-[*] Make multi column layout for larger screen
+Internals:
+- Bump system requirement to php version 7.2.5
+- Upgrade to symfony 5.1
+- Change list entry size to maximize space usage
+- Increase thumbnail size on lg screen
+- Reduce directory icon size
+- Use 2 column layout for md and lg screen size
 
-0.5.0 (2020-05-02)
-[+] Add lazy load to prevent downloading unnecessary image.
-[*] Fix expires header assertion
+---
+v0.6.0 (2020-05-18)
+New Features:
+- Add support for handling zip and cbz (comic book) file format
+- Add option to set maximum image width
+- Show cover image for supported archive file (zip, cbz)
+- Make multi column layout for larger screen
 
-0.4.0 (2020-03-27)
-[!] Rewrite using symfony framework
-[+] Add travis-ci
+Bugfixes:
+- Fix path resolution and url encoding
+- Fix breadcrumbs url encoding
+- Fix retrieving item inside nested archive file
 
-0.3.0 (2020-03-19)
+---
+v0.5.0 (2020-05-02)
+New Features:
+- Add lazy load to prevent downloading unnecessary image.
+
+Bugfixes:
+- Fix expires header assertion
+
+---
+v0.4.0 (2020-03-27)
+Internals:
+- Rewrite using symfony framework
+- Add travis-ci
+
+---
+v0.3.0 (2020-03-19)
+New Features:
 [+] Add notification End Of Page on Reader footer
-[*] Rename shell script to build release artifact
-[*] Refactor mime-type guessing to use filename as parameter instead of extension
-[*] Last version of slimphp based app, next version will be symfony based app
 
-0.2.0 (2020-03-07)
-[+] Add caching static file
-[+] Enable static assets versioning on webpack encore
-[*] Fix code style
-[*] Fix 'Content-Type' response header
-[*] Improve list item styling
+Internals:
+- Rename shell script to build release artifact
+- Refactor mime-type guessing to use filename as parameter instead of extension
+- Last version of slimphp based app, next version will be symfony based app
 
-0.1.0 (2020-02-13)
+---
+v0.2.0 (2020-03-07)
+New Features:
+- Add caching static file
+- Enable static assets versioning on webpack encore
+- Improve list item styling
+
+Bugfixes:
+- Fix 'Content-Type' response header
+
+Internals:
+- Fix code style
+
+---
+v0.1.0 (2020-02-13)
 Initial Release
     Most of functionality is adopted from https://github.com/zackad/offmar.
