@@ -62,7 +62,7 @@ export function App(props) {
 
   return (
     <AppContext.Provider value={{ toggleSettingDialog, toggleReaderMode }}>
-      <div className='min-h-screen bg-gray-900 text-white'>
+      <div className='text-white'>
         <AppBar />
         {openSettingDialog && (
           <SettingsDialog

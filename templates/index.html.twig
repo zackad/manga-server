@@ -13,11 +13,11 @@
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
   </head>
-  <body>
+  <body class="min-h-screen bg-gray-900">
     {% block preact_container %}
       <div id="preact_container"></div>
       {% if pagination is defined %}
-        <div class="bg-gray-900">
+        <div class="mt-4">
           <div class="container mx-auto">
             {{ knp_pagination_render(pagination) }}
           </div>
