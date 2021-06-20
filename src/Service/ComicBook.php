@@ -11,10 +11,10 @@ class ComicBook
      */
     public function getCover(string $pathname)
     {
-        $za = new \ZipArchive();
-        $successOpening = $za->open($pathname);
-
-        if (true !== $successOpening) {
+        try {
+            $za = new \ZipArchive();
+            $za->open($pathname);
+        } catch (\Exception $exception) {
             return false;
         }
 
