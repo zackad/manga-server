@@ -4,6 +4,13 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @internal
+ * @covers \App\Controller\ArchiveController
+ * @covers \App\Service\ArchiveReader
+ * @covers \App\Service\ComicBook
+ * @covers \App\Service\DirectoryListing
+ */
 class ArchiveControllerTest extends WebTestCase
 {
     private $client;
@@ -11,14 +18,6 @@ class ArchiveControllerTest extends WebTestCase
     protected function setUp(): void
     {
         $this->client = self::createClient();
-    }
-
-    public function testListItemsInsideArchiveFile()
-    {
-        $this->client->request('GET', '/archive.zip');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('Content-Type', 'text/html; charset=UTF-8');
     }
 
     public function testLoadImageFromArchive()
