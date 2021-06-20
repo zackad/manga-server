@@ -14,7 +14,7 @@ class ComicBook
         try {
             $za = new \ZipArchive();
             $za->open($pathname);
-        } catch (\ErrorException $exception) {
+        } catch (\Exception $exception) {
             return false;
         }
 

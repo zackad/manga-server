@@ -20,6 +20,12 @@ class ArchiveControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
+    public function testCanListArchiveContent()
+    {
+        $this->client->request('GET', '/archive.zip');
+        $this->assertResponseIsSuccessful();
+    }
+
     public function testLoadImageFromArchive()
     {
         $this->client->request('GET', '/archive.zip/image.jpeg');

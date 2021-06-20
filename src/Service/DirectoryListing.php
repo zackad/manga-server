@@ -49,7 +49,7 @@ class DirectoryListing
             $this->za->open($pathname);
 
             return 'archive';
-        } catch (\ErrorException $exception) {
+        } catch (\Exception $exception) {
         }
 
         return 'file';
