@@ -6,8 +6,8 @@ use Symfony\Component\Finder\Finder;
 
 class NextChapterResolver
 {
-    private PathTool $pathTool;
-    private string $mangaRoot;
+    private $pathTool;
+    private $mangaRoot;
 
     public function __construct(PathTool $pathTool, string $mangaRoot)
     {

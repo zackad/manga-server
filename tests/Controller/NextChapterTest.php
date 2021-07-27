@@ -2,12 +2,15 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @internal
+ * @covers \App\Controller\DefaultController
+ */
 class NextChapterTest extends WebTestCase
 {
-    private KernelBrowser $client;
+    private $client;
 
     protected function setUp(): void
     {
