@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 /**
  * @internal
  * @covers \App\Controller\DefaultController
+ * @covers \App\Service\ComicBook
+ * @covers \App\Service\DirectoryListing
+ * @covers \App\Service\NextChapterResolver
+ * @covers \App\Service\PathTool
  */
 class NextChapterTest extends WebTestCase
 {
