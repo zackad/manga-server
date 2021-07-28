@@ -5,6 +5,11 @@ namespace App\Tests\Service;
 use App\Service\ArchiveReader;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @covers \App\Service\ArchiveReader
+ * @covers \App\Service\ComicBook
+ */
 class ArchiveReaderTest extends TestCase
 {
     public function testListingArchiveContent()

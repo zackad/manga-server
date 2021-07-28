@@ -5,6 +5,13 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @internal
+ * @covers \App\Controller\DefaultController
+ * @covers \App\Service\DirectoryListing
+ * @covers \App\Service\NextChapterResolver
+ * @covers \App\Service\PathTool
+ */
 class NextChapterTest extends WebTestCase
 {
     private KernelBrowser $client;

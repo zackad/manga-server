@@ -4,6 +4,10 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @internal
+ * @covers \App\Controller\AssetsController
+ */
 class AssetsControllerTest extends WebTestCase
 {
     private $client;
@@ -15,18 +19,25 @@ class AssetsControllerTest extends WebTestCase
 
     /**
      * @dataProvider assetsProvider
+     *
+     * @param mixed $asset
      */
     public function testGetHeaderOfAssetsFile($asset)
     {
         $this->client->request('GET', $asset);
         $this->assertResponseIsSuccessful();
+
         switch (pathinfo($asset, PATHINFO_EXTENSION)) {
             case 'css':
                 $this->assertResponseHeaderSame('Content-Type', 'text/css');
+
                 break;
+
             case 'js':
                 $this->assertResponseHeaderSame('Content-Type', 'application/javascript');
+
                 break;
+
             default:
                 break;
         }

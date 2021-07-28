@@ -5,6 +5,11 @@ namespace App\Tests\Service;
 use App\Service\ComicBook;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @covers \App\Service\ComicBook
+ * @covers \App\Service\DirectoryListing
+ */
 class ComicBookTest extends TestCase
 {
     public function testGetCover()
