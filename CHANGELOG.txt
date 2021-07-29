@@ -1,8 +1,18 @@
 Manga Server
 https://github.com/zackad/manga-server
 
-(unreleased)
+v0.11.0 (2021-07-29)
+New Features:
+- Add wider compatibility with php version (compatible with php 7.2.5 and later)
 
+Internals:
+- Add `symfony/runtime` component
+- Explicitly declare code coverage annotation on phpunit test file
+- Let `phpunit-bridge` automatically select which version of phpunit to be used
+- Update `symfony/framework-bundle` recipes
+- Upload code coverage report only when run on php8
+
+---
 v0.10.0 (2021-04-05)
 Bugfixes:
 - Fix get cover image by assuming that the first image is the cover (after
