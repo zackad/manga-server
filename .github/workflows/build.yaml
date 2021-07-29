@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-versions: [ '7.2','7.4', '8.0' ]
+                php-versions: ['7.2', '7.4', '8.0']
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2
@@ -21,6 +21,7 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
+                    tools: psalm, php-cs-fixer
             -   name: Setup NodeJS
                 uses: actions/setup-node@v2
                 with:
@@ -51,6 +52,11 @@ jobs:
                     composer install --no-progress --prefer-dist --optimize-autoloader
             -   name: Intall yarn dependencies
                 run: yarn install
+            -   name: Lint code style
+                run: |
+                    bin/console lint:twig
+                    psalm -c psalm.xml
+                    php-cs-fixer fix --dry-run --diff
             -   name: Build frontend artifact
                 run: |
                     NODE_ENV=production yarn encore production

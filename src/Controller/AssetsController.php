@@ -17,10 +17,11 @@ class AssetsController extends AbstractController
      */
     public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets): Response
     {
+        /** @psalm-suppress PossiblyNullOperand */
         $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
 
         if (!file_exists($file)) {
-            throw  $this->createNotFoundException(sprintf('File "%s" not found.', $file));
+            throw $this->createNotFoundException(sprintf('File "%s" not found.', $file));
         }
 
         $stream = new Stream($file);

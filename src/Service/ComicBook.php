@@ -22,7 +22,7 @@ class ComicBook
         natsort($images);
 
         if (count($images) > 0) {
-            return $images[array_key_first($images)];
+            return (string) $images[array_key_first($images)];
         }
 
         return false;
@@ -31,7 +31,7 @@ class ComicBook
     private function getImages(\ZipArchive $archive): \Generator
     {
         for ($index = 0; $index < $archive->numFiles; ++$index) {
-            $cover = $archive->statIndex($index)['name'];
+            $cover = (string) $archive->statIndex($index)['name'];
             $coverPatternExtension = '/.+(jpe?g|png|webp)$/i';
             if (preg_match($coverPatternExtension, $cover)) {
                 yield $cover;

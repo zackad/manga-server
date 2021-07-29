@@ -19,7 +19,7 @@ class SearchController extends AbstractController
         $errorMessage = null;
 
         $q = $request->query->get('q') ?? '';
-        $results = $search->find($q);
+        $results = $search->find((string) $q);
         $entries = iterator_to_array($results);
 
         if (0 === count($entries)) {

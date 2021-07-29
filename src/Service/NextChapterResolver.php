@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class NextChapterResolver
 {
@@ -52,6 +53,7 @@ class NextChapterResolver
         $finder = new Finder();
         $finder->in($directory)->directories()->depth('== 0')->sortByName(true);
 
+        /** @var SplFileInfo $entry */
         foreach ($finder as $entry) {
             // Fix windows path separator
             $fixedPath = str_replace('\\', '/', $entry->getPathname());
@@ -68,9 +70,9 @@ class NextChapterResolver
         }
 
         if (false !== next($array)) {
-            return current($array);
+            return (string) current($array);
         }
 
-        return prev($array);
+        return (string) prev($array);
     }
 }

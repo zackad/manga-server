@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class Search
 {
@@ -52,6 +53,7 @@ class Search
             ->sortByName(true)
         ;
 
+        /** @var SplFileInfo $file */
         foreach ($this->finder as $file) {
             $filename = $file->getRelativePathname();
             $hasCover = $this->comicBook->getCover($file->getRealPath());
