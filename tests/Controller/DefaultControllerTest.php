@@ -4,6 +4,12 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @internal
+ * @covers \App\Controller\DefaultController
+ * @covers \App\Service\DirectoryListing
+ * @covers \App\Service\PathTool
+ */
 class DefaultControllerTest extends WebTestCase
 {
     private $client;
@@ -15,6 +21,8 @@ class DefaultControllerTest extends WebTestCase
 
     /**
      * @dataProvider imageProvider
+     *
+     * @param mixed $image
      */
     public function testLoadImage($image)
     {

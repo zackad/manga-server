@@ -5,6 +5,11 @@ namespace App\Tests\Service;
 use App\Service\Search;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @covers \App\Service\DirectoryListing
+ * @covers \App\Service\Search
+ */
 class SearchTest extends TestCase
 {
     private $search;
