@@ -14,7 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class NextChapterTest extends WebTestCase
 {
-    private KernelBrowser $client;
+    /**
+     * @var KernelBrowser
+     */
+    private $client;
 
     protected function setUp(): void
     {

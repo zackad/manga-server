@@ -7,8 +7,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class PathTool
 {
-    private ?Request $request;
-    private string $mangaRoot;
+    /**
+     * @var null|Request
+     */
+    private $request;
+    /**
+     * @var string
+     */
+    private $mangaRoot;
 
     public function __construct(RequestStack $request, string $mangaRoot)
     {
