@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -29,6 +29,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "7.2.5"
+        },
         "preferred-install": {
             "*": "dist"
         },
