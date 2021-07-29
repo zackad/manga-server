@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PathTool
 {
     /**
-     * @var null|Request
+     * @var Request|null
      */
     private $request;
     /**

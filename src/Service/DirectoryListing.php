@@ -25,6 +25,7 @@ class DirectoryListing
     public function buildList(array $entries, string $uriPrefix, string $target = ''): \Traversable
     {
         $comicBook = new ComicBook();
+        /** @var string $entry */
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
             $hasCover = $comicBook->getCover($target.'/'.$entry);
