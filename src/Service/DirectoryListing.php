@@ -47,10 +47,13 @@ class DirectoryListing
         }
 
         try {
-            $this->za->open($pathname);
-
-            return 'archive';
+            $isArchive = $this->za->open($pathname);
         } catch (\Exception $exception) {
+            return 'file';
+        }
+
+        if (true === $isArchive) {
+            return 'archive';
         }
 
         return 'file';
