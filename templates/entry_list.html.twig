@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {% include 'partial/_header.html.twig' %}
+  <main>
+    <h2>
+      Main Content
+    </h2>
+    {% for item in entries %}
+      <li>{{ item.label }}</li>
+    {% endfor %}
+  </main>
+{% endblock %}

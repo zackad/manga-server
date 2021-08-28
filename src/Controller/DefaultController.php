@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="home", methods={"GET"})
+     * @Route("/", name="app_home", methods={"GET"})
      * @Route("/{default}", name="default", methods={"GET"}, requirements={"default"="^(?!build).+"})
      */
     public function index(DirectoryListing $listing, PathTool $pathTool, Request $request, NextChapterResolver $resolver): Response
@@ -45,7 +45,7 @@ class DefaultController extends AbstractController
 
         $data = $listing->scan($target, $uriPrefix);
 
-        return $this->render('index.html.twig', [
+        return $this->render('entry_list.html.twig', [
             'entries' => $data,
         ]);
     }
