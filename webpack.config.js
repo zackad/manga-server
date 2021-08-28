@@ -11,7 +11,6 @@ Encore.addEntry('app', './assets/index.tsx')
   .cleanupOutputBeforeBuild()
   .enablePreactPreset()
   .enableTypeScriptLoader()
-  .enablePostCssLoader()
   .enableVersioning(Encore.isProduction())
 
 module.exports = Encore.getWebpackConfig()
