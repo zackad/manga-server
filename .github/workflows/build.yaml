@@ -59,7 +59,7 @@ jobs:
                     php-cs-fixer fix --dry-run --diff
             -   name: Build frontend artifact
                 run: |
-                    NODE_ENV=production yarn encore production
+                    yarn build
             -   name: Run Tests
                 run: php bin/phpunit --coverage-clover var/coverage.xml
             -   name: Upload coverage to Codecov

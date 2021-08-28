@@ -1,20 +1,12 @@
 module.exports = {
-  purge: false,
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+  mode: 'jit',
+  purge: ['./assets/**/*.jsx', './assets/**/*.tsx', './templates/**/*.twig'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {
-      spacing: {
-        80: '20rem',
-      },
-      maxHeight: (theme) => theme('spacing'),
-      minHeight: (theme) => theme('spacing'),
-      height: (theme) => theme('spacing'),
-      minWidth: (theme) => theme('spacing'),
-    },
+    extend: {},
   },
-  variants: {},
+  variants: {
+    extend: {},
+  },
   plugins: [],
 }
