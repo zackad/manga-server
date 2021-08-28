@@ -4,6 +4,7 @@
     "@fullhuman/postcss-purgecss": "^2.0.6",
     "@symfony/webpack-encore": "^0.28.2",
     "autoprefixer": "^10.3.3",
+    "concurrently": "^6.2.1",
     "cssnano": "^4.1.10",
     "postcss-loader": "^3.0.0",
     "tailwindcss": "^2.2.8",
@@ -15,7 +16,9 @@
     "preact": "^10.3.0"
   },
   "scripts": {
-    "start": "encore dev --watch",
-    "build": "NODE_ENV=production encore production"
+    "dev": "concurrently --kill-others \"yarn run tailwind:watch\" \"encore dev --watch\"",
+    "build": "yarn run tailwind:build && NODE_ENV=production encore production",
+    "tailwind:build": "tailwindcss -i assets/css/tailwind.src.css -o assets/css/tailwind.css",
+    "tailwind:watch": "tailwindcss -i assets/css/tailwind.src.css -o assets/css/tailwind.css --watch"
   }
 }
