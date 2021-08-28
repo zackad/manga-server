@@ -6,7 +6,7 @@ import { Listing } from 'App/Components/Listing'
 import { Reader } from 'App/Components/Reader'
 import { SettingsDialog } from 'App/Components/SettingsDialog'
 import { AppContext } from 'App/AppContext'
-import 'App/css/tailwind.src.css'
+import 'App/css/tailwind.css'
 
 export function App(props) {
   const [readerMode, setReaderMode] = useState(false)
