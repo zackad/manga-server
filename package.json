@@ -3,10 +3,10 @@
     "@babel/plugin-transform-react-jsx": "^7.8.3",
     "@fullhuman/postcss-purgecss": "^2.0.6",
     "@symfony/webpack-encore": "^0.28.2",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^10.3.3",
     "cssnano": "^4.1.10",
     "postcss-loader": "^3.0.0",
-    "tailwindcss": "^1.2.0",
+    "tailwindcss": "^2.2.8",
     "ts-loader": "5.3.0",
     "typescript": "^3.9.6"
   },
