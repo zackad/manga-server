@@ -44,9 +44,12 @@ class DefaultController extends AbstractController
         }
 
         $data = $listing->scan($target, $uriPrefix);
+        $directories = array_filter($data, function ($item) {return 'directory' === $item['type']; });
+        $files = array_filter($data, function ($item) {return 'file' === $item['type']; });
+        $archives = array_filter($data, function ($item) {return 'archive' === $item['type']; });
 
         return $this->render('entry_list.html.twig', [
-            'entries' => $data,
+            'entries' => array_merge($directories, $files, $archives),
         ]);
     }
 }
