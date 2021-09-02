@@ -4,12 +4,13 @@
   {% include 'partial/_header.html.twig' %}
   <main class="text-gray-100">
     <div class="container mx-auto">
-      <h2>
-        Main Content
-      </h2>
+      {# TODO: add breadcrumbs #}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         {% for item in entries %}
-          <div class="border-b">
+          <div class="flex items-center border-b">
+            {% if item.type == 'directory' %}
+              <span class="block pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
+            {% endif %}
             <a href="{{ item.uri }}">{{ item.label }}</a>
           </div>
         {% endfor %}
