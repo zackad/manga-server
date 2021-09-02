@@ -2,12 +2,18 @@
 
 {% block body %}
   {% include 'partial/_header.html.twig' %}
-  <main>
-    <h2>
-      Main Content
-    </h2>
-    {% for item in entries %}
-      <li>{{ item.label }}</li>
-    {% endfor %}
+  <main class="text-gray-100">
+    <div class="container mx-auto">
+      <h2>
+        Main Content
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        {% for item in entries %}
+          <div class="border-b">
+            <a href="{{ item.uri }}">{{ item.label }}</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </main>
 {% endblock %}
