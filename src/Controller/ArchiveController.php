@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Service\ArchiveReader;
@@ -66,6 +68,7 @@ class ArchiveController extends AbstractController
         ];
         $response->headers->add($headers);
         $response->setExpires(new \DateTime('+1 week'));
+        $response->send();
 
         return $response;
     }
