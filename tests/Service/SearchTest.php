@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Service;
 
 use App\Service\Search;
@@ -16,7 +18,7 @@ class SearchTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $_ENV['MAXIMUM_SEARCH_DEPTH']);
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], (int) $_ENV['MAXIMUM_SEARCH_DEPTH']);
     }
 
     /**

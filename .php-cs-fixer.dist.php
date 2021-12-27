@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $finder = PhpCsFixer\Finder::create()
     ->in([__DIR__.'/src', __DIR__.'/tests'])
 ;
@@ -7,9 +9,9 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 
 return $config->setRules([
-    '@PhpCsFixer' => true,
     '@Symfony' => true,
-    '@PSR12' => true,
+    'declare_strict_types' => true,
 ])
     ->setFinder($finder)
+    ->setRiskyAllowed(true)
 ;
