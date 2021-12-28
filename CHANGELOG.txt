@@ -1,6 +1,24 @@
 Manga Server
 https://github.com/zackad/manga-server
 
+v0.13.0 (2021-12-28)
+NOTES: This is the last version that use Client Side Rendering (SRS) to build
+    the UI. The next version will use Server Side Rendering (SSR) for better
+    integration with symfony framework ecosystem.
+
+Bugfixes:
+- Fix bug when sending streamed response
+
+Internals:
+- Change code style for php-cs-fixer rule with @Symfony ruleset with strict type
+  declared
+- Run CI/CD with oldest/newest supported php version only (7.2 and 8.1)
+- Update symfony framework to version 5.4
+- Update symfony recipes to the latest version
+- Update symfony/flex to version 1.17.x
+- Update tailwindcss to version 2.2 with JIT mode enabled.
+
+---
 v0.12.0 (2021-07-30)
 Bugfixes:
 - Fix categorizing file entry list
