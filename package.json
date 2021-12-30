@@ -7,7 +7,7 @@
     "autoprefixer": "^10.3.3",
     "concurrently": "^6.2.1",
     "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.8",
+    "tailwindcss": "^3.0.8",
     "ts-loader": "5.3.0",
     "typescript": "^3.9.6"
   },
