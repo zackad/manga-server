@@ -7,7 +7,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
 }
 
-Encore.addEntry('app', './assets/index.tsx')
+Encore.addEntry('app', './assets/app.js')
   .addAliases({
     App: path.resolve('assets/'),
   })
@@ -32,11 +32,11 @@ Encore.addEntry('app', './assets/index.tsx')
    * https://symfony.com/doc/current/frontend.html#adding-more-features
    */
   .cleanupOutputBeforeBuild()
-  .enablePreactPreset()
-  .enableTypeScriptLoader()
+  // .enablePreactPreset()
+  // .enableTypeScriptLoader()
   .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
-  .enableVersioning(Encore.isProduction())
+  .enableVersioning()
 
   // .configureBabel((config) => {
   //   config.plugins.push('@babel/plugin-proposal-class-properties')

@@ -31,7 +31,7 @@ class ArchiveController extends AbstractController
         $entries = new ArchiveReader($target);
         $entryList = iterator_to_array($listing->buildList($entries->getList(), $uriPrefix, $target));
 
-        return $this->render('index.html.twig', [
+        return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
         ]);
     }
