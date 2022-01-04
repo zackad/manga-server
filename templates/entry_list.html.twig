@@ -7,11 +7,18 @@
       {# TODO: add breadcrumbs #}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         {% for item in entries %}
-          <div class="flex items-center border-b">
-            {% if item.type == 'directory' %}
-              <span class="block pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
+          <div>
+            {% if item.cover %}
+              <a href="{{ item.uri }}">
+                <img src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="w-full aspect-[3/4] object-cover" />
+              </a>
             {% endif %}
-            <a href="{{ item.uri }}">{{ item.label }}</a>
+            <div class="flex items-center border-b">
+              {% if item.type == 'directory' %}
+                <span class="block pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
+              {% endif %}
+              <a href="{{ item.uri }}">{{ item.label }}</a>
+            </div>
           </div>
         {% endfor %}
       </div>
