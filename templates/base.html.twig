@@ -16,7 +16,7 @@
       {{ encore_entry_script_tags('app') }}
     {% endblock %}
   </head>
-  <body class="min-h-screen bg-gray-900">
+  <body class="min-h-screen bg-gray-900" {{ stimulus_controller('app') }}>
     {% block body %}
 
     {% endblock %}
