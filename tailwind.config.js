@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./assets/**/*.jsx', './assets/**/*.tsx', './templates/**/*.twig'],
+  content: ['./assets/**/*.{js,jsx,ts,tsx}', './templates/**/*.twig'],
   theme: {
     extend: {},
   },
