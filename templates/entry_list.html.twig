@@ -7,7 +7,7 @@
       {# TODO: add breadcrumbs #}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         {% for item in entries %}
-          <div>
+          <div data-app-target="entry">
             {% if item.cover %}
               <a href="{{ item.uri }}">
                 <img src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="w-full aspect-[3/4] object-cover" />
@@ -20,6 +20,13 @@
               <a href="{{ item.uri }}">{{ item.label }}</a>
             </div>
           </div>
+          {% if item.uri|is_image %}
+            <img class="hidden md:col-span-3 min-h-screen mx-auto lozad"
+              loading="lazy"
+              data-src="{{ item.uri }}"
+              data-app-target="image"
+              alt="{{ item.uri }}" />
+          {% endif %}
         {% endfor %}
       </div>
     </div>
