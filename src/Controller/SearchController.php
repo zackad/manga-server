@@ -20,8 +20,8 @@ class SearchController extends AbstractController
         $response = new Response();
         $errorMessage = null;
 
-        $q = $request->query->get('q') ?? '';
-        $results = $search->find((string) $q);
+        $q = (string) $request->query->get('q', '');
+        $results = $search->find($q);
         $entries = iterator_to_array($results);
 
         if (0 === count($entries)) {
@@ -29,7 +29,7 @@ class SearchController extends AbstractController
             $errorMessage = 'Empty search result, please use other "search term"';
         }
 
-        return $this->render('index.html.twig', [
+        return $this->render('entry_list.html.twig', [
             'entries' => $entries,
             'error_message' => $errorMessage,
         ], $response);

@@ -17,8 +17,9 @@
     <form action="{{ path('search') }}" class="flex-grow max-w-md">
       <input type="text"
         name="q"
-        class="w-full px-1 h-8 bg-gray-900 focus:bg-white text-sm text-gray-900 border border-gray-700 rounded"
-        placeholder="Search" />
+        class="w-full px-1 h-8 bg-gray-900 text-white focus:bg-white text-sm focus:text-gray-900 border border-gray-700 rounded"
+        placeholder="Search"
+        value="{{ app.request.query.get('q') }}" />
     </form>
     <div class="flex-grow"></div>
     <a href="{{ path('app_home') }}" class="inline-block w-8 h-8 p-1">

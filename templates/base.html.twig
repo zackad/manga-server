@@ -20,5 +20,15 @@
     {% block body %}
 
     {% endblock %}
+
+    {% block errors %}
+      {% if error_message is defined and error_message %}
+        <div class="container mx-auto">
+          <p class="border border-dashed border-2 border-gray-300 text-white p-4 text-center text-xl">
+            {{ error_message }}
+          </p>
+        </div>
+      {% endif %}
+    {% endblock %}
   </body>
 </html>
