@@ -5,17 +5,39 @@ import lozad from 'lozad'
 export default class extends Controller {
   static targets = ['image', 'imageContainer', 'entryContainer']
   isReaderModeActive = false
+  imageContainerMaxWidth = null
 
   connect() {
+    // Initialize image lazy load observer
     const observer = lozad('.lozad', {
       loaded: (el) => el.classList.remove('min-h-screen'),
     })
     observer.observe()
+
+    // Add keyboard event listener
     addEventListener('keydown', this.keyPressListener.bind(this))
+    // Listen to setting_controller.js event
+    addEventListener('setting:saved', this.saveSettings.bind(this))
+
+    // Set maximum image container width
+    this.setMaxImageContainerWidth()
   }
 
   disconnect() {
     removeEventListener('keydown', this.keyPressListener)
+  }
+
+  saveSettings(event) {
+    let width = event.detail.width ? event.detail.width : null
+    localStorage.setItem('imageContainerMaxWidth', width)
+    this.setMaxImageContainerWidth()
+  }
+
+  setMaxImageContainerWidth() {
+    this.imageContainerMaxWidth = localStorage.getItem('imageContainerMaxWidth')
+    this.imageContainerTarget.style.maxWidth = isNaN(this.imageContainerMaxWidth)
+      ? '100%'
+      : `${this.imageContainerMaxWidth}px`
   }
 
   keyPressListener(event) {

@@ -22,7 +22,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="hidden" {{ stimulus_target('app', 'imageContainer') }}>
+      <div class="hidden -mt-2 w-full mx-auto" {{ stimulus_target('app', 'imageContainer') }}>
         {% for item in entries %}
           {% if item.uri|is_image %}
             <img class="md:col-span-3 min-h-screen mx-auto lozad"
