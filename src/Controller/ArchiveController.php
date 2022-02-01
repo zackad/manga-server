@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +24,19 @@ class ArchiveController extends AbstractController
      *     requirements={"path"=".+(\.zip|cbz)$"}
      * )
      */
-    public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot): Response
+    public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot, PaginatorInterface $paginator): Response
     {
+        $page = $request->query->getInt('page', 1);
         $path = $request->attributes->get('path');
         $target = sprintf('%s/%s', $mangaRoot, $path);
 
         $entries = new ArchiveReader($target);
         $entryList = iterator_to_array($listing->buildList($entries->getList(), $path, $target));
+        $pagination = $paginator->paginate($entryList, $page);
 
         return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
+            'pagination' => $pagination,
         ]);
     }
 
