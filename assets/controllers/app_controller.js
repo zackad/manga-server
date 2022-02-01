@@ -1,8 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
 import lozad from 'lozad'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
-  static targets = ['image', 'entry']
+  static targets = ['image', 'imageContainer', 'entryContainer']
   isReaderModeActive = false
 
   connect() {
@@ -33,8 +34,8 @@ export default class extends Controller {
       return
     }
 
-    this.entryTargets.forEach(this.hideElement)
-    this.imageTargets.forEach(this.showElement)
+    this.imageContainerTarget.classList.remove('hidden')
+    this.entryContainerTarget.classList.add('hidden')
     this.isReaderModeActive = true
   }
 
@@ -43,20 +44,12 @@ export default class extends Controller {
       return
     }
 
-    this.entryTargets.forEach(this.showElement)
-    this.imageTargets.forEach(this.hideElement)
+    this.entryContainerTarget.classList.remove('hidden')
+    this.imageContainerTarget.classList.add('hidden')
     this.isReaderModeActive = false
   }
 
   toggleReader() {
     this.isReaderModeActive && this.imageTargets.length > 0 ? this.deactivateReader() : this.activateReader()
-  }
-
-  hideElement(element) {
-    element.classList.add('hidden')
-  }
-
-  showElement(element) {
-    element.classList.remove('hidden')
   }
 }

@@ -5,9 +5,9 @@
   <main class="pt-14 text-gray-100">
     <div class="container mx-auto">
       {# TODO: add breadcrumbs #}
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2" {{ stimulus_target('app', 'entryContainer') }}>
         {% for item in entries %}
-          <div data-app-target="entry">
+          <div>
             {% if item.cover %}
               <a href="{{ item.uri }}">
                 <img src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="w-full aspect-[3/4] object-cover" />
@@ -20,8 +20,12 @@
               <a href="{{ item.uri }}">{{ item.label }}</a>
             </div>
           </div>
+        {% endfor %}
+      </div>
+      <div class="hidden" {{ stimulus_target('app', 'imageContainer') }}>
+        {% for item in entries %}
           {% if item.uri|is_image %}
-            <img class="hidden md:col-span-3 min-h-screen mx-auto lozad"
+            <img class="md:col-span-3 min-h-screen mx-auto lozad"
               loading="lazy"
               data-src="{{ item.uri }}"
               data-app-target="image"
