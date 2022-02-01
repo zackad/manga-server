@@ -10,7 +10,9 @@
           <div>
             {% if item.cover %}
               <a href="{{ item.uri }}">
-                <img src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="w-full aspect-[3/4] object-cover" />
+                <img data-src="{{ item.cover }}"
+                  alt="Cover for {{ item.label }}"
+                  class="lozad w-full aspect-[3/4] object-cover" />
               </a>
             {% endif %}
             <div class="flex items-center border-b">
