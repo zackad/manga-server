@@ -53,6 +53,6 @@
     {% if item.type == 'directory' %}
       <span class="block pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
-    <a href="{{ item.uri }}">{{ item.label }}</a>
+    <a href="{{ item.uri }}" class="break-words line-clamp-5 md:line-clamp-2">{{ item.label }}</a>
   </div>
 {% endblock %}
