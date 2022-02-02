@@ -8,6 +8,7 @@ use App\Twig\AppExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Environment;
 
 /**
  * @covers \App\Twig\AppExtension
@@ -15,15 +16,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class AppExtensionTest extends TestCase
 {
     private $requestStack;
+    private $twig;
 
     protected function setUp(): void
     {
         $this->requestStack = $this->createMock(RequestStack::class);
+        $this->twig = $this->createMock(Environment::class);
     }
 
     public function testMakeSureIsCovered()
     {
-        $extension = new AppExtension($this->requestStack);
+        $extension = new AppExtension($this->requestStack, $this->twig);
 
         $this->assertIsArray($extension->getFilters());
         $this->assertIsArray($extension->getFunctions());
@@ -34,7 +37,7 @@ class AppExtensionTest extends TestCase
      */
     public function testIsImage(string $filename, bool $result)
     {
-        $extension = new AppExtension($this->requestStack);
+        $extension = new AppExtension($this->requestStack, $this->twig);
 
         $this->assertEquals($result, $extension->isImage($filename));
     }
@@ -47,15 +50,22 @@ class AppExtensionTest extends TestCase
         $mainRequest = $this->createMock(Request::class);
         $mainRequest->method('getRequestUri')->willReturn($input);
         $this->requestStack->method('getMainRequest')->willReturn($mainRequest);
-        $extension = new AppExtension($this->requestStack);
+        $extension = new AppExtension($this->requestStack, $this->twig);
 
         $this->assertEquals($output, $extension->getTitleFromUri($input));
+    }
+
+    public function testRenderBreadcrumbsReturnNullWhenRequestObjectIsNull()
+    {
+        $extension = new AppExtension($this->requestStack, $this->twig);
+
+        $this->assertNull($extension->renderBreadcrumbs());
     }
 
     public function testAutowiring()
     {
         $requestStack = $this->createMock(RequestStack::class);
-        $extension = new AppExtension($requestStack);
+        $extension = new AppExtension($requestStack, $this->twig);
 
         $this->assertEquals(null, $extension->getTitleFromUri());
     }

@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -14,10 +15,15 @@ class AppExtension extends AbstractExtension
 {
     /** @var Request|null */
     private $request;
+    /**
+     * @var Environment
+     */
+    private $twig;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, Environment $twig)
     {
         $this->request = $requestStack->getMainRequest();
+        $this->twig = $twig;
     }
 
     public function getFilters(): array
@@ -32,6 +38,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('is_image', [$this, 'isImage']),
+            new TwigFunction('render_breadcrumbs', [$this, 'renderBreadcrumbs'], ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
     }
 
@@ -50,5 +57,29 @@ class AppExtension extends AbstractExtension
         $array = preg_split('/\//', $decodedUri, -1, PREG_SPLIT_NO_EMPTY);
 
         return array_pop($array);
+    }
+
+    public function renderBreadcrumbs(): ?string
+    {
+        if (null === $this->request) {
+            return null;
+        }
+
+        $target = $this->request->attributes->get('path', '');
+        $breadcumbs = preg_split('/\//', $target, -1, PREG_SPLIT_NO_EMPTY);
+
+        $target = '';
+        $items = [];
+        foreach ($breadcumbs as $crumb) {
+            $target .= '/'.$crumb;
+            $items[] = [
+                'label' => $crumb,
+                'uri' => $target,
+            ];
+        }
+
+        return $this->twig->render('partial/_breadcrumbs.html.twig', [
+            'breadcrumbs' => $items,
+        ]);
     }
 }
