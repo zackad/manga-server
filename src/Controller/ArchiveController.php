@@ -17,10 +17,10 @@ class ArchiveController extends AbstractController
 {
     /**
      * @Route(
-     *     "/{archive_list}",
+     *     "/{path}",
      *     name="archive_list",
      *     methods={"GET"},
-     *     requirements={"archive_list"=".+(\.zip|cbz)$"}
+     *     requirements={"path"=".+(\.zip|cbz)$"}
      * )
      */
     public function archiveListing(DirectoryListing $listing, PathTool $pathTool): Response

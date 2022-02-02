@@ -44,11 +44,24 @@ class DefaultControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    public function testAccessHomepage()
+    /**
+     * @dataProvider targetPathProvider
+     * @covers \App\Twig\AppExtension::renderBreadcrumbs
+     */
+    public function testCanAccessTargetPath(string $target)
     {
-        $this->client->request('GET', '/');
+        $this->client->request('GET', $target);
 
         $this->assertResponseIsSuccessful();
+    }
+
+    public function targetPathProvider(): array
+    {
+        return [
+            [rawurlencode('')],
+            [rawurlencode('/Series 1')],
+            [rawurlencode('/Series 1/Chapter 001')],
+        ];
     }
 
     public function imageProvider()
