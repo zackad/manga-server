@@ -2,7 +2,7 @@
 
 {% block body %}
   {% include 'partial/_header.html.twig' %}
-  <main class="pt-14 text-gray-100">
+  <main class="pt-12 text-gray-100">
     <div class="container mx-auto font-thin">
       {{render_breadcrumbs()}}
       <div class="mt-2 px-2" {{ stimulus_target('app', 'entryContainer') }}>
@@ -19,7 +19,7 @@
           {% endfor %}
         </div>
       </div>
-      <div class="hidden -mt-2 w-full mx-auto overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
+      <div class="hidden mt-2 w-full mx-auto overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
         {% for item in entries|filter(item => item.uri|is_image) %}
           <img class="md:col-span-3 min-h-screen mx-auto lozad"
             loading="lazy"
