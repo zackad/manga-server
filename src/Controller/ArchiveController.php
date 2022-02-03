@@ -7,8 +7,8 @@ namespace App\Controller;
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
-use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,13 +23,13 @@ class ArchiveController extends AbstractController
      *     requirements={"path"=".+(\.zip|cbz)$"}
      * )
      */
-    public function archiveListing(DirectoryListing $listing, PathTool $pathTool): Response
+    public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot): Response
     {
-        $uriPrefix = $pathTool->getPrefix();
-        $target = rawurldecode($pathTool->getTarget());
+        $path = $request->attributes->get('path');
+        $target = sprintf('%s/%s', $mangaRoot, $path);
 
         $entries = new ArchiveReader($target);
-        $entryList = iterator_to_array($listing->buildList($entries->getList(), $uriPrefix, $target));
+        $entryList = iterator_to_array($listing->buildList($entries->getList(), $path, $target));
 
         return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
@@ -44,9 +44,10 @@ class ArchiveController extends AbstractController
      *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
      * )
      */
-    public function archiveItem(PathTool $pathTool, MimeGuesser $guesser): Response
+    public function archiveItem(Request $request, MimeGuesser $guesser, string $mangaRoot): Response
     {
-        $target = $pathTool->getTarget();
+        $path = $request->attributes->get('archive_item');
+        $target = sprintf('%s/%s', $mangaRoot, $path);
         $archivePath = preg_replace('/(?<=cbz|zip).*$/i', '', $target);
         $entryName = preg_replace('/.*(cbz|zip)\//i', '', $target);
 

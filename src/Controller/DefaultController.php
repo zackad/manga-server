@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Service\DirectoryListing;
 use App\Service\NextChapterResolver;
-use App\Service\PathTool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
@@ -20,10 +19,10 @@ class DefaultController extends AbstractController
      * @Route("/", name="app_home", methods={"GET"})
      * @Route("/{path}", name="default", methods={"GET"}, requirements={"path"="^(?!build).+"})
      */
-    public function index(DirectoryListing $listing, PathTool $pathTool, Request $request, NextChapterResolver $resolver): Response
+    public function index(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot): Response
     {
-        $uriPrefix = $pathTool->getPrefix();
-        $target = $pathTool->getTarget();
+        $path = $request->attributes->get('path', '');
+        $target = sprintf('%s/%s', $mangaRoot, $path);
 
         $nextPage = '' === $request->query->get('next');
 
@@ -43,7 +42,7 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Directory not found.');
         }
 
-        $data = $listing->scan($target, $uriPrefix);
+        $data = $listing->scan($target, $path);
         $directories = array_filter($data, function ($item) {return 'directory' === $item['type']; });
         $files = array_filter($data, function ($item) {return 'file' === $item['type']; });
         $archives = array_filter($data, function ($item) {return 'archive' === $item['type']; });
