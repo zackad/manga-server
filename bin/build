@@ -16,15 +16,14 @@ echo "APP_SECRET=$(openssl rand -hex 20)" >> build/manga-server/.env
 echo "MANGA_ROOT_DIRECTORY=/" >> build/manga-server/.env
 echo "MAXIMUM_SEARCH_DEPTH=3" >> build/manga-server/.env
 
-# Install dependencies and warm up cache
+# Install dependencies
 cd build/manga-server \
   && composer install --no-dev \
-  && bin/console cache:clear --env prod \
   && cd ../..
 
 # Remove unnecessary binary
 cd build/manga-server \
-  && rm -fr bin/build bin/phpunit bin/release composer.lock \
+  && rm -fr bin/build bin/phpunit bin/release composer.lock var/cache \
   && cd ../..
 
 # Remove php_cs cache
