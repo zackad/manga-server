@@ -6,10 +6,12 @@ namespace App\Service;
 
 class ComicBook
 {
+    public const IMAGE_EXTENSIONS = '/.+(jpe?g|png|webp)$/i';
+
     /**
      * @param string $pathname Pathname of zip file/comicbook
      *
-     * @return false|string Resolveable image url, or false on failure
+     * @return false|string Resolvable image url, or false on failure
      */
     public function getCover(string $pathname)
     {
@@ -34,8 +36,7 @@ class ComicBook
     {
         for ($index = 0; $index < $archive->numFiles; ++$index) {
             $cover = (string) $archive->statIndex($index)['name'];
-            $coverPatternExtension = '/.+(jpe?g|png|webp)$/i';
-            if (preg_match($coverPatternExtension, $cover)) {
+            if (preg_match(self::IMAGE_EXTENSIONS, $cover)) {
                 yield $cover;
             }
         }
