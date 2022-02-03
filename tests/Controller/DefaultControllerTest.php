@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * @internal
  * @covers \App\Controller\DefaultController
  * @covers \App\Service\DirectoryListing
- * @covers \App\Service\PathTool
  */
 class DefaultControllerTest extends WebTestCase
 {
@@ -23,10 +22,8 @@ class DefaultControllerTest extends WebTestCase
 
     /**
      * @dataProvider imageProvider
-     *
-     * @param mixed $image
      */
-    public function testLoadImage($image)
+    public function testLoadImage(string $image)
     {
         $this->client->request('GET', $image);
 
@@ -64,7 +61,7 @@ class DefaultControllerTest extends WebTestCase
         ];
     }
 
-    public function imageProvider()
+    public function imageProvider(): array
     {
         return [
             ['/image.jpg'],

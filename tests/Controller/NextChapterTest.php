@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @covers \App\Controller\DefaultController
  * @covers \App\Service\DirectoryListing
  * @covers \App\Service\NextChapterResolver
- * @covers \App\Service\PathTool
  */
 class NextChapterTest extends WebTestCase
 {
