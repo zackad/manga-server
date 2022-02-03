@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
+use App\Service\NextChapterResolver;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
@@ -40,5 +42,13 @@ class NextChapterTest extends WebTestCase
     {
         $this->client->request('GET', '?next');
         $this->assertResponseRedirects('/');
+    }
+
+    public function testRequestObjectIsNullReturnToHomepage()
+    {
+        $requestStack = $this->createMock(RequestStack::class);
+        $nextResolver = new NextChapterResolver('/path/to/manga/root', $requestStack);
+
+        $this->assertEquals('/', $nextResolver->resolve());
     }
 }

@@ -6,31 +6,37 @@ namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class NextChapterResolver
 {
     /**
-     * @var PathTool
-     */
-    private $pathTool;
-    /**
      * @var string
      */
     private $mangaRoot;
+    /**
+     * @var Request|null
+     */
+    private $request;
 
-    public function __construct(PathTool $pathTool, string $mangaRoot)
+    public function __construct(string $mangaRoot, RequestStack $requestStack)
     {
-        $this->pathTool = $pathTool;
         $this->mangaRoot = $mangaRoot;
+        $this->request = $requestStack->getMainRequest();
     }
 
     public function resolve(): string
     {
-        $parent = $this->pathTool->getTargetParent();
+        if (!$this->request instanceof Request) {
+            return '/';
+        }
+        $path = $this->request->attributes->get('path', '');
+        $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $path));
 
         $entries = iterator_to_array($this->getEntry($parent));
 
-        $uri = '/'.$this->pathTool->getUri();
+        $uri = '/'.$path;
         if ('/' === $uri) {
             return $uri;
         }
