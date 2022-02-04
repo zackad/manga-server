@@ -31,11 +31,7 @@ class DefaultController extends AbstractController
         }
 
         if (is_file($target)) {
-            $stream = new Stream($target);
-            $response = new BinaryFileResponse($stream);
-            $response->setExpires(new \DateTime('+1 week'));
-
-            return $response;
+            return $this->serveBinaryResponse($target);
         }
 
         if (!is_dir($target)) {
@@ -50,5 +46,14 @@ class DefaultController extends AbstractController
         return $this->render('entry_list.html.twig', [
             'entries' => array_merge($directories, $files, $archives),
         ]);
+    }
+
+    private function serveBinaryResponse(string $target): Response
+    {
+        $stream = new Stream($target);
+        $response = new BinaryFileResponse($stream);
+        $response->setExpires(new \DateTime('+1 week'));
+
+        return $response;
     }
 }
