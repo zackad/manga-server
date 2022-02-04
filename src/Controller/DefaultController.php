@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
         }
 
         if (!is_dir($target)) {
-            throw $this->createNotFoundException('Directory not found.');
+            throw $this->createNotFoundException(sprintf('Directory "%s" could not be found inside manga root directory.', $path));
         }
 
         $data = $listing->scan($target, $path);
