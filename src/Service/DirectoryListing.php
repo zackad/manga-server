@@ -16,12 +16,15 @@ class DirectoryListing
     private $finder;
     /** @var CacheInterface */
     private $cache;
+    /** @var ComicBook */
+    private $comicBook;
 
-    public function __construct(CacheInterface $cache)
+    public function __construct(CacheInterface $cache, ComicBook $comicBook)
     {
         $this->za = new \ZipArchive();
         $this->finder = new Finder();
         $this->cache = $cache;
+        $this->comicBook = $comicBook;
     }
 
     public function scan(string $target): array
@@ -40,11 +43,10 @@ class DirectoryListing
 
     public function buildList(iterable $entries, string $uriPrefix, string $target = ''): \Traversable
     {
-        $comicBook = new ComicBook();
         /** @var string $entry */
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
-            $hasCover = $comicBook->getCover($target.'/'.$entry);
+            $hasCover = $this->comicBook->getCover($target.'/'.$entry);
 
             $cover = $hasCover ? rawurlencode($requestUri.'/'.$hasCover) : false;
             yield [
