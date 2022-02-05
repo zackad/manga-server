@@ -31,15 +31,11 @@ class DefaultController extends AbstractController
         }
 
         if (is_file($target)) {
-            $stream = new Stream($target);
-            $response = new BinaryFileResponse($stream);
-            $response->setExpires(new \DateTime('+1 week'));
-
-            return $response;
+            return $this->serveBinaryResponse($target);
         }
 
         if (!is_dir($target)) {
-            throw $this->createNotFoundException('Directory not found.');
+            throw $this->createNotFoundException(sprintf('Directory "%s" could not be found inside manga root directory.', $path));
         }
 
         $data = $listing->scan($target, $path);
@@ -50,5 +46,14 @@ class DefaultController extends AbstractController
         return $this->render('entry_list.html.twig', [
             'entries' => array_merge($directories, $files, $archives),
         ]);
+    }
+
+    private function serveBinaryResponse(string $target): Response
+    {
+        $stream = new Stream($target);
+        $response = new BinaryFileResponse($stream);
+        $response->setExpires(new \DateTime('+1 week'));
+
+        return $response;
     }
 }
