@@ -7,20 +7,20 @@
       {{render_breadcrumbs()}}
       <div class="mt-2 px-2" {{ stimulus_target('app', 'entryContainer') }}>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-          {% for item in entries|filter(item => not item.cover) %}
+          {% for item in pagination|filter(item => not item.cover) %}
             <div class="border-b border-gray-600">
               {{ block('no_cover') }}
             </div>
           {% endfor %}
         </div>
         <div class="mt-2 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
-          {% for item in entries|filter(item => item.cover) %}
+          {% for item in pagination|filter(item => item.cover) %}
             {{ block('has_cover') }}
           {% endfor %}
         </div>
       </div>
       <div class="hidden mt-2 w-full mx-auto overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
-        {% for item in entries|filter(item => item.uri|is_image) %}
+        {% for item in pagination|filter(item => item.uri|is_image) %}
           <img class="md:col-span-3 min-h-screen mx-auto lozad"
             loading="lazy"
             data-src="{{ item.uri }}"
@@ -29,6 +29,7 @@
         {% endfor %}
       </div>
     </div>
+    {{ knp_pagination_render(pagination) }}
     {% include 'partial/_next_page.html.twig' %}
   </main>
 {% endblock %}

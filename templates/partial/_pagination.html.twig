@@ -1,0 +1,31 @@
+{# tailwindcss Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+  <div class="">
+    <div class="flex items-baseline flex-row justify-center">
+      {% set base_url = (app.request.get('path')|url_encode) ~ '?' ~ pageParameterName ~ '=' %}
+      {% if first is defined and current != first %}
+        <span class="px-3 py-2 font-bold"><a href="{{ base_url ~ first }}">&lt;&lt;</a></span>
+      {% endif %}
+
+      {% if previous is defined %}
+        <span class="px-3 py-2"><a rel="prev" href="{{ base_url ~ previous }}">&lt;</a></span>
+      {% endif %}
+
+      {% for page in pagesInRange %}
+        {% if page != current %}
+          <span class="px-3 py-2"><a href="{{ base_url ~ page }}">{{ page }}</a></span>
+        {% else %}
+          <span class="px-3 py-2 font-blod border border-gray-600 rounded-lg">{{ page }}</span>
+        {% endif %}
+      {% endfor %}
+
+      {% if next is defined %}
+        <span class="px-3 py-2"><a rel="next" href="{{ base_url ~ next }}">&gt;</a></span>
+      {% endif %}
+
+      {% if last is defined and current != last %}
+        <span class="px-3 py-2 font-bold"><a href="{{ base_url ~ last }}">&gt;&gt;</a></span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

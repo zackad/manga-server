@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Service\DirectoryListing;
 use App\Service\NextChapterResolver;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
@@ -19,10 +20,11 @@ class DefaultController extends AbstractController
      * @Route("/", name="app_home", methods={"GET"})
      * @Route("/{path}", name="default", methods={"GET"}, requirements={"path"="^(?!build).+"})
      */
-    public function index(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot): Response
+    public function index(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot, PaginatorInterface $paginator): Response
     {
         $path = $request->attributes->get('path', '');
         $target = sprintf('%s/%s', $mangaRoot, $path);
+        $page = $request->query->getInt('page', 1);
 
         $nextPage = '' === $request->query->get('next');
 
@@ -42,9 +44,11 @@ class DefaultController extends AbstractController
         $directories = array_filter($data, function ($item) {return 'directory' === $item['type']; });
         $files = array_filter($data, function ($item) {return 'file' === $item['type']; });
         $archives = array_filter($data, function ($item) {return 'archive' === $item['type']; });
+        $entries = array_merge($directories, $files, $archives);
 
         return $this->render('entry_list.html.twig', [
-            'entries' => array_merge($directories, $files, $archives),
+            'entries' => $entries,
+            'pagination' => $paginator->paginate($entries, $page),
         ]);
     }
 

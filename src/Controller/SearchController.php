@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\Search;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,9 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search", priority=10)
      */
-    public function index(Request $request, Search $search): Response
+    public function index(Request $request, Search $search, PaginatorInterface $paginator): Response
     {
+        $page = $request->query->getInt('page', 1);
         $response = new Response();
         $errorMessage = null;
 
@@ -29,9 +31,13 @@ class SearchController extends AbstractController
             $errorMessage = 'Empty search result, please use other "search term"';
         }
 
+        // disable pagination until I can figure out how to build pagination url with multiple query params
+        $pagination = $paginator->paginate($entries, $page, 1000);
+
         return $this->render('entry_list.html.twig', [
             'entries' => $entries,
             'error_message' => $errorMessage,
+            'pagination' => $pagination,
         ], $response);
     }
 }
