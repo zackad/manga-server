@@ -1,8 +1,8 @@
 {% if breadcrumbs is not empty %}
   <div class="container mx-auto border-b border-gray-600">
-    <div class="flex items-baseline gap-2 text-base">
+    <div class="flex items-baseline gap-2 px-2 text-base overflow-x-scroll">
       {% for item in breadcrumbs %}
-        <a href="{{ item.uri|url_encode }}" class="font-medium text-gray-300">{{ item.label }}</a>
+        <a href="{{ item.uri|url_encode }}" class="font-medium text-gray-300 whitespace-nowrap">{{ item.label }}</a>
         {% if not loop.last %}
           <span class="font-thin">/</span>
         {% endif %}
