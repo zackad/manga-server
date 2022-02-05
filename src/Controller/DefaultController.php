@@ -40,15 +40,13 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException(sprintf('Directory "%s" could not be found inside manga root directory.', $path));
         }
 
-        $data = $listing->scan($target, $path);
-        $directories = array_filter($data, function ($item) {return 'directory' === $item['type']; });
-        $files = array_filter($data, function ($item) {return 'file' === $item['type']; });
-        $archives = array_filter($data, function ($item) {return 'archive' === $item['type']; });
-        $entries = array_merge($directories, $files, $archives);
+        $entryList = $listing->scan($target);
+        $pagination = $paginator->paginate($entryList, $page);
+        $populatedList = $listing->buildList($pagination->getItems(), $path, $target);
+        $pagination->setItems(iterator_to_array($populatedList));
 
         return $this->render('entry_list.html.twig', [
-            'entries' => $entries,
-            'pagination' => $paginator->paginate($entries, $page),
+            'pagination' => $pagination,
         ]);
     }
 
