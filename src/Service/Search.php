@@ -35,18 +35,22 @@ class Search
     {
         /*
          * Prevent traversing all valid archive file and force user to include
-         * search pattern.
+         * search pattern with atleast 3 characters.
          */
-        if ('' === $search) {
+        if (strlen($search) < 3) {
             return;
         }
 
-        /** @var array $list */
         $list = $this->buildSearchIndex();
-        $list = array_filter($list, function (array $item) use ($search): bool {
+        $list = array_filter((array) $list, function (array $item) use ($search): bool {
             return (bool) preg_match(sprintf('/%s/i', $search), $item['basename']);
         });
 
+        yield from $this->populateEntry($list);
+    }
+
+    public function populateEntry(array $list): \Generator
+    {
         /** @var array $file */
         foreach ($list as $file) {
             $filename = $file['relative_path'];
