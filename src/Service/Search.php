@@ -6,32 +6,29 @@ namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class Search
 {
-    /**
-     * @var Finder
-     */
+    /** @var Finder */
     private $finder;
-    /**
-     * @var ComicBook
-     */
+    /** @var ComicBook */
     private $comicBook;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $mangaRoot;
-    /**
-     * @var int
-     */
-    private $maximumSearchDepth;
+    /** @var CacheInterface */
+    private $cache;
+    /** @var string */
+    private $searchIndexExcluded;
 
-    public function __construct(string $mangaRoot, int $maximumSearchDepth)
+    public function __construct(string $mangaRoot, CacheInterface $cache, ComicBook $comicBook, string $searchIndexExcluded = '')
     {
         $this->finder = new Finder();
-        $this->comicBook = new ComicBook();
+        $this->comicBook = $comicBook;
         $this->mangaRoot = $mangaRoot;
-        $this->maximumSearchDepth = $maximumSearchDepth;
+        $this->cache = $cache;
+        $this->searchIndexExcluded = $searchIndexExcluded;
     }
 
     public function find(string $search = ''): \Generator
@@ -44,28 +41,53 @@ class Search
             return;
         }
 
-        $patterns = sprintf('/.*%s.*\.(zip|cbz)$/i', $search);
-        $this->finder
-            ->files()
-            ->depth(sprintf('< %s', $this->maximumSearchDepth))
-            ->ignoreUnreadableDirs()
-            ->followLinks()
-            ->in($this->mangaRoot)
-            ->name($patterns)
-            ->sortByName(true)
-        ;
+        /** @var array $list */
+        $list = $this->buildSearchIndex();
+        $list = array_filter($list, function (array $item) use ($search): bool {
+            return (bool) preg_match(sprintf('/%s/i', $search), $item['basename']);
+        });
 
-        /** @var SplFileInfo $file */
-        foreach ($this->finder as $file) {
-            $filename = $file->getRelativePathname();
-            $hasCover = $this->comicBook->getCover($file->getRealPath());
+        /** @var array $file */
+        foreach ($list as $file) {
+            $filename = $file['relative_path'];
+            $hasCover = $this->comicBook->getCover($file['realpath']);
             $coverUrl = $hasCover ? rawurlencode(sprintf('%s/%s', $filename, $hasCover)) : false;
             yield [
-                'uri' => rawurlencode($file->getRelativePathname()),
-                'label' => $file->getFilenameWithoutExtension(),
+                'uri' => rawurlencode($file['relative_path']),
+                'label' => $file['basename'],
                 'type' => 'archive',
                 'cover' => $coverUrl,
             ];
         }
+    }
+
+    public function buildSearchIndex(): iterable
+    {
+        return $this->cache->get('search-index', function (ItemInterface $cacheItem) {
+            $cacheItem->expiresAfter(86400); // 24 hours
+            $patterns = '/.*\.(zip|cbz)$/i';
+
+            $excludedFinderPath = explode(' ', $this->searchIndexExcluded);
+            $this->finder
+                ->files()
+                ->ignoreUnreadableDirs()
+                ->followLinks()
+                ->in($this->mangaRoot)
+                ->exclude($excludedFinderPath)
+                ->name($patterns)
+                ->sortByName(true);
+
+            $list = iterator_to_array($this->finder);
+            $mappedArray = array_map(
+                function (SplFileInfo $item) {
+                    return [
+                        'basename' => $item->getBasename(),
+                        'realpath' => $item->getRealPath(),
+                        'relative_path' => sprintf('/%s/%s', $item->getRelativePath(), $item->getBasename()),
+                    ];
+                }, $list);
+
+            return array_values($mappedArray);
+        });
     }
 }

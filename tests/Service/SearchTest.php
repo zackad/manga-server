@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Service;
 
+use App\Service\ComicBook;
 use App\Service\Search;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 
 /**
  * @internal
@@ -18,7 +20,9 @@ class SearchTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], (int) $_ENV['MAXIMUM_SEARCH_DEPTH']);
+        $cache = new FilesystemTagAwareAdapter();
+        $comicbook = new ComicBook($cache);
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $comicbook);
     }
 
     /**
