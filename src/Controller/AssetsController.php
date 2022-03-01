@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssetsController extends AbstractController
 {
     /**
-     * @Route("/build/{assets}", name="assets", methods={"GET"}, requirements={"assets"=".+"})
+     * @Route("/build/{assets}", name="app_assets", methods={"GET"}, requirements={"assets"=".+"})
      */
     public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets): Response
     {
