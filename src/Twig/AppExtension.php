@@ -30,13 +30,13 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('is_image', [$this, 'isImage']),
-            new TwigFilter('get_title', [$this, 'getTitleFromUri']),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('get_title', [$this, 'getTitleFromUri']),
             new TwigFunction('is_image', [$this, 'isImage']),
             new TwigFunction('render_breadcrumbs', [$this, 'renderBreadcrumbs'], ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
@@ -55,8 +55,9 @@ class AppExtension extends AbstractExtension
 
         $decodedUri = urldecode($this->request->getRequestUri());
         $array = preg_split('/\//', $decodedUri, -1, PREG_SPLIT_NO_EMPTY);
+        $dirtyString = array_pop($array);
 
-        return array_pop($array);
+        return explode('?', $dirtyString)[0];
     }
 
     public function renderBreadcrumbs(): ?string
