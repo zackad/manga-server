@@ -19,7 +19,7 @@ class ArchiveController extends AbstractController
     /**
      * @Route(
      *     "/{path}",
-     *     name="archive_list",
+     *     name="app_archive_list",
      *     methods={"GET"},
      *     requirements={"path"=".+(\.zip|cbz)$"}
      * )
@@ -43,7 +43,7 @@ class ArchiveController extends AbstractController
     /**
      * @Route(
      *     "/{archive_item}",
-     *     name="archive_item",
+     *     name="app_archive_item",
      *     methods={"GET"},
      *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
      * )

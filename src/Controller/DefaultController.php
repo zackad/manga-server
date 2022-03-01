@@ -18,7 +18,7 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="app_home", methods={"GET"})
-     * @Route("/{path}", name="default", methods={"GET"}, requirements={"path"="^(?!build).+"})
+     * @Route("/{path}", name="app_default", methods={"GET"}, requirements={"path"="^(?!build).+"})
      */
     public function index(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot, PaginatorInterface $paginator): Response
     {
