@@ -21,7 +21,7 @@ class ArchiveController extends AbstractController
      *     "/{path}",
      *     name="app_archive_list",
      *     methods={"GET"},
-     *     requirements={"path"=".+(\.zip|cbz)$"}
+     *     requirements={"path"=".+\.(zip|cbz|epub)$"}
      * )
      */
     public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot, PaginatorInterface $paginator): Response
@@ -45,15 +45,15 @@ class ArchiveController extends AbstractController
      *     "/{archive_item}",
      *     name="app_archive_item",
      *     methods={"GET"},
-     *     requirements={"archive_item"=".+(\.zip|cbz\/).+$"}
+     *     requirements={"archive_item"=".+\.(zip|cbz|epub\/).+$"}
      * )
      */
     public function archiveItem(Request $request, MimeGuesser $guesser, string $mangaRoot): Response
     {
         $path = $request->attributes->get('archive_item');
         $target = sprintf('%s/%s', $mangaRoot, $path);
-        $archivePath = preg_replace('/(?<=cbz|zip).*$/i', '', $target);
-        $entryName = preg_replace('/.*(cbz|zip)\//i', '', $target);
+        $archivePath = preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
+        $entryName = preg_replace('/.*(cbz|epub|zip)\//i', '', $target);
 
         $za = new \ZipArchive();
         $za->open($archivePath);
