@@ -11,6 +11,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class Search
 {
+    public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
+
     /** @var Finder */
     private $finder;
     /** @var ComicBook */
@@ -69,7 +71,7 @@ class Search
     {
         return $this->cache->get('search-index', function (ItemInterface $cacheItem) {
             $cacheItem->expiresAfter(86400); // 24 hours
-            $patterns = '/.*\.(zip|cbz)$/i';
+            $patterns = self::SUPPORTED_ARCHIVE_FORMAT;
 
             $excludedFinderPath = explode(' ', $this->searchIndexExcluded);
             $this->finder
