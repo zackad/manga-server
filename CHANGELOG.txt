@@ -1,8 +1,38 @@
 Manga Server
 https://github.com/zackad/manga-server
 
+v0.14.0 (2022-03-22)
+NOTES: This is the rewrite version with Server Side Rendering (SSR) with
+    `stimulusjs` to add interactivity.
+
+New features:
+- Add epub as supported archive format
+- Add feature to show random entry for comicbook
+- Add pagination for long entry list
+
+Bugfixes:
+- Fix route priority
+- Fix next directory link visibility, don't show on archive route
+- Fix text overflow on footer and file/directory name with clamping
+- Fix overlapping image container with breadcrumbs
+
+Internals:
+- Add config to allow plugin for composer
+- Add profiler bundle as dependency
+- Add stimulusjs as dependency
+- Cache directory scanning to improve performance
+- Improve search performance with caching
+- Pin php-cs-fixer to version 3.4 on github action
+- Remove cache from build artifact
+- Remove dead code
+- Remove unused dependencies
+- Simplify tailwindcss config to watch directories
+- Update symfony recipes to the latest version
+- Update tailwindcss to version 3
+
+---
 v0.13.0 (2021-12-28)
-NOTES: This is the last version that use Client Side Rendering (SRS) to build
+NOTES: This is the last version that use Client Side Rendering (CSR) to build
     the UI. The next version will use Server Side Rendering (SSR) for better
     integration with symfony framework ecosystem.
 
