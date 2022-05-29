@@ -52,7 +52,7 @@
 {% block no_cover %}
   <div class="flex items-center">
     {% if item.type == 'directory' %}
-      <span class="block pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
+      <span class="block flex-shrink-0 pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
     <a href="{{ item.uri }}" class="break-words line-clamp-5 md:line-clamp-2">{{ item.label }}</a>
   </div>
