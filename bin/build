@@ -4,6 +4,9 @@
 rm -fr build/manga-server
 mkdir -p build/manga-server
 
+# Install frontend dependencies
+yarn install
+
 # Build frontend artifact
 yarn build
 
