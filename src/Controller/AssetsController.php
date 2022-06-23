@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Service\MimeGuesser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +16,10 @@ class AssetsController extends AbstractController
     /**
      * @Route("/build/{assets}", name="app_assets", methods={"GET"}, requirements={"assets"=".+"})
      */
-    public function index(ParameterBagInterface $parameterBag, MimeGuesser $guesser, string $assets): Response
+    public function index(string $projectRoot, MimeGuesser $guesser, string $assets): Response
     {
         /** @psalm-suppress PossiblyNullOperand */
-        $file = $parameterBag->get('kernel.project_dir').'/public/build/'.$assets;
+        $file = $projectRoot.'/public/build/'.$assets;
 
         if (!file_exists($file)) {
             throw $this->createNotFoundException(sprintf('File "%s" not found.', $file));
