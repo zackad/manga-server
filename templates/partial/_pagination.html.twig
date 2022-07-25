@@ -5,27 +5,41 @@
     <div class="flex flex-wrap flex-row gap-1 items-baseline justify-center text-sm">
       {% set base_url = (app.request.get('path')|url_encode) ~ '?' ~ pageParameterName ~ '=' %}
       {% if first is defined and current != first %}
-        <a href="{{ base_url ~ first }}" class="{{ button_style }}">&laquo;</a>
+        <a href="{{ path('app_explore', app.request.query|merge({ page: first })) }}" class="{{ button_style }}">
+          &laquo;
+        </a>
       {% endif %}
 
       {% if previous is defined %}
-        <a rel="prev" href="{{ base_url ~ previous }}" class="{{ button_style }}">&lsaquo;</a>
+        <a rel="prev"
+          href="{{ path('app_explore', app.request.query|merge({ page: previous })) }}"
+          class="{{ button_style }}">
+          &lsaquo;
+        </a>
       {% endif %}
 
       {% for page in pagesInRange %}
         {% if page != current %}
-          <a href="{{ base_url ~ page }}" class="{{ button_style }}">{{ page }}</a>
+          <a href="{{ path('app_explore', app.request.query|merge({ page: page })) }}" class="{{ button_style }}">
+            {{ page }}
+          </a>
         {% else %}
           <span class="{{ button_style }} bg-gray-700 underline">{{ page }}</span>
         {% endif %}
       {% endfor %}
 
       {% if next is defined %}
-        <a rel="next" href="{{ base_url ~ next }}" class="{{ button_style }}">&rsaquo;</a>
+        <a rel="next"
+          href="{{ path('app_explore', app.request.query|merge({ page: next })) }}"
+          class="{{ button_style }}">
+          &rsaquo;
+        </a>
       {% endif %}
 
       {% if last is defined and current != last %}
-        <a href="{{ base_url ~ last }}" class="{{ button_style }}">&raquo;</a>
+        <a href="{{ path('app_explore', app.request.query|merge({ page: last })) }}" class="{{ button_style }}">
+          &raquo;
+        </a>
       {% endif %}
     </div>
   </div>

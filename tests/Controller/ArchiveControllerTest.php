@@ -24,14 +24,16 @@ class ArchiveControllerTest extends WebTestCase
 
     public function testCanListArchiveContent()
     {
-        $this->client->request('GET', '/archive.zip');
+        $this->client->request('GET', '/archive/archive.zip');
         $this->assertResponseIsSuccessful();
     }
 
     public function testLoadImageFromArchive()
     {
-        $this->client->request('GET', '/archive.zip/image.jpeg');
-
+        $imageInsideArchvie = rawurlencode('archive.zip/image.jpeg');
+        ob_start();
+        $this->client->request('GET', '/archive/'.$imageInsideArchvie);
+        ob_get_clean();
         $expiresExpected = (new \DateTime('+1 week'))->getTimestamp();
         $actualExpires = (new \DateTime($this->client->getResponse()->headers->get('Expires')))->getTimestamp();
 
@@ -42,7 +44,10 @@ class ArchiveControllerTest extends WebTestCase
 
     public function testLoadFromNestedArchive()
     {
-        $this->client->request('GET', '/nested-archive.zip%2Ftests%2Fstub%2Fimage.jpeg');
+        $imageNestedInsideArchvie = rawurlencode('nested-archive.zip/tests/stub/image.jpeg');
+        ob_start();
+        $this->client->request('GET', '/archive/'.$imageNestedInsideArchvie);
+        ob_get_clean();
 
         $this->assertResponseIsSuccessful();
     }

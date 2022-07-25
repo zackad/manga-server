@@ -18,12 +18,20 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="app_home", methods={"GET"})
-     * @Route("/{path}", name="app_default", methods={"GET"}, requirements={"path"="^(?!build).+"})
+     * @Route("/explore", name="app_explore", methods={"GET"})
      */
     public function index(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot, PaginatorInterface $paginator): Response
     {
-        $path = $request->attributes->get('path', '');
-        $target = sprintf('%s/%s', $mangaRoot, $path);
+        if ('app_home' === $request->attributes->get('_route')) {
+            return $this->redirectToRoute('app_explore');
+        }
+
+        $path = (string) $request->query->get('path', '/');
+        $decodedPath = rawurldecode($path);
+        if (str_ends_with($decodedPath, '.zip')) {
+            return $this->redirectToRoute('app_archive_list', ['path' => $path]);
+        }
+        $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
         $page = $request->query->getInt('page', 1);
 
         $nextPage = '' === $request->query->get('next');
@@ -42,7 +50,7 @@ class DefaultController extends AbstractController
 
         $entryList = $listing->scan($target);
         $pagination = $paginator->paginate($entryList, $page);
-        $populatedList = $listing->buildList($pagination->getItems(), $path, $target);
+        $populatedList = $listing->buildList($pagination->getItems(), $decodedPath, $target);
         $pagination->setItems(iterator_to_array($populatedList));
 
         return $this->render('entry_list.html.twig', [

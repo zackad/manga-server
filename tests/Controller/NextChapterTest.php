@@ -27,20 +27,31 @@ class NextChapterTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testGetNextChapter()
+    /**
+     * @dataProvider nextDataProvider
+     */
+    public function testGetNextChapter(array $queryParams, string $redirectTarget)
     {
-        $this->client->request('GET', 'Series%201%2FChapter%20001?next');
-        $this->assertResponseRedirects('%2FSeries%201%2FChapter%20002');
-        $this->client->request('GET', 'Series%201%2FChapter%20005?next');
-        $this->assertResponseRedirects('%2FSeries%201');
-        $this->client->request('GET', 'empty-directory?next');
-        $this->assertResponseRedirects('/');
+//        $this->client->request('GET', 'Series%201%2FChapter%20001?next');
+//        $this->assertResponseRedirects('%2FSeries%201%2FChapter%20002');
+//        $this->client->request('GET', 'Series%201%2FChapter%20005?next');
+//        $this->assertResponseRedirects('%2FSeries%201');
+        $this->client->request('GET', '/explore', $queryParams);
+        $this->assertResponseRedirects($redirectTarget);
+    }
+
+    public function nextDataProvider(): array
+    {
+        return [
+            [['path' => rawurlencode('empty-directory'), 'next' => ''], '/explore'],
+            [['path' => rawurlencode('Series 1/Chapter 01'), 'next' => ''], '/'],
+        ];
     }
 
     public function testHomeDoesNotRedirect()
     {
         $this->client->request('GET', '?next');
-        $this->assertResponseRedirects('/');
+        $this->assertResponseRedirects('/explore');
     }
 
     public function testRequestObjectIsNullReturnToHomepage()

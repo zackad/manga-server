@@ -6,6 +6,7 @@ namespace App\Service;
 
 use Psr\Cache\CacheItemInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class DirectoryListing
@@ -18,13 +19,16 @@ class DirectoryListing
     private $cache;
     /** @var ComicBook */
     private $comicBook;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
 
-    public function __construct(CacheInterface $cache, ComicBook $comicBook)
+    public function __construct(CacheInterface $cache, ComicBook $comicBook, UrlGeneratorInterface $urlGenerator)
     {
         $this->za = new \ZipArchive();
         $this->finder = new Finder();
         $this->cache = $cache;
         $this->comicBook = $comicBook;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function scan(string $target): array
@@ -46,14 +50,17 @@ class DirectoryListing
         /** @var string $entry */
         foreach ($entries as $entry) {
             $requestUri = $uriPrefix.'/'.$entry;
-            $hasCover = $this->comicBook->getCover($target.'/'.$entry);
+            $pathname = $target.'/'.$entry;
+            $hasCover = $this->comicBook->getCover($pathname);
+            $coverUrl = !$hasCover
+                ? false
+                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => rawurlencode($requestUri.'/'.$hasCover)]);
 
-            $cover = $hasCover ? rawurlencode($requestUri.'/'.$hasCover) : false;
             yield [
-                'uri' => rawurlencode($requestUri),
+                'uri' => $this->urlGenerator->generate('app_explore', ['path' => rawurlencode($requestUri)]),
                 'label' => $entry,
-                'type' => $this->getType($target.'/'.$entry),
-                'cover' => $cover,
+                'type' => $this->getType($pathname),
+                'cover' => $coverUrl,
             ];
         }
     }
