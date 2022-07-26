@@ -57,7 +57,10 @@ class AppExtension extends AbstractExtension
             return null;
         }
 
-        $decodedUri = urldecode($this->request->getRequestUri());
+        $decodedUri = urldecode((string) $this->request->query->get('path', ''));
+        if ('' === $decodedUri) {
+            return null;
+        }
         $array = preg_split('/\//', $decodedUri, -1, PREG_SPLIT_NO_EMPTY);
         $dirtyString = array_pop($array);
 
@@ -80,7 +83,7 @@ class AppExtension extends AbstractExtension
             $target .= '/'.$crumb;
             $items[] = [
                 'label' => $crumb,
-                'uri' => $this->urlGenerator->generate('app_explore', ['path' => rawurlencode($target)]),
+                'uri' => $this->urlGenerator->generate('app_explore', ['path' => $target]),
             ];
         }
 

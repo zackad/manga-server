@@ -8,6 +8,7 @@ use App\Service\NextChapterResolver;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
@@ -32,10 +33,6 @@ class NextChapterTest extends WebTestCase
      */
     public function testGetNextChapter(array $queryParams, string $redirectTarget)
     {
-//        $this->client->request('GET', 'Series%201%2FChapter%20001?next');
-//        $this->assertResponseRedirects('%2FSeries%201%2FChapter%20002');
-//        $this->client->request('GET', 'Series%201%2FChapter%20005?next');
-//        $this->assertResponseRedirects('%2FSeries%201');
         $this->client->request('GET', '/explore', $queryParams);
         $this->assertResponseRedirects($redirectTarget);
     }
@@ -43,8 +40,10 @@ class NextChapterTest extends WebTestCase
     public function nextDataProvider(): array
     {
         return [
-            [['path' => rawurlencode('empty-directory'), 'next' => ''], '/explore'],
-            [['path' => rawurlencode('Series 1/Chapter 01'), 'next' => ''], '/'],
+            [['next' => ''], '/explore'],
+            [['path' => urlencode('empty-directory'), 'next' => ''], '/explore'],
+            [['path' => rawurlencode('Series 1/Chapter 001'), 'next' => ''], sprintf('/explore?path=%s', '/Series%201/Chapter%20002')],
+            [['path' => rawurlencode('Series 1/Chapter 005'), 'next' => ''], sprintf('/explore?path=%s', '/Series%201')],
         ];
     }
 
@@ -57,7 +56,9 @@ class NextChapterTest extends WebTestCase
     public function testRequestObjectIsNullReturnToHomepage()
     {
         $requestStack = $this->createMock(RequestStack::class);
-        $nextResolver = new NextChapterResolver('/path/to/manga/root', $requestStack);
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $urlGenerator->method('generate')->willReturn('/');
+        $nextResolver = new NextChapterResolver('/path/to/manga/root', $requestStack, $urlGenerator);
 
         $this->assertEquals('/', $nextResolver->resolve());
     }

@@ -1,10 +1,12 @@
-{% if app.request.get('_route') == 'app_default' %}
+{% if app.request.get('_route') == 'app_explore' %}
   <div class="mt-2 p-4 font-medium text-center text-lg text-gray-400 border-0 border-t border-dashed border-t-2 border-gray-600">
     End of:
     <strong class="font-semibold">
       <span class="break-words">{{ get_title()|default('Title') }}</span>
       <span>/</span>
-      <span><a href="{{ app.request.requestUri|split('?')[0] }}?next" class="underline">Next &raquo;</a></span>
+      <span>
+        <a href="{{ path('app_explore', app.request.query|merge({ next: '' })) }}" class="underline">Next &raquo;</a>
+      </span>
     </strong>
   </div>
 {% endif %}
