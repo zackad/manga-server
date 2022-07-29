@@ -52,6 +52,12 @@ class ArchiveControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    public function testLoadNonExistingArchiveEntryReturn404Error()
+    {
+        $this->client->request('GET', '/archive/archive.zip/non-exist.jpg');
+        self::assertResponseStatusCodeSame(404);
+    }
+
     public function testLoadInvalidImageFromArchiveGiveErrorResponse()
     {
         $this->client->request('GET', '/archive.zip%2Fimage.JPEG');

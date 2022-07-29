@@ -45,19 +45,22 @@ class DirectoryListing
         });
     }
 
-    public function buildList(iterable $entries, string $uriPrefix, string $target = ''): \Traversable
+    public function buildList(iterable $entries, string $uriPrefix, string $target = '', bool $isArchive = false): \Traversable
     {
         /** @var string $entry */
         foreach ($entries as $entry) {
-            $requestUri = $uriPrefix.'/'.$entry;
+            $requestUri = trim($uriPrefix.'/'.$entry, '/');
             $pathname = $target.'/'.$entry;
             $hasCover = $this->comicBook->getCover($pathname);
             $coverUrl = !$hasCover
                 ? false
-                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => rawurlencode($requestUri.'/'.$hasCover)]);
+                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => $requestUri.'/'.$hasCover]);
 
+            $uri = !$isArchive
+                ? $this->urlGenerator->generate('app_explore', ['path' => $requestUri])
+                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => $requestUri]);
             yield [
-                'uri' => $this->urlGenerator->generate('app_explore', ['path' => rawurlencode($requestUri)]),
+                'uri' => $uri,
                 'label' => $entry,
                 'type' => $this->getType($pathname),
                 'cover' => $coverUrl,

@@ -32,7 +32,7 @@ class ArchiveController extends AbstractController
         $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
 
         $entries = new ArchiveReader($target);
-        $entryList = iterator_to_array($listing->buildList($entries->getList(), $decodedPath, $target));
+        $entryList = iterator_to_array($listing->buildList($entries->getList(), $decodedPath, $target, true));
         $pagination = $paginator->paginate($entryList, $page);
 
         return $this->render('entry_list.html.twig', [
