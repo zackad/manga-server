@@ -8,6 +8,7 @@ use App\Service\ComicBook;
 use App\Service\Search;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
@@ -22,7 +23,8 @@ class SearchTest extends TestCase
     {
         $cache = new FilesystemTagAwareAdapter();
         $comicbook = new ComicBook($cache);
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $comicbook);
+        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $comicbook, $urlGenerator);
     }
 
     /**
