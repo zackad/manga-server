@@ -1,18 +1,20 @@
 {# tailwindcss Sliding pagination control implementation #}
 {% set button_style = 'px-3 py-2 font-mono cursor-pointer border border-gray-600 rounded-lg hover:underline' %}
+{% set route_name = app.request.attributes.get('_route') == 'app_explore' ? 'app_explore' : 'app_archive_list' %}
 {% if pageCount > 1 %}
   <div class="py-2">
     <div class="flex flex-wrap flex-row gap-1 items-baseline justify-center text-sm">
-      {% set base_url = (app.request.get('path')|url_encode) ~ '?' ~ pageParameterName ~ '=' %}
+      {% set target_path = app.request.get('path') %}
       {% if first is defined and current != first %}
-        <a href="{{ path('app_explore', app.request.query|merge({ page: first })) }}" class="{{ button_style }}">
+        <a href="{{ path(route_name, app.request.query|merge({ page: first, path: target_path })) }}"
+          class="{{ button_style }}">
           &laquo;
         </a>
       {% endif %}
 
       {% if previous is defined %}
         <a rel="prev"
-          href="{{ path('app_explore', app.request.query|merge({ page: previous })) }}"
+          href="{{ path(route_name, app.request.query|merge({ page: previous, path: target_path })) }}"
           class="{{ button_style }}">
           &lsaquo;
         </a>
@@ -20,7 +22,8 @@
 
       {% for page in pagesInRange %}
         {% if page != current %}
-          <a href="{{ path('app_explore', app.request.query|merge({ page: page })) }}" class="{{ button_style }}">
+          <a href="{{ path(route_name, app.request.query|merge({ page: page, path: target_path })) }}"
+            class="{{ button_style }}">
             {{ page }}
           </a>
         {% else %}
@@ -30,14 +33,15 @@
 
       {% if next is defined %}
         <a rel="next"
-          href="{{ path('app_explore', app.request.query|merge({ page: next })) }}"
+          href="{{ path(route_name, app.request.query|merge({ page: next, path: target_path })) }}"
           class="{{ button_style }}">
           &rsaquo;
         </a>
       {% endif %}
 
       {% if last is defined and current != last %}
-        <a href="{{ path('app_explore', app.request.query|merge({ page: last })) }}" class="{{ button_style }}">
+        <a href="{{ path(route_name, app.request.query|merge({ page: last, path: target_path })) }}"
+          class="{{ button_style }}">
           &raquo;
         </a>
       {% endif %}
