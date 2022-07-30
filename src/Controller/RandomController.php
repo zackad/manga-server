@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RandomController extends AbstractController
 {
     /**
-     * @Route("/random", name="app_random", priority="10")
+     * @Route("/random", name="app_random")
      */
     public function randomEntries(Search $search, PaginatorInterface $paginator): Response
     {
