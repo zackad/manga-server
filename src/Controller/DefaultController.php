@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
 
         $path = (string) $request->query->get('path', '/');
         $decodedPath = rawurldecode($path);
-        if (str_ends_with($decodedPath, '.zip')) {
+        if (preg_match('/\.(cbz|epub|zip)$/i', $decodedPath)) {
             return $this->redirectToRoute('app_archive_list', ['path' => $path]);
         }
         $target = sprintf('%s/%s', $mangaRoot, $decodedPath);

@@ -53,6 +53,15 @@ class DefaultControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @dataProvider redirectDataProvider
+     */
+    public function testRedirectToArchiveController(array $queryParams, string $targetUrl)
+    {
+        $this->client->request('GET', '/explore', $queryParams);
+        self::assertResponseRedirects($targetUrl);
+    }
+
     public function targetPathProvider(): array
     {
         return [
@@ -69,6 +78,18 @@ class DefaultControllerTest extends WebTestCase
             ['explore?path=image.jpeg'],
             ['explore?path=image.png'],
             ['explore?path=image.webp'],
+        ];
+    }
+
+    public function redirectDataProvider(): array
+    {
+        return [
+            [['path' => 'archive.zip'], '/archive/archive.zip'],
+            [['path' => 'archive.ZIP'], '/archive/archive.ZIP'],
+            [['path' => 'archive.EPUB'], '/archive/archive.EPUB'],
+            [['path' => 'archive.epub'], '/archive/archive.epub'],
+            [['path' => 'archive.cbz'], '/archive/archive.cbz'],
+            [['path' => 'archive.CBZ'], '/archive/archive.CBZ'],
         ];
     }
 }
