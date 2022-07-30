@@ -7,11 +7,11 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * @internal
  * @covers \App\Controller\DefaultController
+ * @covers \App\Controller\ExploreController
  * @covers \App\Service\DirectoryListing
  */
-class DefaultControllerTest extends WebTestCase
+class ExploreControllerTest extends WebTestCase
 {
     private $client;
 
