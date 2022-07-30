@@ -36,7 +36,8 @@ class DefaultControllerTest extends WebTestCase
 
     public function testAccessNonExistingDirectory()
     {
-        $this->client->request('GET', '/non-existing-directory');
+        $target = rawurlencode('/non-existing-directory');
+        $this->client->request('GET', '/explore?path='.$target);
 
         $this->assertResponseStatusCodeSame(404);
     }
@@ -52,22 +53,43 @@ class DefaultControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @dataProvider redirectDataProvider
+     */
+    public function testRedirectToArchiveController(array $queryParams, string $targetUrl)
+    {
+        $this->client->request('GET', '/explore', $queryParams);
+        self::assertResponseRedirects($targetUrl);
+    }
+
     public function targetPathProvider(): array
     {
         return [
-            [rawurlencode('')],
-            [rawurlencode('/Series 1')],
-            [rawurlencode('/Series 1/Chapter 001')],
+            ['/explore'],
+            ['/explore?path='.rawurlencode('/Series 1')],
+            ['/explore?path='.rawurlencode('/Series 1/Chapter 001')],
         ];
     }
 
     public function imageProvider(): array
     {
         return [
-            ['/image.jpg'],
-            ['/image.jpeg'],
-            ['/image.png'],
-            ['/image.webp'],
+            ['explore?path=image.jpg'],
+            ['explore?path=image.jpeg'],
+            ['explore?path=image.png'],
+            ['explore?path=image.webp'],
+        ];
+    }
+
+    public function redirectDataProvider(): array
+    {
+        return [
+            [['path' => 'archive.zip'], '/archive/archive.zip'],
+            [['path' => 'archive.ZIP'], '/archive/archive.ZIP'],
+            [['path' => 'archive.EPUB'], '/archive/archive.EPUB'],
+            [['path' => 'archive.epub'], '/archive/archive.epub'],
+            [['path' => 'archive.cbz'], '/archive/archive.cbz'],
+            [['path' => 'archive.CBZ'], '/archive/archive.CBZ'],
         ];
     }
 }

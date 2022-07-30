@@ -6,6 +6,7 @@ namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -21,15 +22,18 @@ class Search
     private $mangaRoot;
     /** @var CacheInterface */
     private $cache;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
     /** @var string */
     private $searchIndexExcluded;
 
-    public function __construct(string $mangaRoot, CacheInterface $cache, ComicBook $comicBook, string $searchIndexExcluded = '')
+    public function __construct(string $mangaRoot, CacheInterface $cache, ComicBook $comicBook, UrlGeneratorInterface $urlGenerator, string $searchIndexExcluded = '')
     {
         $this->finder = new Finder();
         $this->comicBook = $comicBook;
         $this->mangaRoot = $mangaRoot;
         $this->cache = $cache;
+        $this->urlGenerator = $urlGenerator;
         $this->searchIndexExcluded = $searchIndexExcluded;
     }
 
@@ -55,11 +59,14 @@ class Search
     {
         /** @var array $file */
         foreach ($list as $file) {
-            $filename = $file['relative_path'];
+            $filename = trim($file['relative_path'], '/');
             $hasCover = $this->comicBook->getCover($file['realpath']);
-            $coverUrl = $hasCover ? rawurlencode(sprintf('%s/%s', $filename, $hasCover)) : false;
+            $uri = $this->urlGenerator->generate('app_archive_list', ['path' => $filename]);
+            $coverUrl = !$hasCover
+                ? false
+                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => $filename.'/'.$hasCover]);
             yield [
-                'uri' => rawurlencode($file['relative_path']),
+                'uri' => $uri,
                 'label' => $file['basename'],
                 'type' => 'archive',
                 'cover' => $coverUrl,

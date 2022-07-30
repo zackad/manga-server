@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -19,11 +20,14 @@ class AppExtension extends AbstractExtension
      * @var Environment
      */
     private $twig;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
 
-    public function __construct(RequestStack $requestStack, Environment $twig)
+    public function __construct(RequestStack $requestStack, Environment $twig, UrlGeneratorInterface $urlGenerator)
     {
         $this->request = $requestStack->getMainRequest();
         $this->twig = $twig;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function getFilters(): array
@@ -53,7 +57,10 @@ class AppExtension extends AbstractExtension
             return null;
         }
 
-        $decodedUri = urldecode($this->request->getRequestUri());
+        $decodedUri = urldecode((string) $this->request->query->get('path', ''));
+        if ('' === $decodedUri) {
+            return null;
+        }
         $array = preg_split('/\//', $decodedUri, -1, PREG_SPLIT_NO_EMPTY);
         $dirtyString = array_pop($array);
 
@@ -66,8 +73,9 @@ class AppExtension extends AbstractExtension
             return null;
         }
 
-        $target = $this->request->attributes->get('path', '');
-        $breadcumbs = preg_split('/\//', $target, -1, PREG_SPLIT_NO_EMPTY);
+        $target = $this->request->query->get('path') ?? $this->request->attributes->get('path');
+        $decodedTarget = rawurldecode((string) $target);
+        $breadcumbs = preg_split('/\//', $decodedTarget, -1, PREG_SPLIT_NO_EMPTY);
 
         $target = '';
         $items = [];
@@ -75,7 +83,7 @@ class AppExtension extends AbstractExtension
             $target .= '/'.$crumb;
             $items[] = [
                 'label' => $crumb,
-                'uri' => $target,
+                'uri' => $this->urlGenerator->generate('app_explore', ['path' => $target]),
             ];
         }
 

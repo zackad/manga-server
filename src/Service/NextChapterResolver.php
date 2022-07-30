@@ -8,6 +8,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class NextChapterResolver
 {
@@ -19,41 +20,45 @@ class NextChapterResolver
      * @var Request|null
      */
     private $request;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
 
-    public function __construct(string $mangaRoot, RequestStack $requestStack)
+    public function __construct(string $mangaRoot, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator)
     {
         $this->mangaRoot = $mangaRoot;
         $this->request = $requestStack->getMainRequest();
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function resolve(): string
     {
         if (!$this->request instanceof Request) {
-            return '/';
+            return $this->urlGenerator->generate('app_explore');
         }
-        $path = $this->request->attributes->get('path', '');
-        $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $path));
+        $path = (string) $this->request->query->get('path', '');
+        $decodedPath = trim(rawurldecode($path), '/');
+        $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));
 
         $entries = iterator_to_array($this->getEntry($parent));
 
-        $uri = '/'.$path;
-        if ('/' === $uri) {
-            return $uri;
+        $currentEntry = '/'.$decodedPath;
+        if ('/' === $currentEntry) {
+            return $this->urlGenerator->generate('app_explore');
         }
 
-        $nexpage = $this->getNext($entries, $uri);
+        $nextEntry = $this->getNext($entries, $currentEntry);
 
-        if (!$nexpage) {
-            $parentUrl = rawurlencode(str_replace($this->mangaRoot, '', $parent));
+        if ('' === $nextEntry) {
+            $parentUrl = str_replace($this->mangaRoot, '', $parent);
 
             if (!$parentUrl) {
-                return '/';
+                return $this->urlGenerator->generate('app_explore');
             }
 
-            return $parentUrl;
+            return $this->urlGenerator->generate('app_explore', ['path' => $parentUrl]);
         }
 
-        return rawurlencode($nexpage);
+        return $this->urlGenerator->generate('app_explore', ['path' => $nextEntry]);
     }
 
     private function getEntry(string $directory): \Generator

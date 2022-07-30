@@ -18,7 +18,7 @@ class ArchiveController extends AbstractController
 {
     /**
      * @Route(
-     *     "/{path}",
+     *     "/archive/{path}",
      *     name="app_archive_list",
      *     methods={"GET"},
      *     requirements={"path"=".+\.(zip|cbz|epub)$"}
@@ -28,10 +28,11 @@ class ArchiveController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
         $path = $request->attributes->get('path');
-        $target = sprintf('%s/%s', $mangaRoot, $path);
+        $decodedPath = rawurldecode($path);
+        $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
 
         $entries = new ArchiveReader($target);
-        $entryList = iterator_to_array($listing->buildList($entries->getList(), $path, $target));
+        $entryList = iterator_to_array($listing->buildList($entries->getList(), $decodedPath, $target, true));
         $pagination = $paginator->paginate($entryList, $page);
 
         return $this->render('entry_list.html.twig', [
@@ -42,7 +43,7 @@ class ArchiveController extends AbstractController
 
     /**
      * @Route(
-     *     "/{archive_item}",
+     *     "/archive/{archive_item}",
      *     name="app_archive_item",
      *     methods={"GET"},
      *     requirements={"archive_item"=".+\.(zip|cbz|epub\/).+$"}
@@ -53,6 +54,7 @@ class ArchiveController extends AbstractController
         $path = $request->attributes->get('archive_item');
         $target = sprintf('%s/%s', $mangaRoot, $path);
         $archivePath = preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
+        $archivePath = realpath(rawurldecode($archivePath));
         $entryName = preg_replace('/.*(cbz|epub|zip)\//i', '', $target);
 
         $za = new \ZipArchive();
