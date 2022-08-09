@@ -9,8 +9,9 @@ export default class extends Controller {
 
   connect() {
     // Initialize image lazy load observer
+    // FIXME: extract into separate controller
     const observer = lozad('.lozad', {
-      loaded: (el) => el.classList.remove('min-h-screen'),
+      loaded: (element) => element.addEventListener('load', this.lazyLoadListener.bind(this)),
     })
     observer.observe()
 
@@ -25,6 +26,10 @@ export default class extends Controller {
 
   disconnect() {
     removeEventListener('keydown', this.keyPressListener)
+
+    // Remove event listener from lazy loaded images
+    const images = [...document.querySelectorAll('.lozad')]
+    images.forEach((image) => image.removeEventListener('load', this.lazyLoadListener.bind(this)))
   }
 
   saveSettings(event) {
@@ -49,6 +54,11 @@ export default class extends Controller {
         this.deactivateReader()
         break
     }
+  }
+
+  lazyLoadListener(event) {
+    const image = event.target
+    image.classList.remove('min-h-screen')
   }
 
   activateReader() {
