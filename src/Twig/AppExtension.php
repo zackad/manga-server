@@ -34,6 +34,8 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('is_image', [$this, 'isImage']),
+            new TwigFilter('filter_image', [$this, 'filterImage']),
+            new TwigFilter('filter_cover', [$this, 'filterCover']),
         ];
     }
 
@@ -44,6 +46,24 @@ class AppExtension extends AbstractExtension
             new TwigFunction('is_image', [$this, 'isImage']),
             new TwigFunction('render_breadcrumbs', [$this, 'renderBreadcrumbs'], ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
+    }
+
+    public function filterImage(\Traversable $items): iterable
+    {
+        $items = iterator_to_array($items);
+
+        return array_filter($items, function ($item) {
+            return $this->isImage($item['uri']);
+        });
+    }
+
+    public function filterCover(\Traversable $items, bool $withCover = true): iterable
+    {
+        $items = iterator_to_array($items);
+
+        return array_filter($items, function ($item) use ($withCover) {
+            return $withCover ? $item['cover'] : !$item['cover'];
+        });
     }
 
     public function isImage(string $value): bool
