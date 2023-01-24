@@ -8,12 +8,15 @@ on:
         branches:
             - master
 
+env:
+    PHP_CS_FIXER_IGNORE_ENV: 1
+
 jobs:
     build:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-versions: ['7.2', '8.1']
+                php-versions: ['7.2', '8.2']
             fail-fast: false
         steps:
             -   name: Checkout
@@ -22,7 +25,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    tools: psalm, php-cs-fixer:3.4, phpstan
+                    tools: psalm:4.30, php-cs-fixer:3.4, phpstan
+                    extensions: pcov, :xdebug
             -   name: Setup NodeJS
                 uses: actions/setup-node@v2
                 with:
@@ -67,7 +71,7 @@ jobs:
             -   name: Run Tests
                 run: php bin/phpunit --coverage-clover var/coverage.xml
             -   name: Upload coverage to Codecov
-                if: ${{ matrix.php-versions == '8.1' }}
+                if: ${{ matrix.php-versions == '8.2' }}
                 uses: codecov/codecov-action@v1
                 with:
                     files: ./var/coverage.xml
