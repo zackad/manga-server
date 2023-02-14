@@ -1,6 +1,6 @@
 {# tailwindcss Sliding pagination control implementation #}
 {% set button_style = 'px-3 py-2 font-mono cursor-pointer border border-gray-600 rounded-lg hover:underline' %}
-{% set route_name = app.request.attributes.get('_route') == 'app_explore' ? 'app_explore' : 'app_archive_list' %}
+{% set route_name = app.request.attributes.get('_route') %}
 {% if pageCount > 1 %}
   <div class="py-2">
     <div class="flex flex-wrap flex-row gap-1 items-baseline justify-center text-sm">

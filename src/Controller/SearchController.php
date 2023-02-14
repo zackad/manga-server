@@ -32,7 +32,7 @@ class SearchController extends AbstractController
         }
 
         // disable pagination until I can figure out how to build pagination url with multiple query params
-        $pagination = $paginator->paginate($entries, $page, 1000);
+        $pagination = $paginator->paginate($entries, $page);
 
         return $this->render('entry_list.html.twig', [
             'entries' => $entries,
