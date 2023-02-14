@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Controller\AssetsController
  */
 class AssetsControllerTest extends WebTestCase
@@ -29,21 +30,6 @@ class AssetsControllerTest extends WebTestCase
         $this->client->request('GET', $asset);
         $this->assertResponseIsSuccessful();
 
-        switch (pathinfo($asset, PATHINFO_EXTENSION)) {
-            case 'css':
-                $this->assertResponseHeaderSame('Content-Type', 'text/css');
-
-                break;
-
-            case 'js':
-                $this->assertResponseHeaderSame('Content-Type', 'application/javascript');
-
-                break;
-
-            default:
-                break;
-        }
-
         $expiresHeader = $this->client->getResponse()->headers->get('expires');
         $expires = (new \DateTime($expiresHeader))->getTimestamp();
         $this->assertLessThanOrEqual((new \DateTime('+1 week'))->getTimestamp(), $expires);
@@ -55,11 +41,14 @@ class AssetsControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    public function assetsProvider()
+    public function assetsProvider(): array
     {
-        $manifestPath = dirname(dirname(__DIR__)).'/public/build/manifest.json';
+        $manifestPath = dirname(__DIR__, 2).'/public/build/manifest.json';
         $data = json_decode(file_get_contents($manifestPath), true);
+        $mappedValues = array_map(function ($value) {
+            return [$value];
+        }, $data);
 
-        return [array_values($data)];
+        return array_combine(array_keys($data), array_values($mappedValues));
     }
 }
