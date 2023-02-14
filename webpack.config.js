@@ -43,10 +43,10 @@ Encore.addEntry('app', './assets/app.js')
   // })
 
   // enables @babel/preset-env polyfills
-  // .configureBabelPresetEnv((config) => {
-  //   config.useBuiltIns = 'usage'
-  //   config.corejs = 3
-  // })
+  .configureBabelPresetEnv((config) => {
+    config.useBuiltIns = 'usage'
+    config.corejs = '3.23'
+  })
 
   // uncomment to get integrity="..." attributes on your script & link tags
   // requires WebpackEncoreBundle 1.4 or higher
