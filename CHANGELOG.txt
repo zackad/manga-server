@@ -1,6 +1,45 @@
 Manga Server
 https://github.com/zackad/manga-server
 
+v0.15.0 (2023-02-15)
+New features:
+- Add pagination above listing items. Now we don't have to scroll to bottom to
+  access pagination link
+- Properly paginate on search result, previously it set with limit of 1000 item
+- Redesign pagination button style
+
+Bugfixes:
+- Fix cover and entry url on search result
+- Fix generating archive item url
+- Fix next target directory resolver
+- Fix pagination on archive listing
+- Improve lazy load image performance by preventing 'min-h-screen' class to be
+  removed until image completely loaded
+- Prevent directory icon from shrinking
+
+Internals:
+- Add route prefix for exploring mode, removing potential url conflict with
+  other route
+- Add test case for redirect into archive controller
+- Bump nodejs runtime version on github action to version 18
+- Fix build script, add missing step to make sure that npm dependencies is
+  installed
+- Fix data provider for assets controller test
+- Fix github action badge on README.md file
+- Ignore php-cs-fixer incompatible error with php 8.2
+- Pin psalm to version 4.30 which support php 7.2
+- Refactor twig filter as workaround prettier limitation with `filter` syntax
+- Remove priority attribute from route
+- Remove response header check for assets controller test
+- Run phpstan on github action
+- Split explore route into separate controller class
+- Update flex recipes (symfony/phpunit-bridge, symfony/webpack-encore-bundle)
+- Update github action workflow to support php version 8.2
+- Update project dependencies
+- Use dependency injection to retrieve project directory path instead of
+  querying from parameterbag service
+
+---
 v0.14.0 (2022-03-22)
 NOTES: This is the rewrite version with Server Side Rendering (SSR) with
     `stimulusjs` to add interactivity.
@@ -94,7 +133,7 @@ Internals:
 ---
 v0.8.1 (2020-07-12)
 New Features:
-- Show error message when searching doesn't has results (issue #33)
+- Show error message when searching doesn't have results (issue #33)
 
 Internals:
 - Add support for typescript
@@ -108,7 +147,7 @@ New Features:
 Bugfixes:
 - Fix MimeGuesser by leveraging symfony mime component, returning generic
   'application/octet-stream' for unknown file type
-- Fix when accessing non existing image inside archive file, give 404 http error
+- Fix when accessing non-existing image inside archive file, give 404 http error
   response
 - Fix icon spacing on AppBar
 
@@ -144,7 +183,7 @@ New Features:
 - Add support for handling zip and cbz (comic book) file format
 - Add option to set maximum image width
 - Show cover image for supported archive file (zip, cbz)
-- Make multi column layout for larger screen
+- Make multi-column layout for larger screen
 
 Bugfixes:
 - Fix path resolution and url encoding
@@ -191,4 +230,4 @@ Internals:
 ---
 v0.1.0 (2020-02-13)
 Initial Release
-    Most of functionality is adopted from https://github.com/zackad/offmar.
+    Most of the functionality is adopted from https://github.com/zackad/offmar.
