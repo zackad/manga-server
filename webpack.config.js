@@ -37,6 +37,7 @@ Encore.addEntry('app', './assets/app.js')
   .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning()
+  .enablePostCssLoader()
 
   // .configureBabel((config) => {
   //   config.plugins.push('@babel/plugin-proposal-class-properties')

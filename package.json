@@ -7,8 +7,8 @@
     "@symfony/webpack-encore": "^4.0.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "autoprefixer": "^10.3.3",
-    "concurrently": "^6.2.1",
     "core-js": "^3.23.0",
+    "postcss-loader": "^7.0.0",
     "tailwindcss": "^3.0.8",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
@@ -18,9 +18,7 @@
     "lozad": "^1.14.0"
   },
   "scripts": {
-    "dev": "concurrently --kill-others \"yarn run tailwind:watch\" \"encore dev --watch\"",
-    "build": "yarn run tailwind:build && NODE_ENV=production encore production",
-    "tailwind:build": "tailwindcss -i assets/css/tailwind.src.css -o assets/css/tailwind.css",
-    "tailwind:watch": "tailwindcss -i assets/css/tailwind.src.css -o assets/css/tailwind.css --watch"
+    "dev": "encore dev --watch",
+    "build": "encore production"
   }
 }

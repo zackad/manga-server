@@ -3,7 +3,6 @@
 /dist
 *.cache
 *.zip
-tailwind.css
 
 ###> symfony/framework-bundle ###
 /.env.local
