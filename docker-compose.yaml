@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    web:
+        image: caddy:latest
+        ports:
+            - "${MANGA_SERVER_PORT:-8000}:8000"
+        volumes:
+            - ./:/app
+            - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+    app:
+        image: app:php
+        build: ./docker/php
+#        volumes:
+#            - ./:/app
