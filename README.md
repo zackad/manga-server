@@ -24,6 +24,22 @@ Web application to serve manga collection from your computer over the network.
 
 ## How to run
 
+### Using Docker
+> [!NOTE]
+> To prevent accidental data lost, make sure to mount your media volume as readonly.
+
+> [!IMPORTANT]
+> By default, memory limit is 128MB and might not be enough to generage cover thumbnail (see #199).
+> You can increase memory limit by setting `APP_MEMORY_LIMIT` env variable to the desired value.
+```shell
+docker run -d --publish 8000:8000 \
+    --env APP_MEMORY_LIMIT=1G \
+    --env MANGA_ROOT_DIRECTORY=/media \
+    --volume /path/to/your/media:/media:ro \
+    ghcr.io/zackad/manga-server:latest
+```
+
+### Manual
 - Download zip file from the [latest release page](https://github.com/zackad/manga-server/releases/latest)
 - Extract
 - Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder. Alternatively you can copy `.env` file into `.env.local` to prevent your value to be overwritten when you update the app later.

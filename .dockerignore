@@ -1,0 +1,8 @@
+.devenv
+.direnv
+build
+dist
+node_modules
+tools
+var
+vendor

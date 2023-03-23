@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Add support to run application as docker container
+
 Internals:
 - Update nix packages
 - Configure pre-commit hooks to use devtools managed by package manager
