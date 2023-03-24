@@ -12,24 +12,21 @@ Web application to serve manga collection from your computer over the network.
 ## Requirements
 
 **Runtime**
-- PHP version 7.4 or newer
+- PHP version 7.2 or newer
 
 **Development**
 - composer
 - NodeJS
 - yarn (replacement for npm)
+- symfony-cli (optional)
 
 ## How to run
 
-- Download zip file from [latest release](https://github.com/zackad/manga-server/releases)
+- Download zip file from the [latest release page](https://github.com/zackad/manga-server/releases/latest)
 - Extract
-- Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder
+- Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder. Alternatively you can copy `.env` file into `.env.local` to prevent your value to be overwritten when you update the app later.
 ```shell
 # Please change to something like MANGA_ROOT_DIRECTORY=/data/manga
-#
-# Warning: If you pointing to sub directory, do NOT add trailing slash e.g
-# valid: MANGA_ROOT_DIRECTORY=/data/manga
-# invalid: MANGA_ROOT_DIRECTORY=/data/manga/
 MANGA_ROOT_DIRECTORY=/
 ```
 - Open terminal
@@ -60,9 +57,12 @@ php -S 0.0.0.0:8000 public/index.php
 
 # if you have symfony cli installed, you can use this command to start
 # development server
-symfony serve
+symfony server:start
 ```
 - Watch the frontend compilation
 ```shell
-yarn start
+# Open another terminal session and run
+yarn dev
 ```
+
+- OPTIONAL: If you have [devenv](https://devenv.sh/getting-started/) setup on your machine, you can run `devenv up` to start all service required to start development.
