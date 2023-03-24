@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
 
+set -ex
+
+BUILD_DIR=build/manga-server-$(git describe)
+
 # Prepare build target directory
-rm -fr build/manga-server
-mkdir -p build/manga-server
+rm -fr build
+mkdir -p ${BUILD_DIR}
 
 # Install frontend dependencies
 yarn install
@@ -11,21 +15,21 @@ yarn install
 yarn build
 
 # Copy artifact into dist directory
-cp -r bin config public src templates composer.json composer.lock build/manga-server
+cp -r bin config public src templates composer.json composer.lock ${BUILD_DIR}
 
 # Define environment variable
-echo "APP_ENV=prod" > build/manga-server/.env
-echo "APP_SECRET=$(openssl rand -hex 20)" >> build/manga-server/.env
-echo "MANGA_ROOT_DIRECTORY=/" >> build/manga-server/.env
-echo "MAXIMUM_SEARCH_DEPTH=3" >> build/manga-server/.env
+echo "APP_ENV=prod" > ${BUILD_DIR}/.env
+echo "APP_SECRET=$(openssl rand -hex 20)" >> ${BUILD_DIR}/.env
+echo "MANGA_ROOT_DIRECTORY=/" >> ${BUILD_DIR}/.env
+echo "MAXIMUM_SEARCH_DEPTH=3" >> ${BUILD_DIR}/.env
 
 # Install dependencies
-cd build/manga-server \
+cd ${BUILD_DIR} \
   && composer install --no-dev \
   && cd ../..
 
 # Remove unnecessary binary
-cd build/manga-server \
+cd ${BUILD_DIR} \
   && rm -fr bin/build bin/phpunit bin/release composer.lock var/cache \
   && cd ../..
 
