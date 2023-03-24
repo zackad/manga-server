@@ -1,6 +1,6 @@
 # Manga Server
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/zackad/manga-server/build.yaml?branch=master&label=action&logo=github&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/zackad/manga-server/test.yaml?branch=master&label=action&logo=github&style=for-the-badge)
 [![Codecov](https://img.shields.io/codecov/c/github/zackad/manga-server?style=for-the-badge&logo=codecov)](https://codecov.io/gh/zackad/manga-server)
 [![MIT License](https://img.shields.io/github/license/zackad/manga-server?style=for-the-badge)](https://github.com/zackad/manga-server/blob/master/LICENSE)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/zackad/manga-server?style=for-the-badge&logo=github)](https://github.com/zackad/manga-server/releases/latest)
