@@ -72,6 +72,6 @@ jobs:
                 run: php bin/phpunit --coverage-clover var/coverage.xml
             -   name: Upload coverage to Codecov
                 if: ${{ matrix.php-versions == '8.2' }}
-                uses: codecov/codecov-action@v1
+                uses: codecov/codecov-action@v3
                 with:
                     files: ./var/coverage.xml
