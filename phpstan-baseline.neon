@@ -1,0 +1,121 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$filename of method App\\\\Service\\\\MimeGuesser\\:\\:guessMimeType\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/ArchiveController.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of method ZipArchive\\:\\:open\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Controller/ArchiveController.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method ZipArchive\\:\\:getStream\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/ArchiveController.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function rawurldecode expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/ArchiveController.php
+
+		-
+			message: "#^Parameter \\#2 \\$dest of function stream_copy_to_stream expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: src/Controller/ArchiveController.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$randomizedIndex has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Controller/RandomController.php
+
+		-
+			message: "#^Cannot access offset 'name' on array\\|false\\.$#"
+			count: 1
+			path: src/Service/ArchiveReader.php
+
+		-
+			message: "#^Method App\\\\Service\\\\ArchiveReader\\:\\:generateList\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+			count: 1
+			path: src/Service/ArchiveReader.php
+
+		-
+			message: "#^Method App\\\\Service\\\\ArchiveReader\\:\\:getList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/ArchiveReader.php
+
+		-
+			message: "#^Property App\\\\Service\\\\ArchiveReader\\:\\:\\$filename has no type specified\\.$#"
+			count: 1
+			path: src/Service/ArchiveReader.php
+
+		-
+			message: "#^Cannot access offset 'name' on array\\|false\\.$#"
+			count: 1
+			path: src/Service/ComicBook.php
+
+		-
+			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) has parameter \\$entries with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Service/DirectoryListing.php
+
+		-
+			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+			count: 1
+			path: src/Service/DirectoryListing.php
+
+		-
+			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:scan\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/DirectoryListing.php
+
+		-
+			message: "#^Method App\\\\Service\\\\NextChapterResolver\\:\\:getNext\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/NextChapterResolver.php
+
+		-
+			message: "#^Method App\\\\Service\\\\Search\\:\\:buildSearchIndex\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Service/Search.php
+
+		-
+			message: "#^Method App\\\\Service\\\\Search\\:\\:populateEntry\\(\\) has parameter \\$list with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/Search.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$file has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/Search.php
+
+		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterCover\\(\\) has parameter \\$items with no value type specified in iterable type Traversable\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterCover\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterImage\\(\\) has parameter \\$items with no value type specified in iterable type Traversable\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterImage\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: "#^Parameter \\#1 \\$stack of function array_pop expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
