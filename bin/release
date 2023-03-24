@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -ex
+
 # Check if current commit is tagged, exit if not
 git describe --exact-match > /dev/null 2>&1
 if [ $? != 0 ]; then
@@ -11,5 +13,7 @@ fi
 # Run build command
 bin/build
 
+mkdir -p dist
+
 # Package archive, move to dist directory
-cd build; zip -r manga-server.$(git describe).zip manga-server; mv *.zip ../dist/; cd ..
+cd build; zip -r manga-server.$(git describe).zip manga-server*; mv *.zip ../dist/; cd ..
