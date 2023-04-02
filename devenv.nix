@@ -8,7 +8,6 @@
   packages = [
     pkgs.php82Extensions.xdebug
     pkgs.nodejs-18_x
-    pkgs.yarn
     pkgs.symfony-cli
     pkgs.zip
   ];
@@ -34,7 +33,7 @@
   # pre-commit.hooks.shellcheck.enable = true;
 
   # https://devenv.sh/processes/
-  processes.asset.exec = "yarn run dev";
+  processes.asset.exec = "npm run dev";
   processes.web.exec = "symfony server:start --no-tls";
 
   # See full reference at https://devenv.sh/reference/options/
