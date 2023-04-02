@@ -9,10 +9,10 @@ rm -fr build
 mkdir -p ${BUILD_DIR}
 
 # Install frontend dependencies
-yarn install
+npm install
 
 # Build frontend artifact
-yarn build
+npm run build
 
 # Copy artifact into dist directory
 cp -r bin config public src templates composer.json composer.lock ${BUILD_DIR}
