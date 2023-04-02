@@ -12,12 +12,12 @@ Web application to serve manga collection from your computer over the network.
 ## Requirements
 
 **Runtime**
-- PHP version 7.2 or newer
+- PHP version 7.2.5 or later
 
 **Development**
 - composer
-- NodeJS
-- yarn (replacement for npm)
+- NodeJS version 18 or later
+- npm (install manually if your nodejs installation doesn't include it)
 - symfony-cli (optional)
 
 ## How to run
@@ -49,7 +49,7 @@ git clone https://github.com/zackad/manga-server
 cd manga-server
 composer install
 
-yarn install
+npm install
 ```
 - Start the server
 ```shell
@@ -62,7 +62,7 @@ symfony server:start
 - Watch the frontend compilation
 ```shell
 # Open another terminal session and run
-yarn dev
+npm run dev
 ```
 
 - OPTIONAL: If you have [devenv](https://devenv.sh/getting-started/) setup on your machine, you can run `devenv up` to start all service required to start development.
