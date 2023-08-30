@@ -9,7 +9,7 @@ rm -fr build
 mkdir -p ${BUILD_DIR}
 
 # Install frontend dependencies
-npm install
+npm ci
 
 # Build frontend artifact
 npm run build
@@ -35,3 +35,7 @@ cd ${BUILD_DIR} \
 
 # Remove php_cs cache
 find build -type f -name "*.cache" -exec rm {} \;
+
+# Overwrite latest build
+rm -fr build/manga-server-latest
+cp -r ${BUILD_DIR} build/manga-server-latest
