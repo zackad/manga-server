@@ -1,7 +1,6 @@
-<header class="fixed w-full top-0 left-0 transition-all duration-300 bg-gray-800 text-white border-b"
-  {{ stimulus_controller('header') }}>
-  <div class="flex container mx-auto px-2 py-1 gap-2 items-center">
-    <a href="{{ path('app_home') }}" class="inline-block w-8 h-8 p-1">
+<header class="fixed left-0 top-0 w-full border-b bg-gray-800 text-white transition-all duration-300" {{ stimulus_controller('header') }}>
+  <div class="container mx-auto flex items-center gap-2 px-2 py-1">
+    <a href="{{ path('app_home') }}" class="inline-block h-8 w-8 p-1">
       <svg aria-hidden="true"
         focusable="false"
         data-prefix="fas"
@@ -14,14 +13,14 @@
           d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
       </svg>
     </a>
-    <form action="{{ path('app_search') }}" class="flex-grow max-w-md">
+    <form action="{{ path('app_search') }}" class="max-w-md flex-grow">
       <input type="text"
         name="q"
-        class="w-full px-1 h-8 bg-gray-900 text-white focus:bg-white text-sm focus:text-gray-900 border border-gray-700 rounded"
+        class="h-8 w-full rounded border border-gray-700 bg-gray-900 px-1 text-sm text-white focus:bg-white focus:text-gray-900"
         placeholder="Search"
         value="{{ app.request.query.get('q') }}" />
     </form>
-    <a href="{{ path('app_random') }}" class="inline-block w-8 h-8 p-1">
+    <a href="{{ path('app_random') }}" class="inline-block h-8 w-8 p-1">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-current">
         <!-- ! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
         <path d="M424.1 287c-15.13-15.12-40.1-4.426-40.1 16.97V352H336L153.6 108.8C147.6 100.8 138.1 96 128 96H32C14.31 96 0 110.3 0 128s14.31 32 32 32h80l182.4 243.2C300.4 411.3 309.9 416 320 416h63.97v47.94c0 21.39 25.86 32.12 40.99 17l79.1-79.98c9.387-9.387 9.387-24.59 0-33.97L424.1 287zM336 160h47.97v48.03c0 21.39 25.87 32.09 40.1 16.97l79.1-79.98c9.387-9.391 9.385-24.59-.0013-33.97l-79.1-79.98c-15.13-15.12-40.99-4.391-40.99 17V96H320c-10.06 0-19.56 4.75-25.59 12.81L254 162.7L293.1 216L336 160zM112 352H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c10.06 0 19.56-4.75 25.59-12.81l40.4-53.87L154 296L112 352z" />
@@ -29,7 +28,7 @@
     </a>
     <div class="flex-grow"></div>
     <div {{ stimulus_controller('setting') }}>
-      <button class="inline-block w-8 h-8 p-1" {{ stimulus_action('setting', 'open') }}>
+      <button class="inline-block h-8 w-8 p-1" {{ stimulus_action('setting', 'open') }}>
         <svg aria-hidden="true"
           focusable="false"
           data-prefix="fas"
@@ -44,7 +43,7 @@
       </button>
       {% include 'partial/_setting_form.html.twig' %}
     </div>
-    <button class="inline-block w-8 h-8 p-1" {{ stimulus_action('app', 'toggleReader') }}>
+    <button class="inline-block h-8 w-8 p-1" {{ stimulus_action('app', 'toggleReader') }}>
       <svg aria-hidden="true"
         focusable="false"
         data-prefix="fas"
