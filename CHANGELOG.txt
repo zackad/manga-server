@@ -1,6 +1,18 @@
 Manga Server
 https://github.com/zackad/manga-server
 
+next (unreleased)
+Internals:
+- Add GitHub action to build release artifact
+- Add prettier with twig and tailwindcss plugin as dev dependencies
+- Add support for `devenv.sh` with direnv enabled, nix based tools
+- Enable postcss-loader on webpack-encore to simplify frontend assets build
+- Increase phpstan analysis to level 8 with baseline
+- Reformat code with configured prettier
+- Remove `line-clamp` plugin for tailwindcss
+- Remove `psalm` static analysis tools
+
+---
 v0.15.0 (2023-02-15)
 New features:
 - Add pagination above listing items. Now we don't have to scroll to bottom to
