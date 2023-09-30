@@ -9,6 +9,7 @@
     pkgs.php82Extensions.xdebug
     pkgs.nodejs-18_x
     pkgs.symfony-cli
+    pkgs.yarn
     pkgs.zip
   ];
 
