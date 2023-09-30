@@ -1,24 +1,29 @@
 {
-  "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/preset-env": "^7.16.0",
-    "@hotwired/stimulus": "^3.0.0",
-    "@symfony/stimulus-bridge": "^3.2.0",
-    "@symfony/webpack-encore": "^4.0.0",
-    "@tailwindcss/line-clamp": "^0.3.1",
-    "autoprefixer": "^10.3.3",
-    "core-js": "^3.23.0",
-    "postcss-loader": "^7.0.0",
-    "tailwindcss": "^3.0.8",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "lozad": "^1.14.0"
-  },
-  "scripts": {
-    "dev": "encore dev --watch",
-    "build": "encore production"
-  }
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@hotwired/stimulus": "^3.0.0",
+        "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/webpack-encore": "^4.0.0",
+        "@tailwindcss/line-clamp": "^0.3.1",
+        "autoprefixer": "^10.3.3",
+        "core-js": "^3.23.0",
+        "postcss-loader": "^7.0.0",
+        "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.2.8",
+        "prettier-plugin-twig-melody": "^0.4.6",
+        "tailwindcss": "^3.0.8",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "lozad": "^1.14.0"
+    },
+    "scripts": {
+        "dev": "encore dev --watch",
+        "build": "encore production",
+        "cs-fix": "prettier -w assets templates",
+        "cs-check": "prettier --check assets templates"
+    }
 }

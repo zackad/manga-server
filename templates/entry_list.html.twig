@@ -7,26 +7,22 @@
       {{ render_breadcrumbs() }}
       {{ knp_pagination_render(pagination) }}
       <div class="mt-2 px-2" {{ stimulus_target('app', 'entryContainer') }}>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {% for item in pagination|filter_cover(false) %}
             <div class="border-b border-gray-600">
               {{ block('no_cover') }}
             </div>
           {% endfor %}
         </div>
-        <div class="mt-2 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
+        <div class="mt-2 grid grid-cols-1 gap-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {% for item in pagination|filter_cover %}
             {{ block('has_cover') }}
           {% endfor %}
         </div>
       </div>
-      <div class="hidden mt-2 w-full mx-auto overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
+      <div class="mx-auto mt-2 hidden w-full overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
         {% for item in pagination|filter_image %}
-          <img class="md:col-span-3 min-h-screen mx-auto lozad"
-            loading="lazy"
-            data-src="{{ item.uri }}"
-            data-app-target="image"
-            alt="{{ item.uri }}" />
+          <img class="lozad mx-auto min-h-screen md:col-span-3" loading="lazy" data-src="{{ item.uri }}" data-app-target="image" alt="{{ item.uri }}" />
         {% endfor %}
       </div>
     </div>
@@ -36,12 +32,10 @@
 {% endblock %}
 
 {% block has_cover %}
-  <div class="flex md:flex-col gap-2 pb-2 border-b border-gray-600">
+  <div class="flex gap-2 border-b border-gray-600 pb-2 md:flex-col">
     {% if item.cover %}
       <a href="{{ item.uri }}" class="w-1/2 md:w-full">
-        <img data-src="{{ item.cover }}"
-          alt="Cover for {{ item.label }}"
-          class="lozad w-full aspect-[3/4] object-cover" />
+        <img data-src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="lozad aspect-[3/4] w-full object-cover" />
       </a>
     {% endif %}
     <div class="w-1/2 md:w-full">
@@ -53,8 +47,8 @@
 {% block no_cover %}
   <div class="flex items-center">
     {% if item.type == 'directory' %}
-      <span class="block flex-shrink-0 pr-2 h-5 w-8">{% include 'partial/_icon_directory.html.twig' %}</span>
+      <span class="block h-5 w-8 flex-shrink-0 pr-2">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
-    <a href="{{ item.uri }}" class="break-words line-clamp-5 md:line-clamp-2">{{ item.label }}</a>
+    <a href="{{ item.uri }}" class="line-clamp-5 break-words md:line-clamp-2">{{ item.label }}</a>
   </div>
 {% endblock %}
