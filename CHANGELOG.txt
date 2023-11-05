@@ -11,6 +11,7 @@ Internals:
 - Reformat code with configured prettier
 - Remove `line-clamp` plugin for tailwindcss
 - Remove `psalm` static analysis tools
+- Require php 8.1
 - Update composer and npm packages
 
 ---
