@@ -16,16 +16,6 @@ parameters:
 			path: src/Controller/ArchiveController.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function rawurldecode expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Controller/ArchiveController.php
-
-		-
-			message: "#^Parameter \\#2 \\$dest of function stream_copy_to_stream expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Controller/ArchiveController.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$randomizedIndex has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Controller/RandomController.php
@@ -112,10 +102,5 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterImage\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Twig/AppExtension.php
-
-		-
-			message: "#^Parameter \\#1 \\$stack of function array_pop expects array, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Twig/AppExtension.php
