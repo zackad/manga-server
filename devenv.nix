@@ -7,6 +7,7 @@
   # https://devenv.sh/packages/
   packages = [
     pkgs.php82Extensions.xdebug
+    pkgs.php82Packages.phive
     pkgs.nodejs-18_x
     pkgs.symfony-cli
     pkgs.yarn
