@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Controller\SearchController
  * @covers \App\Service\Search
  */

@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Service\ArchiveReader
  * @covers \App\Service\ComicBook
  */

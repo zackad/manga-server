@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Controller\ArchiveController
  * @covers \App\Service\ArchiveReader
  * @covers \App\Service\ComicBook

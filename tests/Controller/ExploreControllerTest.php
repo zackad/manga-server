@@ -44,6 +44,7 @@ class ExploreControllerTest extends WebTestCase
 
     /**
      * @dataProvider targetPathProvider
+     *
      * @covers \App\Twig\AppExtension::renderBreadcrumbs
      */
     public function testCanAccessTargetPath(string $target)

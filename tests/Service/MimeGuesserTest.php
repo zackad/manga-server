@@ -9,15 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Service\MimeGuesser
  */
 class MimeGuesserTest extends TestCase
 {
     /**
      * @dataProvider filenameWithValidExtension
-     *
-     * @param mixed $filename
-     * @param mixed $mime
      */
     public function testGetValidMimeTypes($filename, $mime)
     {
@@ -27,9 +25,6 @@ class MimeGuesserTest extends TestCase
 
     /**
      * @dataProvider filenameWithUnusualExtension
-     *
-     * @param mixed $filename
-     * @param mixed $mime
      */
     public function testGetMimeTypesReturningGenericMimeTypes($filename, $mime)
     {
