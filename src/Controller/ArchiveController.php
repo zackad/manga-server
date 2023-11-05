@@ -53,7 +53,7 @@ class ArchiveController extends AbstractController
     {
         $path = $request->attributes->get('archive_item');
         $target = sprintf('%s/%s', $mangaRoot, $path);
-        $archivePath = preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
+        $archivePath = (string) preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
         $archivePath = realpath(rawurldecode($archivePath));
         $entryName = preg_replace('/.*(cbz|epub|zip)\//i', '', $target);
 
@@ -65,6 +65,7 @@ class ArchiveController extends AbstractController
         }
 
         $response = new StreamedResponse(function () use ($inputStream) {
+            /** @var resource $outputStream */
             $outputStream = fopen('php://output', 'wb');
 
             stream_copy_to_stream($inputStream, $outputStream);
