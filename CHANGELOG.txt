@@ -11,6 +11,7 @@ Internals:
 - Reformat code with configured prettier
 - Remove `line-clamp` plugin for tailwindcss
 - Remove `psalm` static analysis tools
+- Update composer and npm packages
 
 ---
 v0.15.0 (2023-02-15)
