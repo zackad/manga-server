@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
+ *
  * @covers \App\Service\DirectoryListing
  * @covers \App\Service\Search
  */

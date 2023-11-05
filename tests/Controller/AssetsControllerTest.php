@@ -22,8 +22,6 @@ class AssetsControllerTest extends WebTestCase
 
     /**
      * @dataProvider assetsProvider
-     *
-     * @param mixed $asset
      */
     public function testGetHeaderOfAssetsFile($asset)
     {

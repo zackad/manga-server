@@ -10,6 +10,7 @@ use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 
 /**
  * @internal
+ *
  * @covers \App\Service\ComicBook
  * @covers \App\Service\DirectoryListing
  */
