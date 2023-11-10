@@ -12,6 +12,7 @@
         "symfony/flex": "^1.18",
         "symfony/framework-bundle": "5.4.*",
         "symfony/mime": "5.4.*",
+        "symfony/monolog-bundle": "^3.8",
         "symfony/runtime": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
