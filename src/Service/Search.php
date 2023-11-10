@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -87,20 +86,21 @@ class Search
                 ->followLinks()
                 ->in($this->mangaRoot)
                 ->exclude($excludedFinderPath)
-                ->name($patterns)
-                ->sortByName(true);
+                ->name($patterns);
 
-            $list = iterator_to_array($this->finder);
-            $mappedArray = array_map(
-                function (SplFileInfo $item) {
-                    return [
-                        'basename' => $item->getBasename(),
-                        'realpath' => $item->getRealPath(),
-                        'relative_path' => sprintf('/%s/%s', $item->getRelativePath(), $item->getBasename()),
-                    ];
-                }, $list);
+            $indexData = [];
+            foreach ($this->finder as $item) {
+                $indexData[] = [
+                    'basename' => $item->getBasename(),
+                    'realpath' => $item->getRealPath(),
+                    'relative_path' => sprintf('/%s/%s', $item->getRelativePath(), $item->getBasename()),
+                ];
+            }
+            usort($indexData, function ($a, $b) {
+                return strnatcmp($a['basename'], $b['basename']);
+            });
 
-            return array_values($mappedArray);
+            return array_values($indexData);
         });
     }
 }
