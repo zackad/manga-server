@@ -4,6 +4,11 @@ https://github.com/zackad/manga-server
 next (unreleased)
 
 ---
+v0.16.1 (2023-11-11)
+Internals:
+- Fix build script to remove version info from directory name
+
+---
 v0.16.0 (2023-11-11)
 Bugfixes:
 - Optimize building search index to reduce memory usage
