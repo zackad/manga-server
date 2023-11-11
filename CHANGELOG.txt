@@ -5,6 +5,7 @@ next (unreleased)
 
 Features:
 - Add support to run application as docker container
+- App settings has been moved into dedicated page
 
 Internals:
 - Update nix packages
