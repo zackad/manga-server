@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.16.0 (2023-11-11)
 Bugfixes:
 - Optimize building search index to reduce memory usage
 
@@ -10,6 +13,7 @@ Internals:
 - Add prettier with twig and tailwindcss plugin as dev dependencies
 - Add support for `devenv.sh` with direnv enabled, nix based tools
 - Add `phive` to manage php phar tools
+- Add logger bundle
 - Enable postcss-loader on webpack-encore to simplify frontend assets build
 - Increase phpstan analysis to level 8 with baseline
 - Reformat code with configured prettier
