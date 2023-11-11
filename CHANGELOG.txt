@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+Bugfixes:
+- Optimize building search index to reduce memory usage
+
 Internals:
 - Add GitHub action to build release artifact
 - Add prettier with twig and tailwindcss plugin as dev dependencies
