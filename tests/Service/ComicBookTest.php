@@ -16,7 +16,7 @@ use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
  */
 class ComicBookTest extends TestCase
 {
-    private $comicbook;
+    private $comicBook;
 
     protected function setUp(): void
     {
