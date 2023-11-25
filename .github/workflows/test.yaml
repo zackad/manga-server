@@ -8,9 +8,6 @@ on:
         branches:
             - master
 
-env:
-    PHP_CS_FIXER_IGNORE_ENV: 1
-
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -25,7 +22,7 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    tools: php-cs-fixer, phpstan
+                    tools: php-cs-fixer:3, phpstan:1
                     extensions: pcov, :xdebug
             -   name: Setup NodeJS
                 uses: actions/setup-node@v3

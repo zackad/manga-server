@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Synchronize php tools between phive managed and GitHub action
+
 ---
 v0.16.1 (2023-11-11)
 Internals:

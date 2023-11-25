@@ -28,7 +28,7 @@ class ArchiveReader
         $indexNumber = 0;
 
         while ($indexNumber < $za->numFiles) {
-            yield $za->statIndex($indexNumber)['name'];
+            yield $za->statIndex($indexNumber)['name'] ?? null;
             ++$indexNumber;
         }
 
