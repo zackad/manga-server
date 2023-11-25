@@ -4,7 +4,7 @@ FROM php:8.2-cli-alpine AS builder
 
 WORKDIR /app
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN apk add git nodejs npm libzip-dev
+RUN apk add git nodejs yarn libzip-dev
 RUN docker-php-ext-install zip ctype
 RUN php -v
 RUN php -m
