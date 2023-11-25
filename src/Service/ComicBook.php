@@ -51,7 +51,7 @@ class ComicBook
     private function getImages(\ZipArchive $archive): \Generator
     {
         for ($index = 0; $index < $archive->numFiles; ++$index) {
-            $cover = (string) $archive->statIndex($index)['name'];
+            $cover = $archive->statIndex($index)['name'] ?? '';
             if (preg_match(self::IMAGE_EXTENSIONS, $cover)) {
                 yield $cover;
             }

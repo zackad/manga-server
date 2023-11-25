@@ -21,11 +21,6 @@ parameters:
 			path: src/Controller/RandomController.php
 
 		-
-			message: "#^Cannot access offset 'name' on array\\|false\\.$#"
-			count: 1
-			path: src/Service/ArchiveReader.php
-
-		-
 			message: "#^Method App\\\\Service\\\\ArchiveReader\\:\\:generateList\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
 			count: 1
 			path: src/Service/ArchiveReader.php
@@ -39,11 +34,6 @@ parameters:
 			message: "#^Property App\\\\Service\\\\ArchiveReader\\:\\:\\$filename has no type specified\\.$#"
 			count: 1
 			path: src/Service/ArchiveReader.php
-
-		-
-			message: "#^Cannot access offset 'name' on array\\|false\\.$#"
-			count: 1
-			path: src/Service/ComicBook.php
 
 		-
 			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) has parameter \\$entries with no value type specified in iterable type iterable\\.$#"
