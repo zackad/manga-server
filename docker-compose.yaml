@@ -9,7 +9,7 @@ services:
             - ./:/app
             - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
     app:
-        image: app:php
-        build: ./docker/php
-#        volumes:
-#            - ./:/app
+        image: manga-server:runtime
+        build: .
+        volumes:
+            - ./:/app
