@@ -5,6 +5,7 @@ next (unreleased)
 
 Internals:
 - Synchronize php tools between phive managed and GitHub action
+- Remove GitHub action job to build release artifact
 
 ---
 v0.16.1 (2023-11-11)
