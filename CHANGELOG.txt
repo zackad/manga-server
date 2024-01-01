@@ -6,6 +6,9 @@ next (unreleased)
 Internals:
 - Synchronize php tools between phive managed and GitHub action
 - Remove GitHub action job to build release artifact
+- Update symfony framework to version 6.4
+- Remove deprecated framework-extra-bundle
+- Use attribute to define route on controller
 
 ---
 v0.16.1 (2023-11-11)
