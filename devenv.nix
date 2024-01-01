@@ -6,8 +6,8 @@
 
   # https://devenv.sh/packages/
   packages = [
-    pkgs.php82Extensions.xdebug
-    pkgs.php82Packages.phive
+    pkgs.php83Extensions.xdebug
+    pkgs.php83Packages.phive
     pkgs.nodejs-18_x
     pkgs.symfony-cli
     pkgs.yarn
@@ -25,7 +25,7 @@
   # languages.nix.enable = true;
   languages.php = {
     enable = true;
-    package = pkgs.php82.buildEnv {
+    package = pkgs.php83.buildEnv {
       # List of php extension required
       extensions = { all, enabled }: with all; enabled ++ [ pcov ];
     };
