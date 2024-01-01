@@ -12,18 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ArchiveController extends AbstractController
 {
-    /**
-     * @Route(
-     *     "/archive/{path}",
-     *     name="app_archive_list",
-     *     methods={"GET"},
-     *     requirements={"path"=".+\.(zip|cbz|epub)$"}
-     * )
-     */
+    #[Route('/archive/{path}', name: 'app_archive_list', requirements: ['path' => '.+\.(zip|cbz|epub)$'], methods: ['GET'])]
     public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot, PaginatorInterface $paginator): Response
     {
         $page = $request->query->getInt('page', 1);
@@ -41,14 +34,7 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route(
-     *     "/archive/{archive_item}",
-     *     name="app_archive_item",
-     *     methods={"GET"},
-     *     requirements={"archive_item"=".+\.(zip|cbz|epub\/).+$"}
-     * )
-     */
+    #[Route('/archive/{archive_item}', name: 'app_archive_item', requirements: ['archive_item' => '.+\.(zip|cbz|epub\/).+$'])]
     public function archiveItem(Request $request, MimeGuesser $guesser, string $mangaRoot): Response
     {
         $path = $request->attributes->get('archive_item');

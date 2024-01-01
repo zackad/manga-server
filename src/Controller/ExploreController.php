@@ -12,13 +12,11 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Stream;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ExploreController extends AbstractController
 {
-    /**
-     * @Route("/explore", name="app_explore", methods={"GET"})
-     */
+    #[Route('/explore', name: 'app_explore', methods: ['GET'])]
     public function explore(DirectoryListing $listing, Request $request, NextChapterResolver $resolver, string $mangaRoot, PaginatorInterface $paginator): Response
     {
         $path = (string) $request->query->get('path', '/');

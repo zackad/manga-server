@@ -8,13 +8,11 @@ use App\Service\Search;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class RandomController extends AbstractController
 {
-    /**
-     * @Route("/random", name="app_random")
-     */
+    #[Route('/random', name: 'app_random')]
     public function randomEntries(Search $search, PaginatorInterface $paginator): Response
     {
         $searchIndex = (array) $search->buildSearchIndex();
