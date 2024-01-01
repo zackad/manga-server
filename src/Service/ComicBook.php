@@ -22,7 +22,7 @@ class ComicBook
     /**
      * @param string $pathname Pathname of zip file/comicbook
      *
-     * @return false|string Resolvable image url, or false on failure
+     * @return bool|string Resolvable image url, or false on failure
      */
     public function getCover(string $pathname)
     {
