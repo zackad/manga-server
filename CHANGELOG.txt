@@ -9,6 +9,8 @@ Internals:
 - Update symfony framework to version 6.4
 - Remove deprecated framework-extra-bundle
 - Use attribute to define route on controller
+- Test againts php 8.3 on GitHub action
+- Update devenv to use php 8.3 as default runtime
 
 ---
 v0.16.1 (2023-11-11)
