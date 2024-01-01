@@ -34,7 +34,7 @@ class SearchTest extends TestCase
     public function testSearchWithEmptySringReturnZeroResult()
     {
         $string = '';
-        $results = $this->search->find($string);
+        $results = iterator_to_array($this->search->find($string));
 
         $this->assertIsIterable($results);
         $this->assertCount(0, $results);
