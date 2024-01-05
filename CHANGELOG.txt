@@ -14,6 +14,7 @@ Internals:
 - Remove unnecessary `config/bootstrap.php`, this file is missing from flex
   recipes since symfony/framework-bundle version 5.1
 - Remove annotation based route configuration
+- Use nodejs-slim package to make sure that `npm` won't be available
 
 ---
 v0.16.1 (2023-11-11)

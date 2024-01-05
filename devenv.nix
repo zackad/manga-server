@@ -8,7 +8,7 @@
   packages = [
     pkgs.php83Extensions.xdebug
     pkgs.php83Packages.phive
-    pkgs.nodejs-18_x
+    pkgs.nodejs-slim_18
     pkgs.symfony-cli
     pkgs.yarn
     pkgs.zip
@@ -35,7 +35,7 @@
   # pre-commit.hooks.shellcheck.enable = true;
 
   # https://devenv.sh/processes/
-  processes.asset.exec = "npm run dev";
+  processes.asset.exec = "yarn run dev";
   processes.web.exec = "symfony server:start --no-tls";
 
   # See full reference at https://devenv.sh/reference/options/
