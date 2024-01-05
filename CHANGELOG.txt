@@ -16,6 +16,7 @@ Internals:
 - Remove annotation based route configuration
 - Use nodejs-slim package to make sure that `npm` won't be available
 - Enable caching for webpack build
+- Fix deprecated method to set up composer dependency cache on github actions
 
 ---
 v0.16.1 (2023-11-11)
