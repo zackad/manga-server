@@ -52,5 +52,6 @@ Encore.addEntry('app', './assets/app.js')
   // uncomment to get integrity="..." attributes on your script & link tags
   // requires WebpackEncoreBundle 1.4 or higher
   .enableIntegrityHashes(Encore.isProduction())
+  .enableBuildCache({ config: [__filename] })
 
 module.exports = Encore.getWebpackConfig()
