@@ -13,6 +13,7 @@ Internals:
 - Update devenv to use php 8.3 as default runtime
 - Remove unnecessary `config/bootstrap.php`, this file is missing from flex
   recipes since symfony/framework-bundle version 5.1
+- Remove annotation based route configuration
 
 ---
 v0.16.1 (2023-11-11)
