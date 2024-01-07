@@ -36,4 +36,10 @@ class ComicBookTest extends TestCase
     {
         $this->assertFalse($this->comicBook->getCover('not-existing.zip'));
     }
+
+    public function testGetCoverFromEmptyArchiveWillFail()
+    {
+        $emptyArchive = dirname(__DIR__).'/stub/empty.zip';
+        $this->assertFalse($this->comicBook->getCover($emptyArchive));
+    }
 }
