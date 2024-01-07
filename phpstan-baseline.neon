@@ -31,11 +31,6 @@ parameters:
 			path: src/Service/ArchiveReader.php
 
 		-
-			message: "#^Property App\\\\Service\\\\ArchiveReader\\:\\:\\$filename has no type specified\\.$#"
-			count: 1
-			path: src/Service/ArchiveReader.php
-
-		-
 			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) has parameter \\$entries with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Service/DirectoryListing.php
