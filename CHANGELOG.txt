@@ -5,6 +5,9 @@ next (unreleased)
 Features:
 - New controller to generate cover thumbnail
 
+Bugfixes:
+- Select proper thumbnail mode to handle longstrip image
+
 Internals:
 - Synchronize php tools between phive managed and GitHub action
 - Remove GitHub action job to build release artifact

@@ -44,9 +44,15 @@ class CoverController extends AbstractController
 
             $imagine = new Imagine();
             $size = new Box($size, $size);
+            $image = $imagine->read($stream);
 
-            return $imagine->read($stream)
-                 ->thumbnail($size, ManipulatorInterface::THUMBNAIL_OUTBOUND)
+            // Crop longstrip image
+            $imageSize = $image->getSize();
+            $aspectRatio = $imageSize->getHeight() / $imageSize->getWidth();
+            $mode = $aspectRatio > 2 ? ManipulatorInterface::THUMBNAIL_OUTBOUND : ManipulatorInterface::THUMBNAIL_INSET;
+
+            return $image
+                 ->thumbnail($size, $mode)
                  ->get('png');
         });
 
