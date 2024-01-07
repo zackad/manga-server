@@ -16,7 +16,11 @@ Internals:
 - Remove annotation based route configuration
 - Use nodejs-slim package to make sure that `npm` won't be available
 - Enable caching for webpack build
-- Fix deprecated method to set up composer dependency cache on github actions
+- Fix deprecated method to set up composer dependency cache on GitHub actions
+- Add rector as devtools
+- Use phpstan installed by composer, remove from phive managed tools
+- Update syntax to level php 8.1 using rector
+- Update phpstan baseline
 
 ---
 v0.16.1 (2023-11-11)
