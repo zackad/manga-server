@@ -11,24 +11,13 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class DirectoryListing
 {
-    /** @var \ZipArchive */
-    private $za;
-    /** @var Finder */
-    private $finder;
-    /** @var CacheInterface */
-    private $cache;
-    /** @var ComicBook */
-    private $comicBook;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private readonly \ZipArchive $za;
+    private readonly Finder $finder;
 
-    public function __construct(CacheInterface $cache, ComicBook $comicBook, UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly CacheInterface $cache, private readonly ComicBook $comicBook, private readonly UrlGeneratorInterface $urlGenerator)
     {
         $this->za = new \ZipArchive();
         $this->finder = new Finder();
-        $this->cache = $cache;
-        $this->comicBook = $comicBook;
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function scan(string $target): array
@@ -41,7 +30,7 @@ class DirectoryListing
                 ->sortByName(true);
             $list = iterator_to_array($this->finder);
 
-            return array_values(array_map(function ($item) {return $item->getBaseName(); }, $list));
+            return array_values(array_map(fn ($item) => $item->getBaseName(), $list));
         });
     }
 
@@ -76,7 +65,7 @@ class DirectoryListing
 
         try {
             $isArchive = $this->za->open($pathname);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             return 'file';
         }
 

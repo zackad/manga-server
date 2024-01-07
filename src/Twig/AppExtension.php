@@ -16,35 +16,27 @@ class AppExtension extends AbstractExtension
 {
     /** @var Request|null */
     private $request;
-    /**
-     * @var Environment
-     */
-    private $twig;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
 
-    public function __construct(RequestStack $requestStack, Environment $twig, UrlGeneratorInterface $urlGenerator)
+    public function __construct(RequestStack $requestStack, private readonly Environment $twig, private readonly UrlGeneratorInterface $urlGenerator)
     {
         $this->request = $requestStack->getMainRequest();
-        $this->twig = $twig;
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function getFilters(): array
     {
         return [
-            new TwigFilter('is_image', [$this, 'isImage']),
-            new TwigFilter('filter_image', [$this, 'filterImage']),
-            new TwigFilter('filter_cover', [$this, 'filterCover']),
+            new TwigFilter('is_image', $this->isImage(...)),
+            new TwigFilter('filter_image', $this->filterImage(...)),
+            new TwigFilter('filter_cover', $this->filterCover(...)),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('get_title', [$this, 'getTitleFromUri']),
-            new TwigFunction('is_image', [$this, 'isImage']),
-            new TwigFunction('render_breadcrumbs', [$this, 'renderBreadcrumbs'], ['is_safe' => ['html'], 'needs_environment' => true]),
+            new TwigFunction('get_title', $this->getTitleFromUri(...)),
+            new TwigFunction('is_image', $this->isImage(...)),
+            new TwigFunction('render_breadcrumbs', $this->renderBreadcrumbs(...), ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
     }
 
@@ -52,18 +44,14 @@ class AppExtension extends AbstractExtension
     {
         $items = iterator_to_array($items);
 
-        return array_filter($items, function ($item) {
-            return $this->isImage($item['uri']);
-        });
+        return array_filter($items, fn ($item) => $this->isImage($item['uri']));
     }
 
     public function filterCover(\Traversable $items, bool $withCover = true): iterable
     {
         $items = iterator_to_array($items);
 
-        return array_filter($items, function ($item) use ($withCover) {
-            return $withCover ? $item['cover'] : !$item['cover'];
-        });
+        return array_filter($items, fn ($item) => $withCover ? $item['cover'] : !$item['cover']);
     }
 
     public function isImage(string $value): bool

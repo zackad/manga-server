@@ -6,11 +6,8 @@ namespace App\Service;
 
 class ArchiveReader
 {
-    private $filename;
-
-    public function __construct(string $filename)
+    public function __construct(private readonly string $filename)
     {
-        $this->filename = $filename;
     }
 
     public function getList(): array

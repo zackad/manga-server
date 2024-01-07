@@ -11,29 +11,18 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class Search
 {
-    public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
+    final public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
 
-    /** @var Finder */
-    private $finder;
-    /** @var ComicBook */
-    private $comicBook;
-    /** @var string */
-    private $mangaRoot;
-    /** @var CacheInterface */
-    private $cache;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-    /** @var string */
-    private $searchIndexExcluded;
+    private readonly Finder $finder;
 
-    public function __construct(string $mangaRoot, CacheInterface $cache, ComicBook $comicBook, UrlGeneratorInterface $urlGenerator, string $searchIndexExcluded = '')
-    {
+    public function __construct(
+        private readonly string $mangaRoot,
+        private readonly CacheInterface $cache,
+        private readonly ComicBook $comicBook,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly string $searchIndexExcluded = '',
+    ) {
         $this->finder = new Finder();
-        $this->comicBook = $comicBook;
-        $this->mangaRoot = $mangaRoot;
-        $this->cache = $cache;
-        $this->urlGenerator = $urlGenerator;
-        $this->searchIndexExcluded = $searchIndexExcluded;
     }
 
     public function find(string $search = ''): \Generator
@@ -47,9 +36,7 @@ class Search
         }
 
         $list = $this->buildSearchIndex();
-        $list = array_filter((array) $list, function (array $item) use ($search): bool {
-            return (bool) preg_match(sprintf('/%s/i', $search), $item['basename']);
-        });
+        $list = array_filter((array) $list, fn (array $item): bool => (bool) preg_match(sprintf('/%s/i', $search), (string) $item['basename']));
 
         yield from $this->populateEntry($list);
     }
@@ -58,7 +45,7 @@ class Search
     {
         /** @var array $file */
         foreach ($list as $file) {
-            $filename = trim($file['relative_path'], '/');
+            $filename = trim((string) $file['relative_path'], '/');
             $hasCover = $this->comicBook->getCover($file['realpath']);
             $uri = $this->urlGenerator->generate('app_archive_list', ['path' => $filename]);
             $coverUrl = !$hasCover
@@ -96,9 +83,7 @@ class Search
                     'relative_path' => sprintf('/%s/%s', $item->getRelativePath(), $item->getBasename()),
                 ];
             }
-            usort($indexData, function ($a, $b) {
-                return strnatcmp($a['basename'], $b['basename']);
-            });
+            usort($indexData, fn ($a, $b) => strnatcmp((string) $a['basename'], (string) $b['basename']));
 
             return array_values($indexData);
         });

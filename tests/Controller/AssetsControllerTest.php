@@ -43,9 +43,7 @@ class AssetsControllerTest extends WebTestCase
     {
         $manifestPath = dirname(__DIR__, 2).'/public/build/manifest.json';
         $data = json_decode(file_get_contents($manifestPath), true);
-        $mappedValues = array_map(function ($value) {
-            return [$value];
-        }, $data);
+        $mappedValues = array_map(fn ($value) => [$value], $data);
 
         return array_combine(array_keys($data), array_values($mappedValues));
     }
