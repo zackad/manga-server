@@ -21,6 +21,7 @@ Internals:
 - Use phpstan installed by composer, remove from phive managed tools
 - Update syntax to level php 8.1 using rector
 - Update phpstan baseline
+- Add composer package imagine/imagine as dependency
 
 ---
 v0.16.1 (2023-11-11)
