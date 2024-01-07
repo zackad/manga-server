@@ -24,10 +24,9 @@ class ComicBook
     {
         return $this->cache->get('cover-'.md5($pathname), function (ItemInterface $cacheItem) use ($pathname) {
             $cacheItem->tag('cover');
-            try {
-                $za = new \ZipArchive();
-                $za->open($pathname);
-            } catch (\Exception) {
+            $za = new \ZipArchive();
+            $status = $za->open($pathname);
+            if (true !== $status) {
                 $cacheItem->expiresAfter(-1);
 
                 return false;
