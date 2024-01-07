@@ -9,14 +9,10 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ComicBook
 {
-    public const IMAGE_EXTENSIONS = '/.+(jpe?g|png|webp)$/i';
+    final public const IMAGE_EXTENSIONS = '/.+(jpe?g|png|webp)$/i';
 
-    /** @var TagAwareCacheInterface */
-    private $cache;
-
-    public function __construct(TagAwareCacheInterface $cache)
+    public function __construct(private readonly TagAwareCacheInterface $cache)
     {
-        $this->cache = $cache;
     }
 
     /**
@@ -24,14 +20,14 @@ class ComicBook
      *
      * @return bool|string Resolvable image url, or false on failure
      */
-    public function getCover(string $pathname)
+    public function getCover(string $pathname): bool|string
     {
         return $this->cache->get('cover-'.md5($pathname), function (ItemInterface $cacheItem) use ($pathname) {
             $cacheItem->tag('cover');
             try {
                 $za = new \ZipArchive();
                 $za->open($pathname);
-            } catch (\Exception $exception) {
+            } catch (\Exception) {
                 $cacheItem->expiresAfter(-1);
 
                 return false;

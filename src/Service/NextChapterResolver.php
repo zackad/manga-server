@@ -12,30 +12,20 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class NextChapterResolver
 {
-    /**
-     * @var string
-     */
-    private $mangaRoot;
-    /**
-     * @var Request|null
-     */
-    private $request;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-
-    public function __construct(string $mangaRoot, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->mangaRoot = $mangaRoot;
-        $this->request = $requestStack->getMainRequest();
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        private readonly string $mangaRoot,
+        private readonly RequestStack $requestStack,
+        private readonly UrlGeneratorInterface $urlGenerator,
+    ) {
     }
 
     public function resolve(): string
     {
-        if (!$this->request instanceof Request) {
+        $request = $this->requestStack->getMainRequest();
+        if (!$request instanceof Request) {
             return $this->urlGenerator->generate('app_explore');
         }
-        $path = (string) $this->request->query->get('path', '');
+        $path = (string) $request->query->get('path', '');
         $decodedPath = trim(rawurldecode($path), '/');
         $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));
 

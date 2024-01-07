@@ -21,7 +21,7 @@ class ArchiveController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
         $path = $request->attributes->get('path');
-        $decodedPath = rawurldecode($path);
+        $decodedPath = rawurldecode((string) $path);
         $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
 
         $entries = new ArchiveReader($target);
