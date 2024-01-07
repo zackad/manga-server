@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.17.0 (2024-01-07)
 Features:
 - New controller to generate cover thumbnail
 
