@@ -14,7 +14,7 @@ class DirectoryListing
     private readonly \ZipArchive $za;
     private readonly Finder $finder;
 
-    public function __construct(private readonly CacheInterface $cache, private readonly ComicBook $comicBook, private readonly UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly CacheInterface $cache, private readonly UrlGeneratorInterface $urlGenerator)
     {
         $this->za = new \ZipArchive();
         $this->finder = new Finder();
@@ -40,10 +40,7 @@ class DirectoryListing
         foreach ($entries as $entry) {
             $requestUri = trim($uriPrefix.'/'.$entry, '/');
             $pathname = $target.'/'.$entry;
-            $hasCover = $this->comicBook->getCover($pathname);
-            $coverUrl = !$hasCover
-                ? false
-                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => $requestUri.'/'.$hasCover]);
+            $coverUrl = 'archive' !== $this->getType($pathname) ? false : $this->urlGenerator->generate('app_cover_thumbnail', ['filename' => $requestUri]);
 
             $uri = !$isArchive
                 ? $this->urlGenerator->generate('app_explore', ['path' => $requestUri])

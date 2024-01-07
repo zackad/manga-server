@@ -18,7 +18,6 @@ class Search
     public function __construct(
         private readonly string $mangaRoot,
         private readonly CacheInterface $cache,
-        private readonly ComicBook $comicBook,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly string $searchIndexExcluded = '',
     ) {
@@ -46,11 +45,8 @@ class Search
         /** @var array $file */
         foreach ($list as $file) {
             $filename = trim((string) $file['relative_path'], '/');
-            $hasCover = $this->comicBook->getCover($file['realpath']);
             $uri = $this->urlGenerator->generate('app_archive_list', ['path' => $filename]);
-            $coverUrl = !$hasCover
-                ? false
-                : $this->urlGenerator->generate('app_archive_item', ['archive_item' => $filename.'/'.$hasCover]);
+            $coverUrl = $this->urlGenerator->generate('app_cover_thumbnail', ['filename' => $filename]);
             yield [
                 'uri' => $uri,
                 'label' => $file['basename'],

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Service;
 
-use App\Service\ComicBook;
 use App\Service\Search;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
@@ -23,9 +22,8 @@ class SearchTest extends TestCase
     protected function setUp(): void
     {
         $cache = new FilesystemTagAwareAdapter();
-        $comicbook = new ComicBook($cache);
         $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $comicbook, $urlGenerator);
+        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $urlGenerator);
     }
 
     /**
