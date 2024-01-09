@@ -46,11 +46,6 @@ parameters:
 			path: src/Service/DirectoryListing.php
 
 		-
-			message: "#^Method App\\\\Service\\\\NextChapterResolver\\:\\:getNext\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Service/NextChapterResolver.php
-
-		-
 			message: "#^Method App\\\\Service\\\\Search\\:\\:buildSearchIndex\\(\\) return type has no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Service/Search.php

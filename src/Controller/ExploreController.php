@@ -28,11 +28,6 @@ class ExploreController extends AbstractController
         $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
         $page = $request->query->getInt('page', 1);
 
-        $nextPage = '' === $request->query->get('next');
-        if ($nextPage) {
-            return $this->redirect($resolver->resolve());
-        }
-
         if (is_file($target)) {
             return $this->serveBinaryResponse($target);
         }
@@ -48,6 +43,8 @@ class ExploreController extends AbstractController
 
         return $this->render('entry_list.html.twig', [
             'pagination' => $pagination,
+            'prev_url' => $resolver->prevUrl($request->get('_route'), $path),
+            'next_url' => $resolver->nextUrl($request->get('_route'), $path),
         ]);
     }
 

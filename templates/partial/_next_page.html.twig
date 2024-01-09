@@ -1,10 +1,8 @@
-{% if app.request.get('_route') == 'app_explore' %}
-  <div class="mt-2 border-0 border-t border-t-2 border-dashed border-gray-600 p-4 text-center text-lg font-medium text-gray-400">
-    End of:
-    <strong class="font-semibold">
-      <span class="break-words">{{ get_title()|default('Title') }}</span>
-      <span>/</span>
-      <span><a href="{{ path('app_explore', app.request.query|merge({ next: '' })) }}" class="underline">Next &raquo;</a></span>
-    </strong>
+<div class="mt-2 border-0 border-t-2 border-dashed border-gray-600 p-4 text-center text-lg font-medium text-gray-400">
+  End of:
+  <strong class="font-semibold"><span class="break-words">{{ get_title()|default('Title') }}</span></strong>
+  <div class="grid grid-cols-2 gap-1">
+    <a data-e2e="prev-link" href="{{ prev_url|default }}" class="border border-gray-700 hover:bg-gray-800">&laquo; Prev</a>
+    <a data-e2e="next-link" href="{{ next_url|default }}" class="border border-gray-700 hover:bg-gray-800">Next &raquo;</a>
   </div>
-{% endif %}
+</div>

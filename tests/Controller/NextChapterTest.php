@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
-use App\Service\NextChapterResolver;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -20,33 +18,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class NextChapterTest extends WebTestCase
 {
-    /**
-     * @var KernelBrowser
-     */
-    private $client;
+    private KernelBrowser $client;
+    private UrlGeneratorInterface $urlGenerator;
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
-    }
-
-    /**
-     * @dataProvider nextDataProvider
-     */
-    public function testGetNextChapter(array $queryParams, string $redirectTarget)
-    {
-        $this->client->request('GET', '/explore', $queryParams);
-        $this->assertResponseRedirects($redirectTarget);
-    }
-
-    public function nextDataProvider(): array
-    {
-        return [
-            [['next' => ''], '/explore'],
-            [['path' => urlencode('empty-directory'), 'next' => ''], '/explore'],
-            [['path' => rawurlencode('Series 1/Chapter 001'), 'next' => ''], sprintf('/explore?path=%s', '/Series%201/Chapter%20002')],
-            [['path' => rawurlencode('Series 1/Chapter 005'), 'next' => ''], sprintf('/explore?path=%s', '/Series%201')],
-        ];
+        $this->urlGenerator = self::getContainer()->get(UrlGeneratorInterface::class);
     }
 
     public function testHomeDoesNotRedirect()
@@ -55,13 +33,52 @@ class NextChapterTest extends WebTestCase
         $this->assertResponseRedirects('/explore');
     }
 
-    public function testRequestObjectIsNullReturnToHomepage()
+    /**
+     * @dataProvider directoryProvider
+     */
+    public function testCanNavigateFromDirectory(string $current, string $prev, string $next): void
     {
-        $requestStack = $this->createMock(RequestStack::class);
-        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
-        $urlGenerator->method('generate')->willReturn('/');
-        $nextResolver = new NextChapterResolver('/path/to/manga/root', $requestStack, $urlGenerator);
+        $url = $this->urlGenerator->generate('app_explore', ['path' => $current]);
+        $this->client->request('GET', $url);
+        $crawler = $this->client->getCrawler();
+        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->link();
+        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->link();
 
-        $this->assertEquals('/', $nextResolver->resolve());
+        self::assertStringEndsWith(rawurlencode($prev), $prevUrl->getUri());
+        self::assertStringEndsWith(rawurlencode($next), $nextUrl->getUri());
+    }
+
+    public static function directoryProvider(): array
+    {
+        return [
+            'first directory' => ['Series 1', 'Series 1', 'Series 2'],
+            'last directory' => ['empty-directory', 'archive copy #12.zip', 'empty.zip'],
+            'directory before archive' => ['Series 2', 'Series 1', 'archive.zip'],
+        ];
+    }
+
+    /**
+     * @dataProvider archiveProvider
+     */
+    public function testCanNavigateFromArchive(string $current, string $prev, string $next): void
+    {
+        $url = $this->urlGenerator->generate('app_archive_list', ['path' => $current]);
+        $this->client->request('GET', $url);
+        $crawler = $this->client->getCrawler();
+        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->link();
+        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->link();
+
+        self::assertStringEndsWith(rawurlencode($prev), $prevUrl->getUri());
+        self::assertStringEndsWith(rawurlencode($next), $nextUrl->getUri());
+    }
+
+    public static function archiveProvider(): array
+    {
+        return [
+            'first archive' => ['archive.zip', 'Series 2', 'archive copy #12.zip'],
+            'archive before directory' => ['empty.zip', 'empty-directory', 'nested-archive.zip'],
+            'archive after directory' => ['archive copy #12.zip', 'archive.zip', 'empty-directory'],
+            'last archive' => ['nested-archive.zip', 'empty.zip', 'nested-archive.zip'],
+        ];
     }
 }

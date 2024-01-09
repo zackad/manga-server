@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Add navigation button to previous/next directory or archive
+
 Internals:
 - Explicitly declare phpunit as dev dependency
 - Set default IDE to phpstorm

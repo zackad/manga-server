@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
+use App\Service\NextChapterResolver;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,29 +17,51 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ArchiveController extends AbstractController
 {
-    #[Route('/archive/{path}', name: 'app_archive_list', requirements: ['path' => '.+\.(zip|cbz|epub)$'], methods: ['GET'])]
-    public function archiveListing(Request $request, DirectoryListing $listing, string $mangaRoot, PaginatorInterface $paginator): Response
+    public function __construct(private readonly string $mangaRoot)
     {
+    }
+
+    #[Route(
+        '/archive/{path}',
+        name: 'app_archive_list',
+        requirements: ['path' => '.+\.(zip|cbz|epub)$'], methods: ['GET'])
+    ]
+    public function archiveListing(
+        Request $request,
+        DirectoryListing $listing,
+        PaginatorInterface $paginator,
+        NextChapterResolver $resolver,
+    ): Response {
         $page = $request->query->getInt('page', 1);
         $path = $request->attributes->get('path');
+        $routeName = $request->get('_route');
         $decodedPath = rawurldecode((string) $path);
-        $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
+        $nextUrl = $resolver->nextUrl($routeName, $decodedPath);
+        $prevUrl = $resolver->prevUrl($routeName, $decodedPath);
 
+        $target = sprintf('%s/%s', $this->mangaRoot, $decodedPath);
         $entries = new ArchiveReader($target);
-        $entryList = iterator_to_array($listing->buildList($entries->getList(), $decodedPath, $target, true));
+        $listIterator = $listing->buildList($entries->getList(), $decodedPath, $target, true);
+        $entryList = iterator_to_array($listIterator);
         $pagination = $paginator->paginate($entryList, $page);
 
         return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
             'pagination' => $pagination,
+            'next_url' => $nextUrl,
+            'prev_url' => $prevUrl,
         ]);
     }
 
-    #[Route('/archive/{archive_item}', name: 'app_archive_item', requirements: ['archive_item' => '.+\.(zip|cbz|epub\/).+$'])]
-    public function archiveItem(Request $request, MimeGuesser $guesser, string $mangaRoot): Response
+    #[Route(
+        '/archive/{archive_item}',
+        name: 'app_archive_item',
+        requirements: ['archive_item' => '.+\.(zip|cbz|epub\/).+$'])
+    ]
+    public function archiveItem(Request $request, MimeGuesser $guesser): Response
     {
         $path = $request->attributes->get('archive_item');
-        $target = sprintf('%s/%s', $mangaRoot, $path);
+        $target = sprintf('%s/%s', $this->mangaRoot, $path);
         $archivePath = (string) preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
         $archivePath = realpath(rawurldecode($archivePath));
         $entryName = preg_replace('/.*(cbz|epub|zip)\//i', '', $target);
