@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Explicitly declare phpunit as dev dependency
+
 ---
 v0.17.0 (2024-01-07)
 Features:
