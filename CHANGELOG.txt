@@ -5,6 +5,7 @@ next (unreleased)
 
 Features:
 - Add navigation button to previous/next directory or archive
+- Cache actual thumbnail cover response
 
 Internals:
 - Explicitly declare phpunit as dev dependency

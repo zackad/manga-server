@@ -17,6 +17,8 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class CoverController extends AbstractController
 {
+    private const CACHE_EXPIRES_AFTER = '+1 months';
+
     public function __construct(private readonly TagAwareCacheInterface $cache)
     {
     }
@@ -56,6 +58,9 @@ class CoverController extends AbstractController
                  ->get('png');
         });
 
-        return new Response($image, headers: ['Content-Type' => 'image/png']);
+        $response = new Response($image, headers: ['Content-Type' => 'image/png']);
+        $response->setExpires(new \DateTimeImmutable(self::CACHE_EXPIRES_AFTER));
+
+        return $response;
     }
 }
