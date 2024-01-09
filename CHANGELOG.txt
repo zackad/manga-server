@@ -6,6 +6,7 @@ next (unreleased)
 Internals:
 - Explicitly declare phpunit as dev dependency
 - Set default IDE to phpstorm
+- Do not retrieve request object on constructor
 
 ---
 v0.17.0 (2024-01-07)

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
@@ -14,12 +13,11 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
-    /** @var Request|null */
-    private $request;
-
-    public function __construct(RequestStack $requestStack, private readonly Environment $twig, private readonly UrlGeneratorInterface $urlGenerator)
-    {
-        $this->request = $requestStack->getMainRequest();
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly Environment $twig,
+        private readonly UrlGeneratorInterface $urlGenerator,
+    ) {
     }
 
     public function getFilters(): array
@@ -61,11 +59,13 @@ class AppExtension extends AbstractExtension
 
     public function getTitleFromUri(): ?string
     {
-        if (null === $this->request) {
+        $request = $this->requestStack->getMainRequest();
+        if (null === $request) {
             return null;
         }
 
-        $decodedUri = urldecode((string) $this->request->query->get('path', ''));
+        $path = $request->query->get('path') ?? $request->get('path');
+        $decodedUri = urldecode((string) $path);
         if ('' === $decodedUri) {
             return null;
         }
@@ -78,11 +78,12 @@ class AppExtension extends AbstractExtension
 
     public function renderBreadcrumbs(): ?string
     {
-        if (null === $this->request) {
+        $request = $this->requestStack->getMainRequest();
+        if (null === $request) {
             return null;
         }
 
-        $target = $this->request->query->get('path') ?? $this->request->attributes->get('path');
+        $target = $request->query->get('path') ?? $request->attributes->get('path');
         $decodedTarget = rawurldecode((string) $target);
         $breadcumbs = preg_split('/\//', $decodedTarget, -1, PREG_SPLIT_NO_EMPTY);
 
