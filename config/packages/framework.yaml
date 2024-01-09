@@ -18,6 +18,8 @@ framework:
     php_errors:
         log: true
 
+    ide: 'phpstorm://open?file=%%f&line=%%l'
+
 when@test:
     framework:
         test: true

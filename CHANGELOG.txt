@@ -5,6 +5,7 @@ next (unreleased)
 
 Internals:
 - Explicitly declare phpunit as dev dependency
+- Set default IDE to phpstorm
 
 ---
 v0.17.0 (2024-01-07)
