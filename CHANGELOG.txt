@@ -3,6 +3,8 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.18.0 (2024-01-09)
 Features:
 - Add navigation button to previous/next directory or archive
 - Cache actual thumbnail cover response
