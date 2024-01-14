@@ -44,6 +44,9 @@ class CoverController extends AbstractController
             /** @var resource $stream */
             $stream = $zipArchive->getStream($entryName);
 
+            // Temporary fix to handle memory exhaustion when processing large image
+            ini_set('memory_limit', '256M');
+
             $imagine = new Imagine();
             $size = new Box($size, $size);
             $image = $imagine->read($stream);

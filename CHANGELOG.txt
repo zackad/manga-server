@@ -5,6 +5,9 @@ next (unreleased)
 Features:
 - Change styling for prev/next button
 
+Bugfixes:
+- Increase memory limit when generating thumbnail cover
+
 ---
 v0.18.0 (2024-01-09)
 Features:
