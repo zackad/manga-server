@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.19.0 (2024-01-14)
 Features:
 - Change styling for prev/next button
 
