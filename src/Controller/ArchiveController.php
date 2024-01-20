@@ -61,6 +61,7 @@ class ArchiveController extends AbstractController
     public function archiveItem(Request $request, MimeGuesser $guesser): Response
     {
         $path = $request->attributes->get('archive_item');
+        $path = rawurldecode($path);
         $target = sprintf('%s/%s', $this->mangaRoot, $path);
         $archivePath = (string) preg_replace('/(?<=\.cbz|\.epub|\.zip).*$/i', '', $target);
         $archivePath = realpath(rawurldecode($archivePath));

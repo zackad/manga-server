@@ -44,7 +44,7 @@ class Search
     {
         /** @var array $file */
         foreach ($list as $file) {
-            $filename = trim((string) $file['relative_path'], '/');
+            $filename = rawurlencode(trim((string) $file['relative_path'], '/'));
             $uri = $this->urlGenerator->generate('app_archive_list', ['path' => $filename]);
             $coverUrl = $this->urlGenerator->generate('app_cover_thumbnail', ['filename' => $filename]);
             yield [

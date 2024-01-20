@@ -27,6 +27,7 @@ class CoverController extends AbstractController
     public function thumbnail(string $mangaRoot, Request $request, ComicBook $comicBook): Response
     {
         $filename = (string) $request->query->get('filename');
+        $filename = rawurldecode($filename);
         $size = $request->query->getInt('size', 512);
         $target = $mangaRoot.'/'.$filename;
         $cacheKey = sprintf('cover-thumbnail-%s-%s', $size, md5($filename));

@@ -38,7 +38,7 @@ class DirectoryListing
     {
         /** @var string $entry */
         foreach ($entries as $entry) {
-            $requestUri = trim($uriPrefix.'/'.$entry, '/');
+            $requestUri = rawurlencode(trim($uriPrefix.'/'.$entry, '/'));
             $pathname = $target.'/'.$entry;
             $coverUrl = 'archive' !== $this->getType($pathname) ? false : $this->urlGenerator->generate('app_cover_thumbnail', ['filename' => $requestUri]);
 
