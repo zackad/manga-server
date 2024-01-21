@@ -65,4 +65,11 @@ class ArchiveControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(404);
     }
+
+    public function testSkipPagination()
+    {
+        $this->client->request('GET', '/archive/Series 1/nopaginate/no-paginate.zip');
+        $entry = $this->client->getCrawler()->filter('[data-e2e=entry-link]');
+        self::assertCount(120, $entry);
+    }
 }

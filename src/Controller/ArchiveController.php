@@ -10,6 +10,7 @@ use App\Service\MimeGuesser;
 use App\Service\NextChapterResolver;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -43,7 +44,8 @@ class ArchiveController extends AbstractController
         $entries = new ArchiveReader($target);
         $listIterator = $listing->buildList($entries->getList(), $decodedPath, $target, true);
         $entryList = iterator_to_array($listIterator);
-        $pagination = $paginator->paginate($entryList, $page);
+        $limit = $this->skipPagination($target) ? count($entryList) : null;
+        $pagination = $paginator->paginate($entryList, $page, $limit);
 
         return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
@@ -89,5 +91,34 @@ class ArchiveController extends AbstractController
         $response->send();
 
         return $response;
+    }
+
+    private function skipPagination(string $path): bool
+    {
+        $finder = new Finder();
+        $directory = dirname((string) realpath($path));
+        $root = realpath($this->mangaRoot);
+        while (true) {
+            $finder->files()
+                ->depth(0)
+                ->name('.nopaginate')
+                ->ignoreDotFiles(false)
+                ->in($directory);
+
+            if ($finder->hasResults()) {
+                return true;
+            }
+
+            $parentDirectory = dirname($directory);
+
+            // Stop if we have reached the root directory
+            if ($directory === $root) {
+                break;
+            }
+
+            $directory = $parentDirectory;
+        }
+
+        return $finder->hasResults();
     }
 }

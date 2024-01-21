@@ -35,7 +35,7 @@
   <div class="flex gap-2 border-b border-gray-600 pb-2 md:flex-col">
     {% if item.cover %}
       <a href="{{ item.uri }}" class="w-1/2 md:w-full">
-        <img data-src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="lozad aspect-[3/4] w-full object-cover" />
+        <img data-e2e="entry-link" data-src="{{ item.cover }}" alt="Cover for {{ item.label }}" class="lozad aspect-[3/4] w-full object-cover" />
       </a>
     {% endif %}
     <div class="w-1/2 md:w-full">
@@ -49,6 +49,6 @@
     {% if item.type == 'directory' %}
       <span class="block h-5 w-8 flex-shrink-0 pr-2">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
-    <a href="{{ item.uri }}" class="line-clamp-5 break-words md:line-clamp-2">{{ item.label }}</a>
+    <a data-e2e="entry-link" href="{{ item.uri }}" class="line-clamp-5 break-words md:line-clamp-2">{{ item.label }}</a>
   </div>
 {% endblock %}
