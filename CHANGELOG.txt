@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.19.1 (2024-01-21)
 Bugfixes:
 - Use raw url encoding/decoding to handle special character
 
