@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.20.0 (2024-01-21)
 Features:
 - Add feature to disable pagination for comicbook/archive file by placing hidden
   `.nopaginate` file into directory you want to disable pagination
