@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internal:
+- Log error and deprecation into file on prod environment
+
 ---
 v0.20.0 (2024-01-21)
 Features:
