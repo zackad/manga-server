@@ -12,6 +12,7 @@ Internals:
 - Update symfony/twig-bundle recipes
 - Update symfony/translation recipes
 - Update symfony/monolog-bundle recipes
+- Update symfony/phpunit-bridge recipes
 
 ---
 v0.20.1 (2024-01-30)
