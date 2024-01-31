@@ -10,6 +10,7 @@ Internals:
 - Update symfony/webpack-encore bundle to version 2.x
 - Add symfony/stimulus-bundle as dependency
 - Update symfony/twig-bundle recipes
+- Update symfony/translation recipes
 
 ---
 v0.20.1 (2024-01-30)
