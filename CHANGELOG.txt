@@ -5,6 +5,9 @@ next (unreleased)
 Features:
 - Put directories at the start of the list before file type entry
 
+Internals:
+- Update symfony/flex to version 2.x
+
 ---
 v0.20.1 (2024-01-30)
 Internal:
