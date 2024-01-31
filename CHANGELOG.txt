@@ -2,6 +2,8 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+Features:
+- Put directories at the start of the list before file type entry
 
 ---
 v0.20.1 (2024-01-30)

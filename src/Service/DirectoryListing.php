@@ -28,7 +28,15 @@ class DirectoryListing
                 ->in($target)
                 ->depth(0)
                 ->sortByName(true);
-            $list = iterator_to_array($this->finder);
+            $directories = $files = [];
+            foreach ($this->finder as $item) {
+                if ($item->isDir()) {
+                    $directories[] = $item;
+                } else {
+                    $files[] = $item;
+                }
+            }
+            $list = array_merge($directories, $files);
 
             return array_values(array_map(fn ($item) => $item->getBaseName(), $list));
         });
