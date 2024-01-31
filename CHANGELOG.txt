@@ -11,6 +11,7 @@ Internals:
 - Add symfony/stimulus-bundle as dependency
 - Update symfony/twig-bundle recipes
 - Update symfony/translation recipes
+- Update symfony/monolog-bundle recipes
 
 ---
 v0.20.1 (2024-01-30)
