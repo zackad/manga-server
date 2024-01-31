@@ -12,7 +12,9 @@ Web application to serve manga collection from your computer over the network.
 ## Requirements
 
 **Runtime**
-- PHP version 8.1 or newer
+- PHP version 8.1 or later with following extension enabled:
+  - gd
+  - zip
 
 **Development**
 - composer

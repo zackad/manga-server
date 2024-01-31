@@ -15,6 +15,7 @@ Internals:
 - Update symfony/phpunit-bridge recipes
 - Update symfony framework to version 6.4.3
 - Update knplabs/knp-paginator-bundle to version 6.x
+- Declare `ext-gd` as required extension
 
 ---
 v0.20.1 (2024-01-30)
