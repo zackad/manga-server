@@ -2,6 +2,9 @@ Manga Server
 https://github.com/zackad/manga-server
 
 next (unreleased)
+
+---
+v0.22.0 (2024-02-07)
 Features:
 - Allow to set php memory limit for generating cover thumbnail via env variable
 
