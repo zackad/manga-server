@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    default_memory_limit: '128M'
 
 services:
     # default configuration for services in *this* file
@@ -14,6 +15,7 @@ services:
             $mangaRoot: '%env(resolve:MANGA_ROOT_DIRECTORY)%'
             $searchIndexExcluded: '%env(SEARCH_INDEX_EXCLUDED)%'
             $projectRoot: '%kernel.project_dir%'
+            $memoryLimit: '%env(default:default_memory_limit:APP_MEMORY_LIMIT)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
