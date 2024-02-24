@@ -16,6 +16,5 @@
             }
         }
     ],
-    "plugins": ["prettier-plugin-twig-melody", "prettier-plugin-tailwindcss"],
-    "pluginSearchDirs": []
+    "plugins": ["prettier-plugin-twig-melody", "prettier-plugin-tailwindcss"]
 }

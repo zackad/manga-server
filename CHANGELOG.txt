@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Upgrade prettier to version 3 and their plugins
+
 ---
 v0.22.0 (2024-02-07)
 Features:
