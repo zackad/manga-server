@@ -7,12 +7,15 @@ namespace App\Service;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class NextChapterResolver
 {
     public function __construct(
         private readonly string $mangaRoot,
         private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly TagAwareCacheInterface $cache,
     ) {
     }
 
@@ -21,7 +24,7 @@ class NextChapterResolver
         $decodedPath = trim(rawurldecode($filename), '/');
         $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));
 
-        $entries = iterator_to_array($this->getEntry($parent));
+        $entries = $this->getEntry($parent);
         $currentEntry = $decodedPath;
         $nextEntry = $this->getNext($entries, $currentEntry);
         if (empty($nextEntry)) {
@@ -41,7 +44,7 @@ class NextChapterResolver
         $decodedPath = trim(rawurldecode($filename), '/');
         $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));
 
-        $entries = iterator_to_array($this->getEntry($parent));
+        $entries = $this->getEntry($parent);
         $currentEntry = $decodedPath;
         $prevEntry = $this->getPrev($entries, $currentEntry);
         if (empty($prevEntry)) {
@@ -56,22 +59,33 @@ class NextChapterResolver
         return $this->urlGenerator->generate('app_explore', ['path' => $prevEntry]);
     }
 
-    private function getEntry(string $directory): \Generator
+    /**
+     * @return string[]
+     */
+    private function getEntry(string $directory): array
     {
-        $finder = new Finder();
-        $finder->in($directory)
-            ->depth('== 0')
-            ->filter(function (\SplFileInfo $fileInfo) {
-                return $fileInfo->isDir() || in_array($fileInfo->getExtension(), ['cbz', 'epub', 'zip']);
-            })
-            ->sortByName(true);
+        return $this->cache->get(sprintf('entry-%s', md5($directory)), function (ItemInterface $item) use ($directory) {
+            $item->expiresAt(new \DateTimeImmutable('+1 week'));
+            $item->tag(['entry']);
 
-        /** @var SplFileInfo $entry */
-        foreach ($finder as $entry) {
-            // Fix windows path separator
-            $fixedPath = str_replace('\\', '/', $entry->getPathname());
-            yield trim(str_replace($this->mangaRoot, '', $fixedPath), '/');
-        }
+            $results = [];
+            $finder = new Finder();
+            $finder->in($directory)
+                ->depth('== 0')
+                ->filter(function (\SplFileInfo $fileInfo) {
+                    return $fileInfo->isDir() || in_array($fileInfo->getExtension(), ['cbz', 'epub', 'zip']);
+                })
+                ->sortByName(true);
+
+            /** @var SplFileInfo $entry */
+            foreach ($finder as $entry) {
+                // Fix windows path separator
+                $fixedPath = str_replace('\\', '/', $entry->getPathname());
+                $results[] = trim(str_replace($this->mangaRoot, '', $fixedPath), '/');
+            }
+
+            return $results;
+        });
     }
 
     /**

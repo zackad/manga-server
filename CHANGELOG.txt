@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Bugfixes:
+- Improve directory traversing performance with caching
+
 Internals:
 - Upgrade prettier to version 3 and their plugins
 

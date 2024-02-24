@@ -15,11 +15,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ArchiveController extends AbstractController
 {
-    public function __construct(private readonly string $mangaRoot)
-    {
+    public function __construct(
+        private readonly string $mangaRoot,
+        private readonly TagAwareCacheInterface $cache,
+    ) {
     }
 
     #[Route(
@@ -95,30 +99,37 @@ class ArchiveController extends AbstractController
 
     private function skipPagination(string $path): bool
     {
-        $finder = new Finder();
         $directory = dirname((string) realpath($path));
-        $root = realpath($this->mangaRoot);
-        while (true) {
-            $finder->files()
-                ->depth(0)
-                ->name('.nopaginate')
-                ->ignoreDotFiles(false)
-                ->in($directory);
 
-            if ($finder->hasResults()) {
-                return true;
+        return $this->cache->get(sprintf('nopaginate-%s', md5($directory)), function (ItemInterface $item) use ($directory) {
+            $item->expiresAt(new \DateTimeImmutable('+1 week'));
+            $item->tag(['nopaginate']);
+
+            $root = realpath($this->mangaRoot);
+            $finder = new Finder();
+
+            while (true) {
+                $finder->files()
+                    ->depth(0)
+                    ->name('.nopaginate')
+                    ->ignoreDotFiles(false)
+                    ->in($directory);
+
+                if ($finder->hasResults()) {
+                    return true;
+                }
+
+                $parentDirectory = dirname($directory);
+
+                // Stop if we have reached the root directory
+                if ($directory === $root) {
+                    break;
+                }
+
+                $directory = $parentDirectory;
             }
 
-            $parentDirectory = dirname($directory);
-
-            // Stop if we have reached the root directory
-            if ($directory === $root) {
-                break;
-            }
-
-            $directory = $parentDirectory;
-        }
-
-        return $finder->hasResults();
+            return $finder->hasResults();
+        });
     }
 }
