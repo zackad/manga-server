@@ -8,6 +8,7 @@ Bugfixes:
 
 Internals:
 - Upgrade prettier to version 3 and their plugins
+- Use array adapter for testing cache
 
 ---
 v0.22.0 (2024-02-07)
