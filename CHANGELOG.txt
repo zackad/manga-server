@@ -3,6 +3,8 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.23.0 (2024-02-24)
 Bugfixes:
 - Improve directory traversing performance with caching
 
