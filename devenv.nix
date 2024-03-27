@@ -34,6 +34,10 @@
   # https://devenv.sh/pre-commit-hooks/
   # pre-commit.hooks.shellcheck.enable = true;
 
+  # https://devenv.sh/reference/options/#processimplementation
+  # Select `honcho` as process manager
+  process.implementation = "honcho";
+
   # https://devenv.sh/processes/
   processes.asset.exec = "yarn run dev";
   processes.web.exec = "symfony server:start --no-tls";
