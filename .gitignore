@@ -29,6 +29,7 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 
 # Devenv
+.devenv
 .devenv*
 devenv.local.nix
 .direnv

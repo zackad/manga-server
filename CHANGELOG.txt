@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- DX: integrate devenv into nix flakes
+
 ---
 v0.23.0 (2024-02-24)
 Bugfixes:

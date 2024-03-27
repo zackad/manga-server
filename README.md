@@ -67,4 +67,12 @@ symfony server:start
 yarn dev
 ```
 
-- OPTIONAL: If you have [devenv](https://devenv.sh/getting-started/) setup on your machine, you can run `devenv up` to start all service required to start development.
+### Nix Support
+This project support nix flakes with [direnv](https://direnv.net/) enabled.
+```shell
+# Enable direnv autoload
+direnv allow
+
+# Start development process
+devenv up
+```
