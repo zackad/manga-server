@@ -3,6 +3,7 @@
 {
   # https://devenv.sh/basics/
   env.GREET = "devenv";
+  env.OVERMIND_SKIP_ENV = true;
 
   # https://devenv.sh/packages/
   packages = [
@@ -35,8 +36,7 @@
   # pre-commit.hooks.shellcheck.enable = true;
 
   # https://devenv.sh/reference/options/#processimplementation
-  # Select `honcho` as process manager
-  process.implementation = "honcho";
+  process.implementation = "overmind";
 
   # https://devenv.sh/processes/
   processes.asset.exec = "yarn run dev";

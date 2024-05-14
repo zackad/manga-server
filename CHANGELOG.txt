@@ -6,6 +6,7 @@ next (unreleased)
 Internals:
 - DX: integrate devenv into nix flakes
 - DX: use frankenphp as runtime, replacing symfony-cli as dev server
+- Replace process manager implementation for devenv `honcho` -> `overmind`
 
 ---
 v0.23.0 (2024-02-24)
