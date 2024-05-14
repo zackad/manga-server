@@ -6,10 +6,10 @@
 
   # https://devenv.sh/packages/
   packages = [
-    pkgs.php83Extensions.xdebug
-    pkgs.php83Packages.phive
+    pkgs.frankenphp
+    pkgs.php82Extensions.xdebug
+    pkgs.php82Packages.phive
     pkgs.nodejs-slim_18
-    pkgs.symfony-cli
     pkgs.yarn
     pkgs.zip
   ];
@@ -25,7 +25,7 @@
   # languages.nix.enable = true;
   languages.php = {
     enable = true;
-    package = pkgs.php83.buildEnv {
+    package = pkgs.php82.buildEnv {
       # List of php extension required
       extensions = { all, enabled }: with all; enabled ++ [ pcov ];
     };
@@ -40,7 +40,7 @@
 
   # https://devenv.sh/processes/
   processes.asset.exec = "yarn run dev";
-  processes.web.exec = "symfony server:start --no-tls";
+  processes.web.exec = "frankenphp php-server --root public --listen :8000";
 
   # See full reference at https://devenv.sh/reference/options/
 }
