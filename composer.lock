@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd6c0d27bf702202cc6a3da22f92613",
+    "content-hash": "91a4065d7b05a3c7a4ebfae6bd0c0b15",
     "packages": [
         {
             "name": "imagine/imagine",
@@ -6467,6 +6467,7 @@
     "platform": {
         "php": ">=8.1",
         "ext-ctype": "*",
+        "ext-gd": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-zip": "*"
