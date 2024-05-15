@@ -33,7 +33,9 @@
   };
 
   # https://devenv.sh/pre-commit-hooks/
-  # pre-commit.hooks.shellcheck.enable = true;
+  pre-commit.hooks.php-cs-fixer.enable = true;
+  pre-commit.hooks.phpstan.enable = true;
+  pre-commit.hooks.prettier.enable = true;
 
   # https://devenv.sh/reference/options/#processimplementation
   process.implementation = "overmind";

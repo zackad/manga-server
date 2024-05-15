@@ -4,6 +4,7 @@
 /tools
 *.cache
 *.zip
+.pre-commit-config.yaml
 
 ###> symfony/framework-bundle ###
 /.env.local
