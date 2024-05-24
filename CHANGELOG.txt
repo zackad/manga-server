@@ -3,6 +3,8 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.24.0 (2024-05-24)
 Features:
 - Add ability to reload image if an error occured
 
