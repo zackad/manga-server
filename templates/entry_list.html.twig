@@ -9,12 +9,12 @@
       <div class="mt-2 px-2" {{ stimulus_target('app', 'entryContainer') }}>
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {% for item in pagination|filter_cover(false) %}
-            <div class="border-b border-gray-600">
+            <div class="border-b border-gray-600 text-base">
               {{ block('no_cover') }}
             </div>
           {% endfor %}
         </div>
-        <div class="mt-2 grid grid-cols-1 gap-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <div class="mt-2 grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {% for item in pagination|filter_cover %}
             {{ block('has_cover') }}
           {% endfor %}
@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block has_cover %}
-  <div class="flex gap-2 border-b border-gray-600 pb-2 md:flex-col">
+  <div class="flex flex-col gap-2 border-b border-gray-600 pb-2">
     {% if item.cover %}
       <div {{ stimulus_controller('image-loader') }}>
         <div {{ stimulus_target('image-loader', 'reload') }}
@@ -52,7 +52,7 @@
           class="hidden aspect-[3/4] w-full cursor-pointer rounded-lg border border-gray-100 bg-gray-800 p-8 text-center text-2xl font-bold hover:bg-gray-700 active:bg-gray-900">
           Reload
         </div>
-        <a href="{{ item.uri }}" class="w-1/2 md:w-full">
+        <a href="{{ item.uri }}">
           <img {{ stimulus_target('image-loader', 'image') }}
             data-e2e="entry-link"
             data-src="{{ item.cover }}"
@@ -61,7 +61,7 @@
         </a>
       </div>
     {% endif %}
-    <div class="w-1/2 md:w-full">
+    <div class="text-xs">
       {{ block('no_cover') }}
     </div>
   </div>
@@ -72,6 +72,6 @@
     {% if item.type == 'directory' %}
       <span class="block h-5 w-8 flex-shrink-0 pr-2">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
-    <a data-e2e="entry-link" href="{{ item.uri }}" class="line-clamp-5 break-words md:line-clamp-2">{{ item.label }}</a>
+    <a data-e2e="entry-link" href="{{ item.uri }}" class="line-clamp-3 break-words">{{ item.label }}</a>
   </div>
 {% endblock %}

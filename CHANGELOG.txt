@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Change layout for small screen to double column with image cover
+
 ---
 v0.24.0 (2024-05-24)
 Features:
