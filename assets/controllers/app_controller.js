@@ -1,5 +1,4 @@
 import { Controller } from '@hotwired/stimulus'
-import lozad from 'lozad'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -8,13 +7,6 @@ export default class extends Controller {
   imageContainerMaxWidth = null
 
   connect() {
-    // Initialize image lazy load observer
-    // FIXME: extract into separate controller
-    const observer = lozad('.lozad', {
-      loaded: (element) => element.addEventListener('load', this.lazyLoadListener.bind(this)),
-    })
-    observer.observe()
-
     // Add keyboard event listener
     addEventListener('keydown', this.keyPressListener.bind(this))
     // Listen to setting_controller.js event
@@ -26,10 +18,6 @@ export default class extends Controller {
 
   disconnect() {
     removeEventListener('keydown', this.keyPressListener)
-
-    // Remove event listener from lazy loaded images
-    const images = [...document.querySelectorAll('.lozad')]
-    images.forEach((image) => image.removeEventListener('load', this.lazyLoadListener.bind(this)))
   }
 
   saveSettings(event) {
@@ -54,11 +42,6 @@ export default class extends Controller {
         this.deactivateReader()
         break
     }
-  }
-
-  lazyLoadListener(event) {
-    const image = event.target
-    image.classList.remove('min-h-screen')
   }
 
   activateReader() {

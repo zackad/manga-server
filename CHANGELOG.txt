@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Add ability to reload image if an error occured
+
 Internals:
 - DX: integrate devenv into nix flakes
 - DX: use frankenphp as runtime, replacing symfony-cli as dev server
