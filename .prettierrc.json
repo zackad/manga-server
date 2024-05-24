@@ -16,5 +16,5 @@
             }
         }
     ],
-    "plugins": ["prettier-plugin-twig-melody", "prettier-plugin-tailwindcss"]
+    "plugins": ["@zackad/prettier-plugin-twig-melody", "prettier-plugin-tailwindcss"]
 }

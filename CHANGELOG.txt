@@ -9,6 +9,7 @@ Internals:
 - Replace process manager implementation for devenv `honcho` -> `overmind`
 - DX: setup pre-commit hook using devenv, enabled hooks (php-cs-fixer, phpstan,
   prettier)
+- Update prettier plugin for twig
 
 ---
 v0.23.0 (2024-02-24)
