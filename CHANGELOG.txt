@@ -3,11 +3,15 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.25.0 (2024-05-25)
+
 Features:
 - Change layout for small screen to double column with image cover
 
 ---
 v0.24.0 (2024-05-24)
+
 Features:
 - Add ability to reload image if an error occured
 
@@ -21,6 +25,7 @@ Internals:
 
 ---
 v0.23.0 (2024-02-24)
+
 Bugfixes:
 - Improve directory traversing performance with caching
 
@@ -30,11 +35,13 @@ Internals:
 
 ---
 v0.22.0 (2024-02-07)
+
 Features:
 - Allow to set php memory limit for generating cover thumbnail via env variable
 
 ---
 v0.21.0 (2024-01-31)
+
 Features:
 - Put directories at the start of the list before file type entry
 
@@ -52,22 +59,26 @@ Internals:
 
 ---
 v0.20.1 (2024-01-30)
+
 Internal:
 - Log error and deprecation into file on prod environment
 
 ---
 v0.20.0 (2024-01-21)
+
 Features:
 - Add feature to disable pagination for comicbook/archive file by placing hidden
   `.nopaginate` file into directory you want to disable pagination
 
 ---
 v0.19.1 (2024-01-21)
+
 Bugfixes:
 - Use raw url encoding/decoding to handle special character
 
 ---
 v0.19.0 (2024-01-14)
+
 Features:
 - Change styling for prev/next button
 
@@ -76,6 +87,7 @@ Bugfixes:
 
 ---
 v0.18.0 (2024-01-09)
+
 Features:
 - Add navigation button to previous/next directory or archive
 - Cache actual thumbnail cover response
@@ -87,6 +99,7 @@ Internals:
 
 ---
 v0.17.0 (2024-01-07)
+
 Features:
 - New controller to generate cover thumbnail
 
@@ -115,11 +128,13 @@ Internals:
 
 ---
 v0.16.1 (2023-11-11)
+
 Internals:
 - Fix build script to remove version info from directory name
 
 ---
 v0.16.0 (2023-11-11)
+
 Bugfixes:
 - Optimize building search index to reduce memory usage
 
@@ -140,7 +155,8 @@ Internals:
 
 ---
 v0.15.0 (2023-02-15)
-New features:
+
+Features:
 - Add pagination above listing items. Now we don't have to scroll to bottom to
   access pagination link
 - Properly paginate on search result, previously it set with limit of 1000 item
@@ -179,10 +195,11 @@ Internals:
 
 ---
 v0.14.0 (2022-03-22)
+
 NOTES: This is the rewrite version with Server Side Rendering (SSR) with
     `stimulusjs` to add interactivity.
 
-New features:
+Features:
 - Add epub as supported archive format
 - Add feature to show random entry for comicbook
 - Add pagination for long entry list
@@ -209,6 +226,7 @@ Internals:
 
 ---
 v0.13.0 (2021-12-28)
+
 NOTES: This is the last version that use Client Side Rendering (CSR) to build
     the UI. The next version will use Server Side Rendering (SSR) for better
     integration with symfony framework ecosystem.
@@ -227,6 +245,7 @@ Internals:
 
 ---
 v0.12.0 (2021-07-30)
+
 Bugfixes:
 - Fix categorizing file entry list
 
@@ -235,7 +254,8 @@ Internals:
 
 ---
 v0.11.0 (2021-07-29)
-New Features:
+
+Features:
 - Add wider compatibility with php version (compatible with php 7.2.5 and later)
 
 Internals:
@@ -247,6 +267,7 @@ Internals:
 
 ---
 v0.10.0 (2021-04-05)
+
 Bugfixes:
 - Fix get cover image by assuming that the first image is the cover (after
   sorted using natural order)
@@ -259,7 +280,8 @@ Internal:
 
 ---
 v0.9.0 (2021-01-04)
-New Features:
+
+Features:
 - Make thumbnail clickable
 - Add button to open next chapter if available
 - Re-design thumbnail size and layout
@@ -270,7 +292,8 @@ Internals:
 
 ---
 v0.8.1 (2020-07-12)
-New Features:
+
+Features:
 - Show error message when searching doesn't have results (issue #33)
 
 Internals:
@@ -279,7 +302,8 @@ Internals:
 
 ---
 v0.8.0 (2020-06-28)
-New Features:
+
+Features:
 - Add home button
 
 Bugfixes:
@@ -299,7 +323,8 @@ Internals:
 
 ---
 v0.7.0 (2020-06-17)
-New Features:
+
+Features:
 - Add border bottom on Wrapper component
 - Add entry type to differentiate styling
 - Add search feature
@@ -317,7 +342,8 @@ Internals:
 
 ---
 v0.6.0 (2020-05-18)
-New Features:
+
+Features:
 - Add support for handling zip and cbz (comic book) file format
 - Add option to set maximum image width
 - Show cover image for supported archive file (zip, cbz)
@@ -330,7 +356,8 @@ Bugfixes:
 
 ---
 v0.5.0 (2020-05-02)
-New Features:
+
+Features:
 - Add lazy load to prevent downloading unnecessary image.
 
 Bugfixes:
@@ -338,14 +365,16 @@ Bugfixes:
 
 ---
 v0.4.0 (2020-03-27)
+
 Internals:
 - Rewrite using symfony framework
 - Add travis-ci
 
 ---
 v0.3.0 (2020-03-19)
-New Features:
-[+] Add notification End Of Page on Reader footer
+
+Features:
+- Add notification End Of Page on Reader footer
 
 Internals:
 - Rename shell script to build release artifact
@@ -354,7 +383,8 @@ Internals:
 
 ---
 v0.2.0 (2020-03-07)
-New Features:
+
+Features:
 - Add caching static file
 - Enable static assets versioning on webpack encore
 - Improve list item styling
@@ -367,5 +397,6 @@ Internals:
 
 ---
 v0.1.0 (2020-02-13)
+
 Initial Release
     Most of the functionality is adopted from https://github.com/zackad/offmar.
