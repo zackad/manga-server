@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Update nix packages
+
 ---
 v0.25.0 (2024-05-25)
 
