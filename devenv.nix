@@ -33,9 +33,37 @@
   };
 
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks.php-cs-fixer.enable = true;
-  pre-commit.hooks.phpstan.enable = true;
-  pre-commit.hooks.prettier.enable = true;
+  pre-commit.hooks = {
+    nixfmt-rfc-style.enable = true;
+    prettier = {
+      enable = true;
+      package = null; # use version managed by yarn
+      entry = "node_modules/.bin/prettier --ignore-unknown --list-different --write";
+    };
+    php-cs-fixer = {
+      enable = true;
+      package = null; # use version managed by phive
+      entry = "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix";
+    };
+    phpstan = {
+      enable = true;
+      package = null; # use version managed by composer
+      entry = "vendor/bin/phpstan --memory-limit=-1 analyze";
+      excludes = [
+        "^config/secrets/.+"
+        "^tests/.+"
+        ".php-cs-fixer.dist.php"
+        "deploy.dist.php"
+      ];
+    };
+
+    # Custom hooks not provided by devenv
+    twig-lint = {
+      enable = true;
+      entry = "bin/console lint:twig";
+      types = [ "twig" ];
+    };
+  };
 
   # https://devenv.sh/reference/options/#processimplementation
   process.implementation = "overmind";
