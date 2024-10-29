@@ -18,7 +18,7 @@ Features:
 v0.24.0 (2024-05-24)
 
 Features:
-- Add ability to reload image if an error occured
+- Add ability to reload image if an error occurred
 
 Internals:
 - DX: integrate devenv into nix flakes
@@ -109,7 +109,7 @@ Features:
 - New controller to generate cover thumbnail
 
 Bugfixes:
-- Select proper thumbnail mode to handle longstrip image
+- Select proper thumbnail mode to handle long strip image
 
 Internals:
 - Synchronize php tools between phive managed and GitHub action
