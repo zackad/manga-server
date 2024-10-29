@@ -2,7 +2,6 @@
 
 {
   # https://devenv.sh/basics/
-  env.GREET = "devenv";
   env.OVERMIND_SKIP_ENV = true;
 
   # https://devenv.sh/packages/
@@ -15,15 +14,7 @@
     pkgs.zip
   ];
 
-  # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo hello from $GREET";
-
-  enterShell = ''
-    hello
-  '';
-
   # https://devenv.sh/languages/
-  # languages.nix.enable = true;
   languages.php = {
     enable = true;
     package = pkgs.php82.buildEnv {
