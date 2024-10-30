@@ -72,9 +72,7 @@ class NextChapterResolver
             $finder = new Finder();
             $finder->in($directory)
                 ->depth('== 0')
-                ->filter(function (\SplFileInfo $fileInfo) {
-                    return $fileInfo->isDir() || in_array($fileInfo->getExtension(), ['cbz', 'epub', 'zip']);
-                })
+                ->filter(fn (\SplFileInfo $fileInfo) => $fileInfo->isDir() || in_array($fileInfo->getExtension(), ['cbz', 'epub', 'zip']))
                 ->sortByName(true);
 
             /** @var SplFileInfo $entry */
