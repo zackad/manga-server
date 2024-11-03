@@ -12,7 +12,7 @@ FROM dunglas/frankenphp:1-php8.3-alpine
 # Option 1: gd extention with "jpeg png webp" support
 RUN apk add --no-cache libjpeg-turbo-dev libpng-dev libwebp-dev libzip-dev \
     && docker-php-ext-configure gd --with-jpeg --with-webp \
-    && docker-php-ext-install gd zip
+    && docker-php-ext-install gd opcache zip
 
 # Option 2: gd extention with "avif freetype jpeg png xpm webp" support
 #RUN apk add --no-cache freetype-dev libavif-dev libjpeg-turbo-dev libpng-dev libwebp-dev libxpm-dev libzip-dev \

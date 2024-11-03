@@ -12,6 +12,7 @@ Internals:
   (composer, yarn)
 - Update composer packages
 - Update composer package rector/rector to version 1.x
+- Enable opcache extension on docker image
 
 ---
 v0.25.0 (2024-05-25)
