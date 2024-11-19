@@ -13,7 +13,7 @@ Web application to serve manga collection from your computer over the network.
 
 **Runtime**
 - PHP version 8.1 or later with following extension enabled:
-  - gd
+  - imagick
   - zip
 
 **Development**
