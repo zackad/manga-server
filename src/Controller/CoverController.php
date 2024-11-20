@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ComicBook;
-use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
+use Imagine\Imagick\Imagine;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

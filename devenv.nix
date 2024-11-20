@@ -1,12 +1,24 @@
 { pkgs, ... }:
-
+let
+  phpCustom = pkgs.php82.buildEnv {
+    # List of php extension required
+    extensions =
+      { all, enabled }:
+      with all;
+      enabled
+      ++ [
+        imagick
+        pcov
+      ];
+  };
+in
 {
   # https://devenv.sh/basics/
   env.OVERMIND_SKIP_ENV = true;
 
   # https://devenv.sh/packages/
   packages = [
-    pkgs.frankenphp
+    (pkgs.frankenphp.override { php = phpCustom; })
     pkgs.php82Extensions.xdebug
     pkgs.php82Packages.phive
     pkgs.nodejs-slim_18
@@ -17,10 +29,7 @@
   # https://devenv.sh/languages/
   languages.php = {
     enable = true;
-    package = pkgs.php82.buildEnv {
-      # List of php extension required
-      extensions = { all, enabled }: with all; enabled ++ [ pcov ];
-    };
+    package = phpCustom;
   };
 
   # https://devenv.sh/pre-commit-hooks/

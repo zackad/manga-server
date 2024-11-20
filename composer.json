@@ -2,8 +2,8 @@
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
-        "ext-gd": "*",
         "ext-iconv": "*",
+        "ext-imagick": "*",
         "ext-json": "*",
         "ext-zip": "*",
         "imagine/imagine": "^1.3",
