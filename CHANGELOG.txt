@@ -14,7 +14,8 @@ Internals:
 - Update composer packages
 - Update composer package rector/rector to version 1.x
 - Enable opcache extension on docker image
-- Optimize memory usage when generating cover thumbnail by using imagick php extention as Imagine driver
+- Optimize memory usage when generating cover thumbnail by using imagick php extension as Imagine driver
+- Update prettier plugin for twig
 
 ---
 v0.25.0 (2024-05-25)
