@@ -23,12 +23,14 @@
       <div class="mx-auto mt-2 hidden w-full overflow-x-hidden" {{ stimulus_target('app', 'imageContainer') }}>
         {% for item in pagination|filter_image %}
           <div {{ stimulus_controller('image-loader') }}>
-            <div {{ stimulus_target('image-loader', 'reload') }}
+            <div
+              {{ stimulus_target('image-loader', 'reload') }}
               {{ stimulus_action('image-loader', 'reload', 'click') }}
               class="hidden cursor-pointer rounded-lg border border-gray-100 bg-gray-800 p-8 text-center text-2xl font-bold hover:bg-gray-700 active:bg-gray-900">
               Reload
             </div>
-            <img {{ stimulus_target('image-loader', 'image') }}
+            <img
+              {{ stimulus_target('image-loader', 'image') }}
               class="lozad mx-auto min-h-screen md:col-span-3"
               loading="lazy"
               data-src="{{ item.uri }}"
@@ -47,13 +49,15 @@
   <div class="flex flex-col gap-2 border-b border-gray-600 pb-2">
     {% if item.cover %}
       <div {{ stimulus_controller('image-loader') }}>
-        <div {{ stimulus_target('image-loader', 'reload') }}
+        <div
+          {{ stimulus_target('image-loader', 'reload') }}
           {{ stimulus_action('image-loader', 'reload', 'click') }}
           class="hidden aspect-[3/4] w-full cursor-pointer rounded-lg border border-gray-100 bg-gray-800 p-8 text-center text-2xl font-bold hover:bg-gray-700 active:bg-gray-900">
           Reload
         </div>
         <a href="{{ item.uri }}">
-          <img {{ stimulus_target('image-loader', 'image') }}
+          <img
+            {{ stimulus_target('image-loader', 'image') }}
             data-e2e="entry-link"
             data-src="{{ item.cover }}"
             alt="Cover for {{ item.label }}"
