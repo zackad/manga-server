@@ -16,6 +16,7 @@ Internals:
 - Enable opcache extension on docker image
 - Optimize memory usage when generating cover thumbnail by using imagick php extension as Imagine driver
 - Update prettier plugin for twig
+- Rewrite _Dockerfile_ to remove incorrect image metadata (EXPOSE, HEALTHCHECK)
 
 ---
 v0.25.0 (2024-05-25)
