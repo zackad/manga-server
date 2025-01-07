@@ -3,11 +3,14 @@
 {% block body %}
   {% include 'partial/_header.html.twig' %}
   <div class="container mx-auto mt-12 text-white">
-    <h2 class="font-semibold">
-      About
-    </h2>
-    <pre class="text-sm">
-      {{- about -}}
-    </pre>
+    {{ include('partial/_setting_form.html.twig') }}
+    <section class="mt-2">
+      <h2 class="font-semibold">
+        About
+      </h2>
+      <pre class="text-sm">
+        {{- about -}}
+      </pre>
+    </section>
   </div>
 {% endblock %}

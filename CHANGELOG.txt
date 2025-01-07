@@ -7,6 +7,9 @@ Features:
 - Add support to run application as docker container
 - App settings has been moved into dedicated page
 
+Bugfixes:
+- Fix regression for limiting image width setting
+
 Internals:
 - Update nix packages
 - Configure pre-commit hooks to use devtools managed by package manager

@@ -27,6 +27,11 @@ export default class extends Controller {
   }
 
   setMaxImageContainerWidth() {
+    // do nothing if imageContainer missing
+    if (!this.hasimageContainerTarget) {
+      return
+    }
+
     this.imageContainerMaxWidth = localStorage.getItem('imageContainerMaxWidth')
     this.imageContainerTarget.style.maxWidth = isNaN(this.imageContainerMaxWidth)
       ? '100%'

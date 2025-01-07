@@ -1,24 +1,23 @@
-<div class="fixed left-0 top-0 z-10 hidden w-full overflow-y-auto" {{ stimulus_target('setting', 'modalContainer') }}>
-  <div class="mx-auto mt-12 max-w-xl bg-gray-800">
-    <div class="rounded-lg border border-white p-4">
-      <h1 class="text-lg font-semibold">
-        Settings
-      </h1>
-      <form class="mt-3" {{ stimulus_target('setting', 'form') }}>
-        <div class="flex flex-col">
-          <label for="max-image-width">Maximum image width <span class="text-sm text-gray-500">(leave blank to default 100%)</span></label>
-          <input
-            type="number"
-            name="max-image-width"
-            id="max-image-width"
-            class="bg-primary block w-full border px-2 py-1 text-gray-900"
-            placeholder="Value in pixel"
-            {{ stimulus_target('setting', 'inputWidth') }} />
-        </div>
-        <div class="mt-4">
-          <button type="submit" class="rounded border px-2 py-1 hover:bg-gray-600">Save</button>
-        </div>
-      </form>
-    </div>
+<section {{ stimulus_controller('setting') }} class="border-0 border-b border-gray-600 pb-2">
+  <h2 class="text-lg font-semibold">
+    Settings
+  </h2>
+  <div {{ stimulus_target('setting', 'alert') }} class="mt-2 hidden rounded border border-dashed p-4 font-semibold">
+    Setting saved.
   </div>
-</div>
+  <form class="mt-3" {{ stimulus_target('setting', 'form') }}>
+    <div class="flex flex-col">
+      <label for="max-image-width">Maximum image width <span class="text-sm text-gray-500">(leave blank to default 100%)</span></label>
+      <input
+        type="number"
+        name="max-image-width"
+        id="max-image-width"
+        class="bg-primary block w-full border px-2 py-1 text-gray-900"
+        placeholder="Value in pixel"
+        {{ stimulus_target('setting', 'inputWidth') }} />
+    </div>
+    <div class="mt-4">
+      <button type="submit" class="rounded border px-2 py-1 hover:bg-gray-600">Save</button>
+    </div>
+  </form>
+</section>

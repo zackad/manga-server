@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-  static targets = ['modalContainer', 'form', 'inputWidth']
+  static targets = ['form', 'inputWidth', 'alert']
 
   connect() {
     let { width } = this.getInitialValue()
@@ -11,11 +11,14 @@ export default class extends Controller {
   }
 
   close() {
-    this.modalContainerTarget.classList.add('hidden')
+    this.alertTarget.classList.add('hidden')
   }
 
   open() {
-    this.modalContainerTarget.classList.remove('hidden')
+    this.alertTarget.classList.remove('hidden')
+    setTimeout(() => {
+      this.close()
+    }, 3000)
   }
 
   handleSubmit(event) {
@@ -28,7 +31,7 @@ export default class extends Controller {
     this.dispatch('saved', {
       detail: eventDetail,
     })
-    this.close()
+    this.open()
   }
 
   getInitialValue() {
