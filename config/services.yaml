@@ -12,7 +12,7 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            $mangaRoot: '%env(resolve:MANGA_ROOT_DIRECTORY)%'
+            $mangaRoot: '%env(resolve:APP_MEDIA_DIRECTORY)%'
             $searchIndexExcluded: '%env(SEARCH_INDEX_EXCLUDED)%'
             $projectRoot: '%kernel.project_dir%'
             $memoryLimit: '%env(default:default_memory_limit:APP_MEMORY_LIMIT)%'

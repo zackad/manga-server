@@ -23,7 +23,7 @@ class SearchTest extends TestCase
     {
         $cache = new FilesystemTagAwareAdapter();
         $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
-        $this->search = new Search($_ENV['MANGA_ROOT_DIRECTORY'], $cache, $urlGenerator);
+        $this->search = new Search($_ENV['APP_MEDIA_DIRECTORY'], $cache, $urlGenerator);
     }
 
     /**

@@ -34,7 +34,7 @@ Web application to serve manga collection from your computer over the network.
 ```shell
 docker run -d --publish 8000:8000 \
     --env APP_MEMORY_LIMIT=1G \
-    --env MANGA_ROOT_DIRECTORY=/media \
+    --env APP_MEDIA_DIRECTORY=/media \
     --volume /path/to/your/media:/media:ro \
     ghcr.io/zackad/manga-server:latest
 ```
@@ -42,10 +42,10 @@ docker run -d --publish 8000:8000 \
 ### Manual
 - Download zip file from the [latest release page](https://github.com/zackad/manga-server/releases/latest)
 - Extract
-- Open `.env` file and change `MANGA_ROOT_DIRECTORY` value to your manga collection folder. Alternatively you can copy `.env` file into `.env.local` to prevent your value to be overwritten when you update the app later.
+- Open `.env` file and change `APP_MEDIA_DIRECTORY` value to your manga collection folder. Alternatively you can copy `.env` file into `.env.local` to prevent your value to be overwritten when you update the app later.
 ```shell
-# Please change to something like MANGA_ROOT_DIRECTORY=/data/manga
-MANGA_ROOT_DIRECTORY=/
+# Please change to something like APP_MEDIA_DIRECTORY=/data/manga
+APP_MEDIA_DIRECTORY=/
 ```
 - Open terminal
 - Navigate to extracted directory

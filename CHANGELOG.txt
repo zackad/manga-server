@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+BREAKING CHANGES:
+- Environment variable MANGA_ROOT_DIRECTORY has been renamed into APP_MEDIA_DIRECTORY
+
 Features:
 - Add support to run application as docker container
 - App settings has been moved into dedicated page
