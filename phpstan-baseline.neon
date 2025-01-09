@@ -1,86 +1,127 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$filename of method App\\\\Service\\\\MimeGuesser\\:\\:guessMimeType\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Parameter \#1 \$filename of method App\\Service\\MimeGuesser\:\:guessMimeType\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Controller/ArchiveController.php
 
 		-
-			message: "#^Parameter \\#1 \\$filename of method ZipArchive\\:\\:open\\(\\) expects string, string\\|false given\\.$#"
+			message: '#^Parameter \#1 \$filename of method ZipArchive\:\:open\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Controller/ArchiveController.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method ZipArchive\\:\\:getStream\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Parameter \#1 \$name of method ZipArchive\:\:getStream\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Controller/ArchiveController.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$randomizedIndex has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$randomizedIndex has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Controller/RandomController.php
 
 		-
-			message: "#^Method App\\\\Service\\\\ArchiveReader\\:\\:generateList\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+			message: '#^PHPDoc tag @var with type array is not subtype of native type array\<int, int\|string\>\|int\|string\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Controller/RandomController.php
+
+		-
+			message: '#^Method App\\Service\\ArchiveReader\:\:generateList\(\) return type has no value type specified in iterable type Traversable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/ArchiveReader.php
 
 		-
-			message: "#^Method App\\\\Service\\\\ArchiveReader\\:\\:getList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method App\\Service\\ArchiveReader\:\:getList\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/ArchiveReader.php
 
 		-
-			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) has parameter \\$entries with no value type specified in iterable type iterable\\.$#"
+			message: '#^Method App\\Service\\DirectoryListing\:\:buildList\(\) has parameter \$entries with no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/DirectoryListing.php
 
 		-
-			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:buildList\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+			message: '#^Method App\\Service\\DirectoryListing\:\:buildList\(\) return type has no value type specified in iterable type Traversable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/DirectoryListing.php
 
 		-
-			message: "#^Method App\\\\Service\\\\DirectoryListing\\:\\:scan\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method App\\Service\\DirectoryListing\:\:scan\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/DirectoryListing.php
 
 		-
-			message: "#^Method App\\\\Service\\\\Search\\:\\:buildSearchIndex\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/Service/DirectoryListing.php
+
+		-
+			message: '#^Method App\\Service\\Search\:\:buildSearchIndex\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/Search.php
 
 		-
-			message: "#^Method App\\\\Service\\\\Search\\:\\:populateEntry\\(\\) has parameter \\$list with no value type specified in iterable type array\\.$#"
+			message: '#^Method App\\Service\\Search\:\:populateEntry\(\) has parameter \$list with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/Search.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$file has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$file has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Service/Search.php
 
 		-
-			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			message: '#^Parameter \#1 \$array \(list\<array\{basename\: string, realpath\: \(string\|false\), relative_path\: non\-falsy\-string\}\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/Service/Search.php
+
+		-
+			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
 			count: 1
 			path: src/Twig/AppExtension.php
 
 		-
-			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterCover\\(\\) has parameter \\$items with no value type specified in iterable type Traversable\\.$#"
+			message: '#^Method App\\Twig\\AppExtension\:\:filterCover\(\) has parameter \$items with no value type specified in iterable type Traversable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Twig/AppExtension.php
 
 		-
-			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterCover\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: '#^Method App\\Twig\\AppExtension\:\:filterCover\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Twig/AppExtension.php
 
 		-
-			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterImage\\(\\) has parameter \\$items with no value type specified in iterable type Traversable\\.$#"
+			message: '#^Method App\\Twig\\AppExtension\:\:filterImage\(\) has parameter \$items with no value type specified in iterable type Traversable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Twig/AppExtension.php
 
 		-
-			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:filterImage\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: '#^Method App\\Twig\\AppExtension\:\:filterImage\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/AppExtension.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type list\<string\>\|false\.$#'
+			identifier: varTag.nativeType
 			count: 1
 			path: src/Twig/AppExtension.php

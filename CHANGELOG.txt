@@ -25,6 +25,7 @@ Internals:
 - Rewrite _Dockerfile_ to remove incorrect image metadata (EXPOSE, HEALTHCHECK)
 - Upgrade webpack encore to version 5
 - Manage phpstan version via composer
+- Upgrade phpstan and rector to version 2
 
 ---
 v0.25.0 (2024-05-25)
