@@ -24,6 +24,7 @@ Internals:
 - Update prettier plugin for twig
 - Rewrite _Dockerfile_ to remove incorrect image metadata (EXPOSE, HEALTHCHECK)
 - Upgrade webpack encore to version 5
+- Manage phpstan version via composer
 
 ---
 v0.25.0 (2024-05-25)
