@@ -44,8 +44,8 @@ docker run -d --publish 8000:8000 \
 - Extract
 - Open `.env` file and change `APP_MEDIA_DIRECTORY` value to your manga collection folder. Alternatively you can copy `.env` file into `.env.local` to prevent your value to be overwritten when you update the app later.
 ```shell
-# Please change to something like APP_MEDIA_DIRECTORY=/data/manga
-APP_MEDIA_DIRECTORY=/
+# Please change to something like APP_MEDIA_DIRECTORY=/your/media/path
+APP_MEDIA_DIRECTORY=/media
 ```
 - Open terminal
 - Navigate to extracted directory
