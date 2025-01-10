@@ -30,7 +30,8 @@ class CoverController extends AbstractController
         $filename = rawurldecode($filename);
         $size = $request->query->getInt('size', 512);
         $target = $mangaRoot.'/'.$filename;
-        $cacheKey = sprintf('cover-thumbnail-%s-%s', $size, md5($filename));
+        $hash = hash('xxh128', $filename);
+        $cacheKey = sprintf('cover-thumbnail-%s-%s', $size, $hash);
 
         $image = $this->cache->get($cacheKey, function (ItemInterface $item) use ($target, $size, $comicBook) {
             $item->tag(['cover', 'thumbnail']);
@@ -58,8 +59,8 @@ class CoverController extends AbstractController
             $mode = $aspectRatio > 2 ? ManipulatorInterface::THUMBNAIL_OUTBOUND : ManipulatorInterface::THUMBNAIL_INSET;
 
             return $image
-                 ->thumbnail($size, $mode)
-                 ->get('png');
+                ->thumbnail($size, $mode)
+                ->get('png');
         });
 
         $response = new Response($image, headers: ['Content-Type' => 'image/png']);
