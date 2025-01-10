@@ -5,6 +5,7 @@ next (unreleased)
 
 Features:
 - Add button to trigger reindex on settings page
+- Store thumbnail into persistent storage to reduce performance hit caused by cache clearing after update/redeployment
 
 Bugfix:
 - Impose actual memory limit constraint

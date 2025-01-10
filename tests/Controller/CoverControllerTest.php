@@ -25,11 +25,22 @@ class CoverControllerTest extends WebTestCase
         $url = '/cover?filename=archive.zip';
         $this->client->request('GET', $url);
         self::assertResponseIsSuccessful();
+
+        // Retrieve existing thumbnail
+        $this->client->request('GET', $url);
+        self::assertResponseIsSuccessful();
     }
 
-    public function testGetCoverFailed()
+    public function testGetCoverFromEmptyArchiveFailed()
     {
         $url = '/cover?filename=empty.zip';
+        $this->client->request('GET', $url);
+        self::assertResponseStatusCodeSame(Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function testGetCoverFromNonExistFileShouldFail()
+    {
+        $url = '/cover?filename=nonexists.zip';
         $this->client->request('GET', $url);
         self::assertResponseStatusCodeSame(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
