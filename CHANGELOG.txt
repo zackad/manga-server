@@ -7,6 +7,7 @@ Internals:
 - Change default value of APP_MEDIA_DIRECTORY from `/` into `/media`
 - Update composer packages
 - Upgrade tailwindcss to version 4
+- Remove tailwindcss config file
 
 ---
 v0.26.0 (2025-01-09)
