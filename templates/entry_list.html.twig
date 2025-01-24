@@ -52,7 +52,7 @@
         <div
           {{ stimulus_target('image-loader', 'reload') }}
           {{ stimulus_action('image-loader', 'reload', 'click') }}
-          class="hidden aspect-[3/4] w-full cursor-pointer rounded-lg border border-gray-100 bg-gray-800 p-8 text-center text-2xl font-bold hover:bg-gray-700 active:bg-gray-900">
+          class="hidden aspect-3/4 w-full cursor-pointer rounded-lg border border-gray-100 bg-gray-800 p-8 text-center text-2xl font-bold hover:bg-gray-700 active:bg-gray-900">
           Reload
         </div>
         <a href="{{ item.uri }}">
@@ -61,7 +61,7 @@
             data-e2e="entry-link"
             data-src="{{ item.cover }}"
             alt="Cover for {{ item.label }}"
-            class="lozad aspect-[3/4] w-full object-cover" />
+            class="lozad aspect-3/4 w-full object-cover" />
         </a>
       </div>
     {% endif %}
@@ -74,7 +74,7 @@
 {% block no_cover %}
   <div class="flex items-center">
     {% if item.type == 'directory' %}
-      <span class="block h-5 w-8 flex-shrink-0 pr-2">{% include 'partial/_icon_directory.html.twig' %}</span>
+      <span class="block h-5 w-8 shrink-0 pr-2">{% include 'partial/_icon_directory.html.twig' %}</span>
     {% endif %}
     <a data-e2e="entry-link" href="{{ item.uri }}" class="line-clamp-3 break-words">{{ item.label }}</a>
   </div>

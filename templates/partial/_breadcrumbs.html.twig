@@ -2,7 +2,7 @@
   <div class="container mx-auto border-b border-gray-600">
     <div class="flex items-baseline gap-2 overflow-x-scroll px-2 text-base">
       {% for item in breadcrumbs %}
-        <a href="{{ item.uri }}" class="whitespace-nowrap font-medium text-gray-300">{{ item.label }}</a>
+        <a href="{{ item.uri }}" class="font-medium whitespace-nowrap text-gray-300">{{ item.label }}</a>
         {% if not loop.last %}
           <span class="font-thin">/</span>
         {% endif %}
