@@ -66,7 +66,7 @@ in
   };
 
   # https://devenv.sh/reference/options/#processimplementation
-  process.implementation = "overmind";
+  process.manager.implementation = "overmind";
 
   # https://devenv.sh/processes/
   processes.asset.exec = "yarn run dev";
