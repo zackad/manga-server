@@ -6,6 +6,7 @@ next (unreleased)
 Internals:
 - Change default value of APP_MEDIA_DIRECTORY from `/` into `/media`
 - Update composer packages
+- Update npm packages
 - Upgrade tailwindcss to version 4
 - Remove tailwindcss config file
 - Upgrade devenv to latest version
