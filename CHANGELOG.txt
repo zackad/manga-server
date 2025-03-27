@@ -3,6 +3,12 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.27.0 (2025-03-28)
+
+NOTE: docker image with tag `latest` is now available on GitHub container registry. Now you can pull it with
+      `docker pull ghcr.io/zackad/manga-server:latest`.
+
 Bugfixes:
 - Explicitly define what registry to pull from for docker image
 
