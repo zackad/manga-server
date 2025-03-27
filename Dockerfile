@@ -1,4 +1,4 @@
-FROM composer:2 AS builder
+FROM docker.io/library/composer:2 AS builder
 
 ENV COMPOSER_IGNORE_PLATFORM_REQS=1
 WORKDIR /app
@@ -6,9 +6,9 @@ COPY . /app
 RUN apk add --no-cache nodejs yarn
 RUN bin/build
 
-FROM dunglas/frankenphp:1-php8.3-alpine AS runtime
+FROM docker.io/dunglas/frankenphp:1-php8.3-alpine AS runtime
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=docker.io/mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN install-php-extensions imagick opcache zip
 

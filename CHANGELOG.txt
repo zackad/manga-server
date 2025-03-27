@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Bugfixes:
+- Explicitly define what registry to pull from for docker image
+
 Internals:
 - Change default value of APP_MEDIA_DIRECTORY from `/` into `/media`
 - Update composer packages
