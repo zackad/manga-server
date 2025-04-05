@@ -29,7 +29,7 @@ Web application to serve manga collection from your computer over the network.
 > To prevent accidental data lost, make sure to mount your media volume as readonly.
 
 > [!IMPORTANT]
-> By default, memory limit is 128MB and might not be enough to generage cover thumbnail (see #199).
+> By default, memory limit is 128MB and might not be enough to generate cover thumbnail (see #199).
 > You can increase memory limit by setting `APP_MEMORY_LIMIT` env variable to the desired value.
 ```shell
 docker run -d --publish 8000:8000 \
