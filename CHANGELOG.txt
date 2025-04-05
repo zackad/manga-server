@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Bump minimum php version to 8.2 to prepare for symfony 7.x
+
 ---
 v0.27.0 (2025-03-28)
 

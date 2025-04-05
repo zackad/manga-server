@@ -12,7 +12,7 @@ Web application to serve manga collection from your computer over the network.
 ## Requirements
 
 **Runtime**
-- PHP version 8.1 or later with following extension enabled:
+- PHP version 8.2 or later with following extension enabled:
   - imagick
   - zip
 
