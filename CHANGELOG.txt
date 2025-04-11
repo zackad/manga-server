@@ -6,6 +6,7 @@ next (unreleased)
 Internals:
 - Bump minimum php version to 8.2 to prepare for symfony 7.x
 - Update php-cs-fixer to latest version (3.75.0)
+- Upgrade symfony framework to version 7.2
 
 ---
 v0.27.0 (2025-03-28)
