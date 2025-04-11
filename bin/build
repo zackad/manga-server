@@ -19,7 +19,6 @@ cp -r bin config public src templates composer.json composer.lock ${BUILD_DIR}
 
 # Define environment variable
 echo "APP_ENV=prod" > ${BUILD_DIR}/.env
-echo "APP_SECRET=$(openssl rand -hex 20)" >> ${BUILD_DIR}/.env
 echo "APP_MEDIA_DIRECTORY=/media" >> ${BUILD_DIR}/.env
 echo "MAXIMUM_SEARCH_DEPTH=3" >> ${BUILD_DIR}/.env
 
