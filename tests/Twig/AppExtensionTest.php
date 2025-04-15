@@ -12,9 +12,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-/**
- * @covers \App\Twig\AppExtension
- */
+#[\PHPUnit\Framework\Attributes\CoversClass(AppExtension::class)]
 class AppExtensionTest extends TestCase
 {
     private $requestStack;
@@ -36,9 +34,7 @@ class AppExtensionTest extends TestCase
         $this->assertIsArray($extension->getFunctions());
     }
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testIsImage(string $filename, bool $result)
     {
         $extension = new AppExtension($this->requestStack, $this->twig, $this->urlGenerator);
@@ -46,9 +42,7 @@ class AppExtensionTest extends TestCase
         $this->assertEquals($result, $extension->isImage($filename));
     }
 
-    /**
-     * @dataProvider uriProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('uriProvider')]
     public function testGetTitleFromUri(string $input, ?string $output)
     {
         $mainRequest = $this->createStub(Request::class);
@@ -76,7 +70,7 @@ class AppExtensionTest extends TestCase
         $this->assertEquals(null, $extension->getTitleFromUri());
     }
 
-    public function uriProvider(): array
+    public static function uriProvider(): array
     {
         return [
             ['', null],
@@ -87,7 +81,7 @@ class AppExtensionTest extends TestCase
         ];
     }
 
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             ['image.pny', false],

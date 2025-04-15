@@ -6,11 +6,10 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @covers \App\Controller\DefaultController
- * @covers \App\Controller\ExploreController
- * @covers \App\Service\DirectoryListing
- */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\DefaultController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\ExploreController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
+#[\PHPUnit\Framework\Attributes\CoversMethod(\App\Twig\AppExtension::class, 'renderBreadcrumbs')]
 class ExploreControllerTest extends WebTestCase
 {
     private $client;
@@ -20,9 +19,7 @@ class ExploreControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    /**
-     * @dataProvider imageProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('imageProvider')]
     public function testLoadImage(string $image)
     {
         $this->client->request('GET', $image);
@@ -42,11 +39,7 @@ class ExploreControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    /**
-     * @dataProvider targetPathProvider
-     *
-     * @covers \App\Twig\AppExtension::renderBreadcrumbs
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('targetPathProvider')]
     public function testCanAccessTargetPath(string $target)
     {
         $this->client->request('GET', $target);
@@ -54,16 +47,14 @@ class ExploreControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    /**
-     * @dataProvider redirectDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('redirectDataProvider')]
     public function testRedirectToArchiveController(array $queryParams, string $targetUrl)
     {
         $this->client->request('GET', '/explore', $queryParams);
         self::assertResponseRedirects($targetUrl);
     }
 
-    public function targetPathProvider(): array
+    public static function targetPathProvider(): array
     {
         return [
             ['/explore'],
@@ -72,7 +63,7 @@ class ExploreControllerTest extends WebTestCase
         ];
     }
 
-    public function imageProvider(): array
+    public static function imageProvider(): array
     {
         return [
             ['explore?path=image.jpg'],
@@ -82,7 +73,7 @@ class ExploreControllerTest extends WebTestCase
         ];
     }
 
-    public function redirectDataProvider(): array
+    public static function redirectDataProvider(): array
     {
         return [
             [['path' => 'archive.zip'], '/archive/archive.zip'],

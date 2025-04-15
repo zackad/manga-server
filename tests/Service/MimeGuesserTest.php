@@ -9,30 +9,25 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Service\MimeGuesser
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(MimeGuesser::class)]
 class MimeGuesserTest extends TestCase
 {
-    /**
-     * @dataProvider filenameWithValidExtension
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('filenameWithValidExtension')]
     public function testGetValidMimeTypes($filename, $mime)
     {
         $guesser = new MimeGuesser();
         $this->assertEquals($mime, $guesser->guessMimeType($filename));
     }
 
-    /**
-     * @dataProvider filenameWithUnusualExtension
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('filenameWithUnusualExtension')]
     public function testGetMimeTypesReturningGenericMimeTypes($filename, $mime)
     {
         $guesser = new MimeGuesser();
         $this->assertEquals($mime, $guesser->guessMimeType($filename));
     }
 
-    public function filenameWithValidExtension()
+    public static function filenameWithValidExtension()
     {
         return [
             ['/image.jpeg', 'image/jpeg'],
@@ -42,7 +37,7 @@ class MimeGuesserTest extends TestCase
         ];
     }
 
-    public function filenameWithUnusualExtension()
+    public static function filenameWithUnusualExtension()
     {
         return [
             ['file.con', 'application/octet-stream'],

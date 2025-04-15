@@ -10,12 +10,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
- *
- * @covers \App\Controller\DefaultController
- * @covers \App\Controller\ExploreController
- * @covers \App\Service\DirectoryListing
- * @covers \App\Service\NextChapterResolver
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\DefaultController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\ExploreController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\NextChapterResolver::class)]
 class NextChapterTest extends WebTestCase
 {
     private KernelBrowser $client;
@@ -33,9 +32,7 @@ class NextChapterTest extends WebTestCase
         $this->assertResponseRedirects('/explore');
     }
 
-    /**
-     * @dataProvider directoryProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('directoryProvider')]
     public function testCanNavigateFromDirectory(string $current, string $prev, string $next): void
     {
         $url = $this->urlGenerator->generate('app_explore', ['path' => $current]);
@@ -57,9 +54,7 @@ class NextChapterTest extends WebTestCase
         ];
     }
 
-    /**
-     * @dataProvider archiveProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('archiveProvider')]
     public function testCanNavigateFromArchive(string $current, string $prev, string $next): void
     {
         $url = $this->urlGenerator->generate('app_archive_list', ['path' => $current]);

@@ -10,10 +10,9 @@ use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 
 /**
  * @internal
- *
- * @covers \App\Service\ComicBook
- * @covers \App\Service\DirectoryListing
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(ComicBook::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
 class ComicBookTest extends TestCase
 {
     private $comicBook;

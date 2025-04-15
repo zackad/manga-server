@@ -11,10 +11,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
- *
- * @covers \App\Service\DirectoryListing
- * @covers \App\Service\Search
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(Search::class)]
 class SearchTest extends TestCase
 {
     private $search;

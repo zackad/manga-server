@@ -8,12 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- *
- * @covers \App\Controller\ArchiveController
- * @covers \App\Service\ArchiveReader
- * @covers \App\Service\ComicBook
- * @covers \App\Service\DirectoryListing
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\ArchiveController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\ArchiveReader::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\ComicBook::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
 class ArchiveControllerTest extends WebTestCase
 {
     private $client;

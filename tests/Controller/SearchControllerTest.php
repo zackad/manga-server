@@ -8,10 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- *
- * @covers \App\Controller\SearchController
- * @covers \App\Service\Search
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\SearchController::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\Search::class)]
 class SearchControllerTest extends WebTestCase
 {
     public function testSearchWithEmptyStringShouldReturnNotFoundResponse()
