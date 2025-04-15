@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  phpCustom = pkgs.php83.buildEnv {
+  phpCustom = pkgs.php84.buildEnv {
     # List of php extension required
     extensions =
       { all, enabled }:
@@ -15,12 +15,13 @@ in
 {
   # https://devenv.sh/basics/
   env.OVERMIND_SKIP_ENV = true;
+  env.PHP_CS_FIXER_IGNORE_ENV = 1;
 
   # https://devenv.sh/packages/
   packages = [
     (pkgs.frankenphp.override { php = phpCustom; })
-    pkgs.php83Extensions.xdebug
-    pkgs.php83Packages.phive
+    pkgs.php84Extensions.xdebug
+    pkgs.php84Packages.phive
     pkgs.nodejs-slim_18
     pkgs.yarn
     pkgs.zip

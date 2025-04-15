@@ -6,7 +6,7 @@ COPY . /app
 RUN apk add --no-cache nodejs yarn
 RUN bin/build
 
-FROM docker.io/dunglas/frankenphp:1-php8.3-alpine AS runtime
+FROM docker.io/dunglas/frankenphp:1-php8.4-alpine AS runtime
 
 COPY --from=docker.io/mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 

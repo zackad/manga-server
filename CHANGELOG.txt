@@ -8,6 +8,7 @@ Internals:
 - Update php-cs-fixer to latest version (3.75.0)
 - Upgrade symfony framework to version 7.2
 - Remove APP_SECRET environment variable, it becomes optional since symfony version 7.2
+- Upgrade php version to 8.4 on dev environment and docker image
 
 ---
 v0.27.0 (2025-03-28)

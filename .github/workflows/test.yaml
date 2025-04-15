@@ -8,12 +8,15 @@ on:
         branches:
             - master
 
+env:
+    PHP_CS_FIXER_IGNORE_ENV: 1
+
 jobs:
     build:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-versions: ['8.2', '8.3']
+                php-versions: ['8.2', '8.3', '8.4']
             fail-fast: false
         steps:
             -   name: Checkout
@@ -58,7 +61,7 @@ jobs:
             -   name: Run Tests
                 run: php bin/phpunit --coverage-clover var/coverage.xml
             -   name: Upload coverage to Codecov
-                if: ${{ matrix.php-versions == '8.3' }}
+                if: ${{ matrix.php-versions == '8.4' }}
                 uses: codecov/codecov-action@v3
                 with:
                     files: ./var/coverage.xml
