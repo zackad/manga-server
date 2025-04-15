@@ -68,12 +68,11 @@ class DirectoryListing
             return 'directory';
         }
 
-        try {
-            $isArchive = $this->za->open($pathname);
-        } catch (\Exception) {
+        if (!is_readable($pathname)) {
             return 'file';
         }
 
+        $isArchive = $this->za->open($pathname);
         if (true === $isArchive) {
             return 'archive';
         }
