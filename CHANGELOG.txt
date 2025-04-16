@@ -12,6 +12,7 @@ Internals:
 - Upgrade symfony framework to version 7.2
 - Remove APP_SECRET environment variable, it becomes optional since symfony version 7.2
 - Upgrade php version to 8.4 on dev environment and docker image
+- Upgrade phpunit to version 11.5
 
 ---
 v0.27.0 (2025-03-28)

@@ -9,10 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Service\ArchiveReader
- * @covers \App\Service\ComicBook
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(ArchiveReader::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\ComicBook::class)]
 class ArchiveReaderTest extends TestCase
 {
     public function testListingArchiveContent()

@@ -8,9 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
-/**
- * @covers \App\Controller\CoverController
- */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\CoverController::class)]
 class CoverControllerTest extends WebTestCase
 {
     private $client;

@@ -8,9 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- *
- * @covers \App\Controller\AssetsController
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\AssetsController::class)]
 class AssetsControllerTest extends WebTestCase
 {
     private $client;
@@ -20,9 +19,7 @@ class AssetsControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    /**
-     * @dataProvider assetsProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('assetsProvider')]
     public function testGetHeaderOfAssetsFile($asset)
     {
         $this->client->request('GET', $asset);
@@ -39,7 +36,7 @@ class AssetsControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(404);
     }
 
-    public function assetsProvider(): array
+    public static function assetsProvider(): array
     {
         $manifestPath = dirname(__DIR__, 2).'/public/build/manifest.json';
         $data = json_decode(file_get_contents($manifestPath), true);

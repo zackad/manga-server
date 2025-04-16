@@ -6,9 +6,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @covers \App\Controller\SettingsController
- */
+#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\SettingsController::class)]
 class SettingsControllerTest extends WebTestCase
 {
     public function testCanAccessSettingsPage()
