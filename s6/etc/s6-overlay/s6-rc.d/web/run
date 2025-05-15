@@ -1,0 +1,2 @@
+#!/command/with-contenv sh
+frankenphp php-server --root /app/public --listen :8000
