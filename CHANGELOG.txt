@@ -14,6 +14,7 @@ Internals:
 - Upgrade php version to 8.4 on dev environment and docker image
 - Upgrade phpunit to version 11.5
 - Rewrite Dockerfile to use s6-overlay as supervisor. This will allow to run multiple process in a single docker image.
+- Add messenger component that would allow to do background processing asynchronously
 
 ---
 v0.27.0 (2025-03-28)
