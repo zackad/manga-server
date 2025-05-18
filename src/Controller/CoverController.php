@@ -9,6 +9,7 @@ use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
 use Imagine\Imagick\Imagine;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,8 +20,12 @@ class CoverController extends AbstractController
 {
     private const CACHE_EXPIRES_AFTER = '+1 months';
 
-    public function __construct(private readonly TagAwareCacheInterface $cache, private readonly string $memoryLimit)
-    {
+    public function __construct(
+        private readonly TagAwareCacheInterface $cache,
+        private readonly string $memoryLimit,
+        #[Autowire('%kernel.project_dir%/var/data')]
+        private readonly string $dataDir,
+    ) {
     }
 
     #[Route('/cover', name: 'app_cover_thumbnail')]
@@ -30,7 +35,8 @@ class CoverController extends AbstractController
         $filename = rawurldecode($filename);
         $size = $request->query->getInt('size', 512);
         $target = $mangaRoot.'/'.$filename;
-        $cacheKey = sprintf('cover-thumbnail-%s-%s', $size, md5($filename));
+        $hash = hash('xxh128', $filename);
+        $cacheKey = sprintf('cover-thumbnail-%s-%s', $size, $hash);
 
         $image = $this->cache->get($cacheKey, function (ItemInterface $item) use ($target, $size, $comicBook) {
             $item->tag(['cover', 'thumbnail']);
@@ -58,13 +64,39 @@ class CoverController extends AbstractController
             $mode = $aspectRatio > 2 ? ManipulatorInterface::THUMBNAIL_OUTBOUND : ManipulatorInterface::THUMBNAIL_INSET;
 
             return $image
-                 ->thumbnail($size, $mode)
-                 ->get('png');
+                ->thumbnail($size, $mode)
+                ->get('png');
         });
 
         $response = new Response($image, headers: ['Content-Type' => 'image/png']);
         $response->setExpires(new \DateTimeImmutable(self::CACHE_EXPIRES_AFTER));
 
         return $response;
+    }
+
+    private function storeThumbnail(string $filename, string $content): void
+    {
+        $filename = strtolower($filename);
+        $destinationDir = $this->dataDir.'/thumbnail/'.substr($filename, 0, 2).'/'.substr($filename, 2, 2).'/';
+        $destinationFile = $destinationDir.basename($filename);
+
+        // Create the destination directory if it doesn't exist
+        if (!is_dir($destinationDir)) {
+            mkdir($destinationDir, 0755, true);
+        }
+        file_put_contents($destinationFile, $content);
+    }
+
+    private function getThumbnail(string $filename): string
+    {
+        // return existing thumbnail
+        $filename = strtolower($filename);
+        $destinationDir = $this->dataDir.'/thumbnail/'.substr($filename, 0, 2).'/'.substr($filename, 2, 2).'/';
+        $destinationFile = $destinationDir.basename($filename);
+
+        return file_get_contents($destinationFile);
+
+        // TODO: generate if not exist
+        // TODO: throw exception on failure
     }
 }
