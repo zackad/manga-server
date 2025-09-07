@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Symfony\Component\Finder\Finder;
+use App\Cache\Indexer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class Search
 {
-    final public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
-
-    private readonly Finder $finder;
-
     public function __construct(
-        private readonly string $mangaRoot,
         private readonly CacheInterface $cache,
         private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly string $searchIndexExcluded = '',
+        private readonly Indexer $indexer,
     ) {
-        $this->finder = new Finder();
     }
 
     public function find(string $search = ''): \Generator
@@ -58,30 +51,6 @@ class Search
 
     public function buildSearchIndex(): iterable
     {
-        return $this->cache->get('search-index', function (ItemInterface $cacheItem) {
-            $cacheItem->expiresAfter(86400); // 24 hours
-            $patterns = self::SUPPORTED_ARCHIVE_FORMAT;
-
-            $excludedFinderPath = explode(' ', $this->searchIndexExcluded);
-            $this->finder
-                ->files()
-                ->ignoreUnreadableDirs()
-                ->followLinks()
-                ->in($this->mangaRoot)
-                ->exclude($excludedFinderPath)
-                ->name($patterns);
-
-            $indexData = [];
-            foreach ($this->finder as $item) {
-                $indexData[] = [
-                    'basename' => $item->getBasename(),
-                    'realpath' => $item->getRealPath(),
-                    'relative_path' => sprintf('/%s/%s', $item->getRelativePath(), $item->getBasename()),
-                ];
-            }
-            usort($indexData, fn ($a, $b) => strnatcmp((string) $a['basename'], (string) $b['basename']));
-
-            return array_values($indexData);
-        });
+        return $this->cache->get('search-index', [$this->indexer, 'buildIndex']);
     }
 }
