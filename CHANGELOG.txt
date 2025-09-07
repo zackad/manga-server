@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Add scheduler to update index regularly
+
 Bugfix:
 - Simplify opening zip archive check without try...catch statement
 
