@@ -5,24 +5,19 @@ declare(strict_types=1);
 namespace App\Tests\Service;
 
 use App\Service\Search;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-/**
- * @internal
- */
-#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(Search::class)]
-class SearchTest extends TestCase
+#[CoversClass(\App\Service\DirectoryListing::class)]
+#[CoversClass(Search::class)]
+class SearchTest extends KernelTestCase
 {
-    private $search;
+    private Search $search;
 
     protected function setUp(): void
     {
-        $cache = new FilesystemTagAwareAdapter();
-        $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
-        $this->search = new Search($_ENV['APP_MEDIA_DIRECTORY'], $cache, $urlGenerator);
+        self::bootKernel();
+        $this->search = self::getContainer()->get(Search::class);
     }
 
     /**
