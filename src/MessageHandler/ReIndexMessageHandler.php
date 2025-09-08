@@ -20,6 +20,6 @@ final class ReIndexMessageHandler
 
     public function __invoke(ReIndexMessage $message): void
     {
-        $this->cache->get('search-index', [$this->indexer, 'buildIndex']);
+        $this->cache->get((string) $message, [$this->indexer, 'buildIndex']);
     }
 }

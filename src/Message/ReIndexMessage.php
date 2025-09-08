@@ -8,6 +8,6 @@ final class ReIndexMessage
 {
     public function __toString()
     {
-        return 'trigger re-indexing';
+        return 'search-index';
     }
 }
