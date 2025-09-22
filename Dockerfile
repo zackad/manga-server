@@ -28,11 +28,16 @@ COPY s6 /
 # https://stackoverflow.com/a/72024605
 FROM scratch
 
+# Fix permission for frankenphp to manage their data and config
+# https://github.com/php/frankenphp/issues/607#issuecomment-2690469396
+ENV XDG_CONFIG_HOME=/config
+ENV XDG_DATA_HOME=/data
+
 COPY --from=runtime / /
 COPY --from=builder /app/build/manga-server /app
 
-RUN mkdir -p /data \
-    && chown -R 1000:1000 /app /data
+RUN mkdir -p /{config,data} \
+    && chown -R 1000:1000 /app /data /config
 
 USER 1000:1000
 WORKDIR /app
