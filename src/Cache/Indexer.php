@@ -9,6 +9,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class Indexer
 {
+    final public const CACHE_TTL = 10_800; // 3 hours
     final public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
 
     private Finder $finder;
@@ -25,7 +26,7 @@ class Indexer
      */
     public function buildIndex(ItemInterface $item): iterable
     {
-        $item->expiresAfter(86400); // 24 hours
+        $item->expiresAfter(self::CACHE_TTL);
 
         $patterns = self::SUPPORTED_ARCHIVE_FORMAT;
 

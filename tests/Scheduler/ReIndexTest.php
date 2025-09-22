@@ -16,7 +16,7 @@ class ReIndexTest extends KernelTestCase
         self::bootKernel();
         $scheduler = self::getContainer()->get(ReIndex::class)->getSchedule();
         $messages = $scheduler->getRecurringMessages()[0];
-        $nextRunDate = $messages->getTrigger()->getNextRunDate(new \DateTimeImmutable());
-        self::assertEquals('02:26', $nextRunDate->format('H:i'));
+        $nextRunDate = $messages->getTrigger()->getNextRunDate(new \DateTimeImmutable('2025-01-01'));
+        self::assertEquals('00:26', $nextRunDate->format('H:i'));
     }
 }

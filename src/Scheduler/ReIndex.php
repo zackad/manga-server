@@ -24,7 +24,7 @@ class ReIndex implements ScheduleProviderInterface
         return (new SymfonySchedule())
             ->stateful($this->cache) // ensure missed tasks are executed
             ->processOnlyLastMissedRun(true) // ensure only last missed task is run
-            ->with(RecurringMessage::cron('#midnight', new ReIndexMessage()))
+            ->with(RecurringMessage::cron('#hourly', new ReIndexMessage()))
 
             // add your own tasks here
             // see https://symfony.com/doc/current/scheduler.html#attaching-recurring-messages-to-a-schedule
