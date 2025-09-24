@@ -85,12 +85,6 @@ parameters:
 			path: src/Service/Search.php
 
 		-
-			message: '#^Parameter \#1 \$array \(list\<array\{basename\: string, realpath\: \(string\|false\), relative_path\: non\-falsy\-string\}\>\) of array_values is already a list, call has no effect\.$#'
-			identifier: arrayValues.list
-			count: 1
-			path: src/Service/Search.php
-
-		-
 			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1

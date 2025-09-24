@@ -21,6 +21,9 @@ cp -r bin config public src templates composer.json composer.lock ${BUILD_DIR}
 echo "APP_ENV=prod" > ${BUILD_DIR}/.env
 echo "APP_MEDIA_DIRECTORY=/media" >> ${BUILD_DIR}/.env
 echo "MAXIMUM_SEARCH_DEPTH=3" >> ${BUILD_DIR}/.env
+echo "SEARCH_INDEX_EXCLUDED=''" >> ${BUILD_DIR}/.env
+echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data/data_%kernel.environment%.db" >> ${BUILD_DIR}/.env
+echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> ${BUILD_DIR}/.env
 
 # Install dependencies
 cd ${BUILD_DIR} \

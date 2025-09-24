@@ -10,7 +10,7 @@ framework:
             # sync: 'sync://'
 
         routing:
-            # Route your messages to the transports
+            App\Message\ReIndexMessage: async            # Route your messages to the transports
             # 'App\Message\YourMessage': async
 
 # when@test:
