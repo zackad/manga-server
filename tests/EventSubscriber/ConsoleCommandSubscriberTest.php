@@ -31,7 +31,7 @@ class ConsoleCommandSubscriberTest extends TestCase
         $input = $this->createMock(InputInterface::class);
         $output = $this->createMock(OutputInterface::class);
         $event = new ConsoleCommandEvent($command, $input, $output);
-        $subscriber = new ConsoleCommandSubscriber($this->rootDataDirectory);
+        $subscriber = new ConsoleCommandSubscriber($this->rootDataDirectory, '128M');
 
         // Check if initial state is not exists
         self::assertDirectoryDoesNotExist($this->rootDataDirectory);
@@ -40,17 +40,26 @@ class ConsoleCommandSubscriberTest extends TestCase
         self::assertDirectoryExists($this->rootDataDirectory.'/var/data');
     }
 
-    public function testDataDirectoryIsNotCreatedWhenOnOtherComman(): void
+    public function testDataDirectoryIsNotCreatedWhenOnOtherCommand(): void
     {
         $command = new Command('about');
         $input = $this->createMock(InputInterface::class);
         $output = $this->createMock(OutputInterface::class);
         $event = new ConsoleCommandEvent($command, $input, $output);
-        $subscriber = new ConsoleCommandSubscriber($this->rootDataDirectory);
+        $subscriber = new ConsoleCommandSubscriber($this->rootDataDirectory, '128M');
 
         $subscriber->onConsoleCommand($event);
 
         self::assertDirectoryDoesNotExist($this->rootDataDirectory.'/var/data');
+    }
+
+    public function testMemoryLimitBeingImposed(): void
+    {
+        $subscriber = new ConsoleCommandSubscriber($this->rootDataDirectory, '1G');
+
+        $subscriber->setMemoryLimit();
+
+        self::assertEquals('1G', ini_get('memory_limit'));
     }
 
     public function testMakeSureIsCovered(): void

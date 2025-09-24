@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Bugfix:
+- Impose actual memory limit constraint
+
 Internals:
 - Upgrade nodejs to version 22
 

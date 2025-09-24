@@ -14,6 +14,8 @@ class ConsoleCommandSubscriber implements EventSubscriberInterface
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
+        #[Autowire('%env(APP_MEMORY_LIMIT)%')]
+        private readonly string $memoryLimit,
     ) {
     }
 
@@ -29,10 +31,18 @@ class ConsoleCommandSubscriber implements EventSubscriberInterface
         }
     }
 
+    public function setMemoryLimit(): void
+    {
+        ini_set('memory_limit', $this->memoryLimit);
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
-            'console.command' => 'onConsoleCommand',
+            ConsoleCommandEvent::class => [
+                ['onConsoleCommand'],
+                ['setMemoryLimit'],
+            ],
         ];
     }
 }

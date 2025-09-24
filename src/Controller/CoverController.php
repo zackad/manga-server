@@ -19,7 +19,7 @@ class CoverController extends AbstractController
 {
     private const CACHE_EXPIRES_AFTER = '+1 months';
 
-    public function __construct(private readonly TagAwareCacheInterface $cache, private readonly string $memoryLimit)
+    public function __construct(private readonly TagAwareCacheInterface $cache)
     {
     }
 
@@ -44,9 +44,6 @@ class CoverController extends AbstractController
             $zipArchive->open($target);
             /** @var resource $stream */
             $stream = $zipArchive->getStream($entryName);
-
-            // Temporary fix to handle memory exhaustion when processing large image
-            ini_set('memory_limit', $this->memoryLimit);
 
             $imagine = new Imagine();
             $size = new Box($size, $size);
