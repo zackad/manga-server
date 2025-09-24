@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-php /app/bin/console messenger:consume scheduler_default -v
+php /app/bin/console messenger:consume scheduler_default

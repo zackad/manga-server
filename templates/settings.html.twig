@@ -4,6 +4,16 @@
   {% include 'partial/_header.html.twig' %}
   <div class="container mx-auto mt-12 text-white">
     {{ include('partial/_setting_form.html.twig') }}
+
+    <section class="border-0 border-b border-gray-600 py-2">
+      <h2 class="font-semibold">
+        Index
+      </h2>
+      <form action="{{ path('app_settings_reindex') }}" method="post">
+        <button type="submit" class="rounded-sm border px-2 py-1 hover:bg-gray-600">Reindex</button>
+      </form>
+    </section>
+
     <section class="mt-2">
       <h2 class="font-semibold">
         About

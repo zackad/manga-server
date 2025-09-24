@@ -15,4 +15,13 @@ class SettingsControllerTest extends WebTestCase
         $client->request('GET', '/settings');
         self::assertResponseIsSuccessful();
     }
+
+    public function testReindexJobBeingTriggered(): void
+    {
+        $client = self::createClient();
+        $transport = self::getContainer()->get('messenger.transport.async');
+        $client->request('POST', '/settings/reindex');
+        self::assertResponseRedirects('/settings');
+        self::assertCount(1, $transport->getSent());
+    }
 }

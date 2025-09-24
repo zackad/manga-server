@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Features:
+- Add button to trigger reindex on settings page
+
 Bugfix:
 - Impose actual memory limit constraint
 
