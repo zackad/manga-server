@@ -22,7 +22,7 @@ in
     (pkgs.frankenphp.override { php = phpCustom; })
     pkgs.php84Extensions.xdebug
     pkgs.php84Packages.phive
-    pkgs.nodejs-slim_18
+    pkgs.nodejs-slim_22
     pkgs.yarn
     pkgs.zip
   ];

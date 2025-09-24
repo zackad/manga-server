@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Internals:
+- Upgrade nodejs to version 22
+
 ---
 v0.28.0 (2025-09-24)
 
