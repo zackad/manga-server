@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.28.0 (2025-09-24)
+
 Features:
 - Add scheduler to update index regularly
 
