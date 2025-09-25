@@ -51,6 +51,6 @@ class Search
 
     public function buildSearchIndex(): iterable
     {
-        return $this->cache->get('search-index', [$this->indexer, 'buildIndex']);
+        return $this->cache->get(Indexer::CACHE_KEY, [$this->indexer, 'buildIndex']);
     }
 }

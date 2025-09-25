@@ -8,6 +8,7 @@ Features:
 
 Bugfix:
 - Impose actual memory limit constraint
+- Fix cache entry got appended into old value instead of replacing it
 
 Internals:
 - Upgrade nodejs to version 22

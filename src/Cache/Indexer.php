@@ -10,6 +10,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class Indexer
 {
+    final public const CACHE_KEY = 'search-index';
     final public const CACHE_TTL = 10_800; // 3 hours
     final public const SUPPORTED_ARCHIVE_FORMAT = '/.*\.(zip|cbz|epub)$/i';
 
@@ -52,6 +53,28 @@ class Indexer
         }
         usort($indexData, fn ($a, $b) => strnatcmp((string) $a['basename'], (string) $b['basename']));
 
-        return $indexData;
+        return $this->multidimArrayUnique($indexData, 'realpath');
+    }
+
+    /**
+     * https://www.php.net/manual/uk/function.array-unique.php#128025.
+     *
+     * @param array<array<string, string>> $array
+     *
+     * @return array<array<string, string>>
+     */
+    private function multidimArrayUnique(array $array, string $key): array
+    {
+        $uniqueArray = [];
+        $keyArray = [];
+
+        foreach ($array as $val) {
+            if (!in_array($val[$key], $keyArray)) {
+                $keyArray[] = $val[$key];
+                $uniqueArray[] = $val;
+            }
+        }
+
+        return $uniqueArray;
     }
 }

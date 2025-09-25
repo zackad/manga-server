@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\MessageHandler;
 
+use App\Cache\Indexer;
 use App\Message\ReIndexMessage;
 use App\MessageHandler\ReIndexMessageHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -26,10 +27,10 @@ class ReIndexMessageHandlerTest extends KernelTestCase
         $message = new ReIndexMessage();
 
         // Cache has NOT been populated
-        self::assertFalse($cache->hasItem('search-index'));
+        self::assertFalse($cache->hasItem(Indexer::CACHE_KEY));
         $handler->__invoke($message);
 
         // Cache has been populated
-        self::assertTrue($cache->hasItem('search-index'));
+        self::assertTrue($cache->hasItem(Indexer::CACHE_KEY));
     }
 }
