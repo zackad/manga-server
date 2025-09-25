@@ -10,6 +10,7 @@ use App\Service\MimeGuesser;
 use App\Service\NextChapterResolver;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 class ArchiveController extends AbstractController
 {
     public function __construct(
+        #[Autowire('%env(resolve:APP_MEDIA_DIRECTORY)%')]
         private readonly string $mangaRoot,
         private readonly TagAwareCacheInterface $cache,
     ) {

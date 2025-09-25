@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Cache;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -15,7 +16,9 @@ class Indexer
     private Finder $finder;
 
     public function __construct(
+        #[Autowire('%env(resolve:APP_MEDIA_DIRECTORY)%')]
         private readonly string $mangaRoot,
+        #[Autowire('%env(SEARCH_INDEX_EXCLUDED)%')]
         private readonly string $searchIndexExcluded = '',
     ) {
         $this->finder = new Finder();

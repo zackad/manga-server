@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -13,6 +14,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 class NextChapterResolver
 {
     public function __construct(
+        #[Autowire('%env(resolve:APP_MEDIA_DIRECTORY)%')]
         private readonly string $mangaRoot,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly TagAwareCacheInterface $cache,

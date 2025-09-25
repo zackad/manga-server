@@ -9,6 +9,7 @@ use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
 use Imagine\Imagick\Imagine;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,7 +25,7 @@ class CoverController extends AbstractController
     }
 
     #[Route('/cover', name: 'app_cover_thumbnail')]
-    public function thumbnail(string $mangaRoot, Request $request, ComicBook $comicBook): Response
+    public function thumbnail(#[Autowire('%env(resolve:APP_MEDIA_DIRECTORY)%')] string $mangaRoot, Request $request, ComicBook $comicBook): Response
     {
         $filename = (string) $request->query->get('filename');
         $filename = rawurldecode($filename);

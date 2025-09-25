@@ -12,6 +12,7 @@ Bugfix:
 Internals:
 - Upgrade nodejs to version 22
 - Copy default `.env.prod` for production environment instead of manually define on build script
+- Use `Autowire` attribute to resolve scalar parameter on service dependency injection
 
 ---
 v0.28.0 (2025-09-24)
