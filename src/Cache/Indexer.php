@@ -53,6 +53,28 @@ class Indexer
         }
         usort($indexData, fn ($a, $b) => strnatcmp((string) $a['basename'], (string) $b['basename']));
 
-        return $indexData;
+        return $this->multidimArrayUnique($indexData, 'realpath');
+    }
+
+    /**
+     * https://www.php.net/manual/uk/function.array-unique.php#128025.
+     *
+     * @param array<array<string, string>> $array
+     *
+     * @return array<array<string, string>>
+     */
+    private function multidimArrayUnique(array $array, string $key): array
+    {
+        $uniqueArray = [];
+        $keyArray = [];
+
+        foreach ($array as $val) {
+            if (!in_array($val[$key], $keyArray)) {
+                $keyArray[] = $val[$key];
+                $uniqueArray[] = $val;
+            }
+        }
+
+        return $uniqueArray;
     }
 }
