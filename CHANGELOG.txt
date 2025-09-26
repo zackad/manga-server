@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.29.0 (2025-09-26)
+
 Features:
 - Add button to trigger reindex on settings page
 - Store thumbnail into persistent storage to reduce performance hit caused by cache clearing after update/redeployment
