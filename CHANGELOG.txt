@@ -3,6 +3,9 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+Bugfixes:
+- Add time limit for messenger worker that run scheduler to prevent resource hogging
+
 ---
 v0.29.0 (2025-09-26)
 
@@ -25,7 +28,7 @@ v0.28.0 (2025-09-24)
 Features:
 - Add scheduler to update index regularly
 
-Bugfix:
+Bugfixes:
 - Simplify opening zip archive check without try...catch statement
 
 Internals:
