@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-php /app/bin/console messenger:consume scheduler_default --time-limit=86400
+php /app/bin/console messenger:consume scheduler_default --limit=10 --time-limit=86400
