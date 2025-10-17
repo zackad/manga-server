@@ -34,7 +34,7 @@ in
   };
 
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks = {
+  git-hooks.hooks = {
     nixfmt-rfc-style.enable = true;
     prettier = {
       enable = true;
