@@ -9,6 +9,9 @@ Features:
 Bugfixes:
 - Add time limit for messenger worker that run scheduler to prevent resource hogging
 
+Internals:
+- Upgrade symfony framework to version 7.4
+
 ---
 v0.29.0 (2025-09-26)
 
@@ -16,7 +19,7 @@ Features:
 - Add button to trigger reindex on settings page
 - Store thumbnail into persistent storage to reduce performance hit caused by cache clearing after update/redeployment
 
-Bugfix:
+Bugfixes:
 - Impose actual memory limit constraint
 - Fix cache entry got appended into old value instead of replacing it
 
