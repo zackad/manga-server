@@ -35,7 +35,7 @@ in
 
   # https://devenv.sh/pre-commit-hooks/
   git-hooks.hooks = {
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
     prettier = {
       enable = true;
       package = null; # use version managed by yarn
