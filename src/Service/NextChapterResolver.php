@@ -21,7 +21,7 @@ class NextChapterResolver
     ) {
     }
 
-    public function nextUrl(string $route, string $filename): ?string
+    public function nextUrl(string $route, string $filename): string
     {
         $decodedPath = trim(rawurldecode($filename), '/');
         $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));
@@ -41,7 +41,7 @@ class NextChapterResolver
         return $this->urlGenerator->generate('app_explore', ['path' => $nextEntry]);
     }
 
-    public function prevUrl(string $route, string $filename): ?string
+    public function prevUrl(string $route, string $filename): string
     {
         $decodedPath = trim(rawurldecode($filename), '/');
         $parent = dirname(sprintf('%s/%s', $this->mangaRoot, $decodedPath));

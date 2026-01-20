@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Service\ArchiveReader;
 use App\Service\DirectoryListing;
 use App\Service\MimeGuesser;
-use App\Service\NextChapterResolver;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -37,14 +36,10 @@ class ArchiveController extends AbstractController
         Request $request,
         DirectoryListing $listing,
         PaginatorInterface $paginator,
-        NextChapterResolver $resolver,
     ): Response {
         $page = $request->query->getInt('page', 1);
         $path = $request->attributes->get('path');
-        $routeName = $request->get('_route');
         $decodedPath = rawurldecode((string) $path);
-        $nextUrl = $resolver->nextUrl($routeName, $decodedPath);
-        $prevUrl = $resolver->prevUrl($routeName, $decodedPath);
 
         $target = sprintf('%s/%s', $this->mangaRoot, $decodedPath);
         $entries = new ArchiveReader($target);
@@ -56,8 +51,7 @@ class ArchiveController extends AbstractController
         return $this->render('entry_list.html.twig', [
             'entries' => $entryList,
             'pagination' => $pagination,
-            'next_url' => $nextUrl,
-            'prev_url' => $prevUrl,
+            'path' => $path,
         ]);
     }
 

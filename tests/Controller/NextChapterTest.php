@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 
-/**
- * @internal
- */
-#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\DefaultController::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(\App\Controller\ExploreController::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\DirectoryListing::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(\App\Service\NextChapterResolver::class)]
+#[CoversClass(\App\Controller\DefaultController::class)]
+#[CoversClass(\App\Controller\ExploreController::class)]
+#[CoversClass(\App\Service\DirectoryListing::class)]
+#[CoversClass(\App\Service\NextChapterResolver::class)]
+#[CoversClass(\App\Twig\Components\NavigationButton::class)]
 class NextChapterTest extends WebTestCase
 {
+    use InteractsWithLiveComponents;
+
     private KernelBrowser $client;
     private UrlGeneratorInterface $urlGenerator;
 
@@ -35,14 +37,17 @@ class NextChapterTest extends WebTestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('directoryProvider')]
     public function testCanNavigateFromDirectory(string $current, string $prev, string $next): void
     {
-        $url = $this->urlGenerator->generate('app_explore', ['path' => $current]);
-        $this->client->request('GET', $url);
-        $crawler = $this->client->getCrawler();
-        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->link();
-        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->link();
+        $sut = $this->createLiveComponent(
+            name: 'NavigationButton',
+            data: ['routeName' => 'app_explore', 'path' => $current],
+        );
 
-        self::assertStringEndsWith(rawurlencode($prev), $prevUrl->getUri());
-        self::assertStringEndsWith(rawurlencode($next), $nextUrl->getUri());
+        $crawler = $sut->render()->crawler();
+        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->attr('href');
+        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->attr('href');
+
+        self::assertStringEndsWith(rawurlencode($prev), $prevUrl);
+        self::assertStringEndsWith(rawurlencode($next), $nextUrl);
     }
 
     public static function directoryProvider(): array
@@ -57,14 +62,17 @@ class NextChapterTest extends WebTestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('archiveProvider')]
     public function testCanNavigateFromArchive(string $current, string $prev, string $next): void
     {
-        $url = $this->urlGenerator->generate('app_archive_list', ['path' => $current]);
-        $this->client->request('GET', $url);
-        $crawler = $this->client->getCrawler();
-        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->link();
-        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->link();
+        $sut = $this->createLiveComponent(
+            name: 'NavigationButton',
+            data: ['routeName' => 'app_archive_list', 'path' => $current],
+        );
 
-        self::assertStringEndsWith(rawurlencode($prev), $prevUrl->getUri());
-        self::assertStringEndsWith(rawurlencode($next), $nextUrl->getUri());
+        $crawler = $sut->render()->crawler();
+        $prevUrl = $crawler->filter('[data-e2e="prev-link"]')->attr('href');
+        $nextUrl = $crawler->filter('[data-e2e="next-link"]')->attr('href');
+
+        self::assertStringEndsWith(rawurlencode($prev), $prevUrl);
+        self::assertStringEndsWith(rawurlencode($next), $nextUrl);
     }
 
     public static function archiveProvider(): array

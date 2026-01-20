@@ -49,8 +49,7 @@ class ExploreController extends AbstractController
 
         return $this->render('entry_list.html.twig', [
             'pagination' => $pagination,
-            'prev_url' => $resolver->prevUrl($request->get('_route'), $path),
-            'next_url' => $resolver->nextUrl($request->get('_route'), $path),
+            'path' => $path,
         ]);
     }
 

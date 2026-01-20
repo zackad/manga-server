@@ -52,7 +52,7 @@ class AppExtensionTest extends TestCase
         $this->requestStack->method('getMainRequest')->willReturn($mainRequest);
         $extension = new AppExtension($this->requestStack, $this->twig, $this->urlGenerator);
 
-        $this->assertEquals($output, $extension->getTitleFromUri());
+        $this->assertEquals($output, $extension->getTitleFromUri($input));
     }
 
     public function testRenderBreadcrumbsReturnNullWhenRequestObjectIsNull()

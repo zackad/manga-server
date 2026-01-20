@@ -57,14 +57,8 @@ class AppExtension extends AbstractExtension
         return (bool) preg_match('/\.(jpg|jpeg|png|webp)$/i', $value);
     }
 
-    public function getTitleFromUri(): ?string
+    public function getTitleFromUri(?string $path = null): ?string
     {
-        $request = $this->requestStack->getMainRequest();
-        if (null === $request) {
-            return null;
-        }
-
-        $path = $request->query->get('path') ?? $request->get('path');
         $decodedUri = urldecode((string) $path);
         if ('' === $decodedUri) {
             return null;
