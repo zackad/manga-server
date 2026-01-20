@@ -41,7 +41,9 @@
       </div>
     </div>
     {{ knp_pagination_render(pagination) }}
-    {% include 'partial/_next_page.html.twig' %}
+    {% if path is defined %}
+      <twig:NavigationButton loading="lazy" path="{{ path }}" routeName="{{ app.request.attributes.get('_route') }}" />
+    {% endif %}
   </main>
 {% endblock %}
 

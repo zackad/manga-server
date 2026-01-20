@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Twig\Components;
 
 use App\Service\NextChapterResolver;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -17,13 +16,13 @@ final class NavigationButton
 
     #[LiveProp]
     public string $path;
-    private string $routeName;
+
+    #[LiveProp]
+    public string $routeName;
 
     public function __construct(
-        private readonly RequestStack $requestStack,
         private readonly NextChapterResolver $nextChapterResolver,
     ) {
-        $this->routeName = $this->requestStack->getCurrentRequest()?->attributes->get('_route');
     }
 
     public function prevUrl(): string
