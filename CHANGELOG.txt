@@ -11,6 +11,7 @@ Bugfixes:
 
 Internals:
 - Upgrade symfony framework to version 7.4
+- Fix build script to make sure that symfony ux asstets is available for yarn package manager
 
 ---
 v0.29.0 (2025-09-26)

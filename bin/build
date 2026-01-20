@@ -8,7 +8,8 @@ BUILD_DIR=build/manga-server
 rm -fr build
 mkdir -p ${BUILD_DIR}
 
-# Install frontend dependencies
+# Install dependencies
+composer install
 yarn install
 
 # Build frontend artifact
