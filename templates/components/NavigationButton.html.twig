@@ -3,7 +3,7 @@
     <div class="break-words text-gray-100">
       {{ get_title(this.path)|default('Title') }}
     </div>
-    <div class="mt-2 grid border-collapse grid-cols-2 font-medium">
+    <div class="container mx-auto mt-2 grid border-collapse grid-cols-2 font-medium">
       <a data-e2e="prev-link" href="{{ this.prevUrl|default }}" class="rounded-l border border-gray-700 py-2 hover:bg-gray-800">&laquo; Prev</a>
       <a data-e2e="next-link" href="{{ this.nextUrl|default }}" class="rounded-r border border-l-0 border-gray-700 py-2 hover:bg-gray-800">Next &raquo;</a>
     </div>
@@ -11,5 +11,15 @@
 </div>
 
 {% macro placeholder(props) %}
-  Loading...
+  <div>
+    <div class="mt-2 animate-pulse border-0 border-t-2 border-dashed border-gray-600 p-2 text-center text-gray-400">
+      <div class="break-words text-gray-100">
+        Loading...
+      </div>
+      <div class="container mx-auto mt-2 grid border-collapse grid-cols-2 font-medium">
+        <button class="rounded-l border border-gray-700 py-2">&laquo; Prev</button>
+        <button class="rounded-r border border-l-0 border-gray-700 py-2">Next &raquo;</button>
+      </div>
+    </div>
+  </div>
 {% endmacro %}
