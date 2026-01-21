@@ -3,11 +3,15 @@ https://github.com/zackad/manga-server
 
 next (unreleased)
 
+---
+v0.30.0 (2026-01-21)
+
 Features:
 - Initialize indexing on app start in container
 
 Bugfixes:
 - Add time limit for messenger worker that run scheduler to prevent resource hogging
+- Improve app responsiveness by deferring rendering prev/next button using live component
 
 Internals:
 - Upgrade symfony framework to version 7.4
