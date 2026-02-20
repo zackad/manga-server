@@ -63,7 +63,7 @@ class AppExtension extends AbstractExtension
         if ('' === $decodedUri) {
             return null;
         }
-        /** @var string[] $array */
+        /** @var list<string> $array */
         $array = preg_split('/\//', $decodedUri, -1, PREG_SPLIT_NO_EMPTY);
         $dirtyString = (string) array_pop($array);
 

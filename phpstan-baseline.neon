@@ -113,9 +113,3 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Twig/AppExtension.php
-
-		-
-			message: '#^PHPDoc tag @var with type array\<string\> is not subtype of native type list\<string\>\|false\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/Twig/AppExtension.php
