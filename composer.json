@@ -21,6 +21,7 @@
         "symfony/runtime": "7.4.*",
         "symfony/scheduler": "7.4.*",
         "symfony/stimulus-bundle": "^2.14",
+        "symfony/translation": "7.4.*",
         "symfony/twig-bundle": "7.4.*",
         "symfony/ux-live-component": "^2.32",
         "symfony/webpack-encore-bundle": "^2.1",
