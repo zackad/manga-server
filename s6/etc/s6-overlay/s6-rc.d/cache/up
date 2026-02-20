@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-php /app/bin/console cache:clear
+frankenphp php-cli /app/bin/console cache:clear

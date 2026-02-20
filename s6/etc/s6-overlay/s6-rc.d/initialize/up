@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-php /app/bin/console app:initialize
+frankenphp php-cli /app/bin/console app:initialize

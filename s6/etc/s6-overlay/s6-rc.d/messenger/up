@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-php /app/bin/console messenger:setup-transports
+frankenphp php-cli /app/bin/console messenger:setup-transports
