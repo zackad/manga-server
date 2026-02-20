@@ -15,7 +15,6 @@ in
 {
   # https://devenv.sh/basics/
   env.OVERMIND_SKIP_ENV = true;
-  env.PHP_CS_FIXER_IGNORE_ENV = 1;
 
   # https://devenv.sh/packages/
   packages = [

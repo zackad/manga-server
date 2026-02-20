@@ -30,8 +30,8 @@ class ArchiveController extends AbstractController
     #[Route(
         '/archive/{path}',
         name: 'app_archive_list',
-        requirements: ['path' => '.+\.(zip|cbz|epub)$'], methods: ['GET'])
-    ]
+        requirements: ['path' => '.+\.(zip|cbz|epub)$'],
+        methods: ['GET'])]
     public function archiveListing(
         Request $request,
         DirectoryListing $listing,
@@ -58,8 +58,7 @@ class ArchiveController extends AbstractController
     #[Route(
         '/archive/{archive_item}',
         name: 'app_archive_item',
-        requirements: ['archive_item' => '.+\.(zip|cbz|epub\/).+$'])
-    ]
+        requirements: ['archive_item' => '.+\.(zip|cbz|epub\/).+$'])]
     public function archiveItem(Request $request, MimeGuesser $guesser): Response
     {
         $path = $request->attributes->get('archive_item');
