@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/tmp/composer \
     --mount=type=cache,target=/app/node_modules \
     bin/build
 
-FROM alpine AS runtime
+FROM docker.io/library/alpine:3 AS runtime
 
 ARG FRANKENPHP_VERSION=1.11.2
 ARG S6_OVERLAY_VERSION=3.2.2.0
@@ -26,7 +26,7 @@ RUN tar -C /s6/root -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 RUN chmod +x /usr/local/bin/frankenphp
 COPY s6 /s6/root
 
-FROM alpine
+FROM docker.io/library/alpine:3
 
 # Fix permission for frankenphp to manage their data and config
 # https://github.com/php/frankenphp/issues/607#issuecomment-2690469396
