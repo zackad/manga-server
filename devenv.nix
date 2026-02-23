@@ -33,6 +33,7 @@ in
   };
 
   # https://devenv.sh/pre-commit-hooks/
+  git-hooks.package = pkgs.prek;
   git-hooks.hooks = {
     nixfmt.enable = true;
     prettier = {
