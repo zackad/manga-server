@@ -28,7 +28,7 @@ export default class extends Controller {
 
   setMaxImageContainerWidth() {
     // do nothing if imageContainer missing
-    if (!this.hasimageContainerTarget) {
+    if (!this.hasImageContainerTarget) {
       return
     }
 
