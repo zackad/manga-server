@@ -1,2 +1,0 @@
-#!/command/with-contenv sh
-frankenphp php-cli /app/bin/console messenger:consume scheduler_default --limit=10 --time-limit=86400
