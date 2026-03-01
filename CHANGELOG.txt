@@ -4,6 +4,18 @@ https://github.com/zackad/manga-server
 next (unreleased)
 
 ---
+v0.31.0 (2026-03-01)
+
+Internals:
+- Bump php to version 8.4 as the earliest active supported version
+- Update php-cs-fixer to version 3.94.1
+- Update composer packages
+- Optimize docker image size by using static build of frankenphp retrieved from GitHub release artifact
+- Consolidate messenger worker and scheduler as single proccess in docker image
+- Replace pre-commit with prek as git hook runner on devenv configuration
+- Add git-cliff as helper tool to generate changelog for release notes
+
+---
 v0.30.0 (2026-01-21)
 
 Features:
