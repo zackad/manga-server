@@ -4,6 +4,15 @@ https://github.com/zackad/manga-server
 next (unreleased)
 
 ---
+v0.31.1 (2026-03-01)
+
+Bugfixes:
+- Setting for max width of image container
+
+Internals:
+- Optimize docker caching by moving copy process after packages install
+
+---
 v0.31.0 (2026-03-01)
 
 Internals:
