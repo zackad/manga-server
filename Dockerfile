@@ -4,8 +4,9 @@ ENV COMPOSER_IGNORE_PLATFORM_REQS=1
 ENV COMPOSER_HOME=/tmp/composer
 
 WORKDIR /app
-COPY . /app
 RUN apk add --no-cache nodejs yarn
+
+COPY . /app
 RUN --mount=type=cache,target=/tmp/composer \
     --mount=type=cache,target=/app/node_modules \
     bin/build
