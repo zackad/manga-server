@@ -19,6 +19,7 @@ in
   # https://devenv.sh/packages/
   packages = [
     (pkgs.frankenphp.override { php = phpCustom; })
+    pkgs.git-cliff
     pkgs.php84Extensions.xdebug
     pkgs.php84Packages.phive
     pkgs.nodejs-slim_22
