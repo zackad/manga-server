@@ -23,6 +23,7 @@ in
     pkgs.php84Extensions.xdebug
     pkgs.php84Packages.phive
     pkgs.nodejs-slim_22
+    pkgs.roadrunner
     pkgs.yarn
     pkgs.zip
   ];
