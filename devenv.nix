@@ -73,7 +73,7 @@ in
 
   # https://devenv.sh/processes/
   processes.asset.exec = "yarn run dev";
-  processes.web.exec = "frankenphp php-server --root public --listen :8000";
+  processes.web.exec = "rr serve";
 
   # See full reference at https://devenv.sh/reference/options/
 }
