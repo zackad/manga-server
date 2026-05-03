@@ -12,24 +12,23 @@ use Symfony\Contracts\Cache\CacheInterface;
 class DirectoryListing
 {
     private readonly \ZipArchive $za;
-    private readonly Finder $finder;
 
     public function __construct(private readonly CacheInterface $cache, private readonly UrlGeneratorInterface $urlGenerator)
     {
         $this->za = new \ZipArchive();
-        $this->finder = new Finder();
     }
 
     public function scan(string $target): array
     {
         return $this->cache->get('scan-'.md5($target), function (CacheItemInterface $cacheItem) use ($target) {
+            $finder = new Finder();
             $cacheItem->expiresAfter(600);
-            $this->finder
+            $finder
                 ->in($target)
                 ->depth(0)
                 ->sortByName(true);
             $directories = $files = [];
-            foreach ($this->finder as $item) {
+            foreach ($finder as $item) {
                 if ($item->isDir()) {
                     $directories[] = $item;
                 } else {
@@ -37,6 +36,7 @@ class DirectoryListing
                 }
             }
             $list = array_merge($directories, $files);
+            $finder = null;
 
             return array_values(array_map(fn ($item) => $item->getBaseName(), $list));
         });
