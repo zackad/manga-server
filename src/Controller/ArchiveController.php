@@ -75,11 +75,22 @@ class ArchiveController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $response = new StreamedResponse(function () use ($inputStream) {
-            /** @var resource $outputStream */
-            $outputStream = fopen('php://output', 'wb');
+        // 1. Return the Response object (DO NOT call ->send())
+        $response = new StreamedResponse(function () use ($inputStream, $za) {
+            // 2. Use a loop to allow manual flushing
+            while (!feof($inputStream)) {
+                // Read in 8KB chunks
+                echo fread($inputStream, 8192);
 
-            stream_copy_to_stream($inputStream, $outputStream);
+                // 3. Force RoadRunner to "see" the data chunk
+                if (ob_get_level() > 0) {
+                    ob_flush();
+                }
+                flush();
+            }
+
+            fclose($inputStream);
+            $za->close(); // Clean up the archive handle
         });
 
         $headers = [
@@ -87,7 +98,6 @@ class ArchiveController extends AbstractController
         ];
         $response->headers->add($headers);
         $response->setExpires(new \DateTime('+1 week'));
-        $response->send();
 
         return $response;
     }
