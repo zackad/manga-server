@@ -46,9 +46,6 @@ in
       enable = true;
       package = null; # use version managed by phive
       entry = "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix";
-      excludes = [
-        "^config/reference.php"
-      ];
     };
     phpstan = {
       enable = true;
@@ -56,7 +53,6 @@ in
       entry = "vendor/bin/phpstan --memory-limit=-1 analyze";
       excludes = [
         "^config/secrets/.+"
-        "^config/reference.php"
         "^tests/.+"
         ".php-cs-fixer.dist.php"
         "deploy.dist.php"
