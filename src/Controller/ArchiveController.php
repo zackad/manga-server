@@ -75,11 +75,12 @@ class ArchiveController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $response = new StreamedResponse(function () use ($inputStream) {
+        $response = new StreamedResponse(function () use ($inputStream, $za) {
             /** @var resource $outputStream */
             $outputStream = fopen('php://output', 'wb');
 
             stream_copy_to_stream($inputStream, $outputStream);
+            $za->close();
         });
 
         $headers = [
@@ -87,7 +88,6 @@ class ArchiveController extends AbstractController
         ];
         $response->headers->add($headers);
         $response->setExpires(new \DateTime('+1 week'));
-        $response->send();
 
         return $response;
     }
