@@ -41,7 +41,13 @@ class ArchiveController extends AbstractController
         $path = $request->attributes->get('path');
         $decodedPath = rawurldecode((string) $path);
 
-        $target = sprintf('%s/%s', $this->mangaRoot, $decodedPath);
+        // Make sure that it won't traverse outside APP_MEDIA_DIRECTORY
+        $realMediaDirectory = realpath($this->mangaRoot);
+        $target = realpath(sprintf('%s/%s', $realMediaDirectory, $decodedPath));
+        if (false === $target || !str_starts_with($target, (string) $realMediaDirectory)) {
+            throw $this->createNotFoundException();
+        }
+
         $entries = new ArchiveReader($target);
         $listIterator = $listing->buildList($entries->getList(), $decodedPath, $target, true);
         $entryList = iterator_to_array($listIterator);

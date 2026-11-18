@@ -31,15 +31,17 @@ class ExploreController extends AbstractController
             return $this->redirectToRoute('app_archive_list', ['path' => $path]);
         }
 
-        $target = sprintf('%s/%s', $mangaRoot, $decodedPath);
+        // Make sure that it won't traverse outside APP_MEDIA_DIRECTORY
+        $realMediaDirectory = realpath($mangaRoot);
+        $target = realpath(sprintf('%s/%s', $realMediaDirectory, $decodedPath));
+        if (false === $target || !str_starts_with($target, (string) $realMediaDirectory)) {
+            throw $this->createNotFoundException();
+        }
+
         $page = $request->query->getInt('page', 1);
 
         if (is_file($target)) {
             return $this->serveBinaryResponse($target);
-        }
-
-        if (!is_dir($target)) {
-            throw $this->createNotFoundException(sprintf('Directory "%s" could not be found inside manga root directory.', $decodedPath));
         }
 
         $entryList = $listing->scan($target);

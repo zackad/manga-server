@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
@@ -70,5 +71,11 @@ class ArchiveControllerTest extends WebTestCase
         $this->client->request('GET', '/archive/Series 1/nopaginate/no-paginate.zip');
         $entry = $this->client->getCrawler()->filter('[data-e2e=entry-link]');
         self::assertCount(120, $entry);
+    }
+
+    public function testAccessingOutsideMediaDirectoryShouldFail(): void
+    {
+        $this->client->request('GET', '/archive/../../../../../Series 1/nopaginate/no-paginate.zip');
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 }
