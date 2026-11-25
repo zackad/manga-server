@@ -4,6 +4,12 @@ https://github.com/zackad/manga-server
 next (unreleased)
 
 ---
+v0.31.3 (2026-11-25)
+
+Bugfixes:
+- Revert s6-overlay update that caused container fail to start
+
+---
 v0.31.2 (2026-11-25)
 
 Bugfixes:
