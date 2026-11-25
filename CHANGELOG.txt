@@ -4,6 +4,17 @@ https://github.com/zackad/manga-server
 next (unreleased)
 
 ---
+v0.31.2 (2026-11-25)
+
+Bugfixes:
+- Reset finder when scanning directory content
+- Make stream response compatible with roadrunner
+- Prevent traversing outside APP_MEDIA_DIRECTORY content
+
+Internals:
+- Update docker image runtime component
+
+---
 v0.31.1 (2026-03-01)
 
 Bugfixes:
