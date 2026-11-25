@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/tmp/composer \
 FROM docker.io/library/alpine:3 AS runtime
 
 ARG FRANKENPHP_VERSION=1.14.0
-ARG S6_OVERLAY_VERSION=3.2.3.2
+ARG S6_OVERLAY_VERSION=3.2.2.0
 
 # frankenphp provides static build that enough for our use case, no need to build our own version
 ADD https://github.com/php/frankenphp/releases/download/v${FRANKENPHP_VERSION}/frankenphp-linux-x86_64 /usr/local/bin/frankenphp
